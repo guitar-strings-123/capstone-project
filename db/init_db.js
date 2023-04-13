@@ -48,12 +48,17 @@ async function buildTables() {
       userLocation varchar(255) NOT NULL,
       active BOOLEAN DEFAULT true
     );
-    
+   
     CREATE TABLE active_cart (
       id SERIAL PRIMARY KEY,
       username varchar(255) UNIQUE NOT NULL,
       name  varchar(255) NOT NULL,
       address varchar(255) NOT NULL
+    );
+
+    CREATE table categories (
+      categoryID SERIAL PRIMARY KEY,
+      categoryname VARCHAR(50) UNIQUE NOT NULL
     );
   `);
 
