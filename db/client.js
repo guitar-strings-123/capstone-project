@@ -1,7 +1,8 @@
 // Connect to DB
-const { Client } = require('pg');
+const { Client } = require("pg");
 
 // change the DB_NAME string to whatever your group decides on
+
 const DB_NAME = 'capstone_project';
 
 const DB_URL =
@@ -12,11 +13,11 @@ let client;
 // github actions client config
 if (process.env.CI) {
   client = new Client({
-    host: 'localhost',
+    host: "localhost",
     port: 5432,
-    user: 'postgres',
-    password: 'postgres',
-    database: 'postgres',
+    user: "postgres",
+    password: "postgres",
+    database: "postgres",
   });
 } else {
   // local / heroku client config
