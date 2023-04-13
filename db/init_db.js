@@ -2,16 +2,37 @@ const {
   client,
   // declare your model imports here
   // for example, User
-} = require('./');
+} = require('./index');
 
 async function buildTables() {
   try {
     client.connect();
 
     // drop tables in correct order
+    await client.query(`
+    DROP TABLES IF EXISTS Users;
+    DROP TABLES IF EXISTS UserID;
+    DROP TABLES IF EXISTS ActiveCart;
+    DROP TABLES IF EXISTS Categories;
+    DROP TABLES IF EXISTS Orders;
 
+    CREATE TABLE Users (
+      id SERIAL PRIMARY KEY,
+      username varchar(255) UNIQUE NOT NULL,
+      password varchar(255) UNIQUE NOT NULL,
+      userEmail varchar(255) UNIQUE NOT NULL,
+      userFirstName varchar(255) UNIQUE NOT NULL,
+      userLastName varchar(255) UNIQUE NOT NULL,
+      userLocation varchar(255) NOT NULL,
+      active BOOLEAN DEFAULT true
+
+    );
+    `)
+    console.log('finished dropping and creating tables')
     // build tables in correct order
+
   } catch (error) {
+    console.log('error dropping tables')
     throw error;
   }
 }
