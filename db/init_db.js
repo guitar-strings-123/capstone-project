@@ -22,6 +22,7 @@ async function buildTables() {
         "categoryId" INTEGER REFERENCES categories(id),
         UNIQUE ("productId", "categoryId")
       );
+
       create table orders (
         orderID serial primary key,
         "orderUserID" references users(id),
@@ -34,17 +35,8 @@ async function buildTables() {
         orderEmail VARCHAR(100),
         orderShipped BOOLEAN default false,
         orderTrackingNumber VARCHAR(80)
-      );
-    `);
-    
-    // drop tables in correct order
-    await client.query(`
-    DROP TABLES IF EXISTS Users;
-    DROP TABLES IF EXISTS UserID;
-    DROP TABLES IF EXISTS ActiveCart;
-    DROP TABLES IF EXISTS Categories;
-    DROP TABLES IF EXISTS Orders;
-
+      ); 
+      
     CREATE TABLE Users (
       id SERIAL PRIMARY KEY,
       username varchar(255) UNIQUE NOT NULL,
@@ -54,14 +46,12 @@ async function buildTables() {
       userLastName varchar(255) UNIQUE NOT NULL,
       userLocation varchar(255) NOT NULL,
       active BOOLEAN DEFAULT true
-
     );
-    `)
-    console.log('finished dropping and creating tables')
+    `);
+    console.log('finished dropping and creating tables');
     // build tables in correct order
-
   } catch (error) {
-    console.log('error dropping tables')
+    console.log('error dropping tables');
     throw error;
   }
 }
