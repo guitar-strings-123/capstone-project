@@ -11,12 +11,7 @@ async function buildTables() {
 
     // drop tables in correct order
     await client.query(`
-    DROP TABLES IF EXISTS Users;
-    DROP TABLES IF EXISTS UserID;
-    DROP TABLES IF EXISTS ActiveCart;
-    DROP TABLES IF EXISTS Categories;
-    DROP TABLES IF EXISTS Orders;
-
+    
     create table products (
       id serial primary key,
       name varchar(255) unique not null,
