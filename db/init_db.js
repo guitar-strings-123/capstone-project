@@ -11,6 +11,12 @@ async function buildTables() {
     // drop tables in correct order
 
     // build tables in correct order
+    await client.query(`
+    CREATE table categories (
+      categoryID SERIAL PRIMARY KEY,
+      categoryname VARCHAR(50) UNIQUE NOT NULL
+    );
+    `)
   } catch (error) {
     throw error;
   }
