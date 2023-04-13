@@ -21,14 +21,6 @@ async function buildTables() {
         "categoryId" INTEGER REFERENCES categories(id),
         UNIQUE ("productId", "categoryId")
       );
-    `);
-    await client.query(`
-    CREATE TABLE product-to-category (
-      id SERIAL PRIMARY KEY,
-      "productId" INTEGER REFERENCES products(id),
-      "categoryId" INTEGER REFERENCES categories(id),
-      UNIQUE ("productId", "categoryId")
-    );
   `);
     // drop tables in correct order
 
