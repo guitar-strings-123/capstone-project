@@ -8,9 +8,14 @@ async function buildTables() {
   try {
     client.connect();
 
-
-    // drop tables in correct order
     await client.query(`
+    
+      drop table if exists categories;
+      drop table if exists products;
+      drop table if exists product_category;
+      drop table if exists users;
+      drop table if exists active_cart;
+      drop table if exists orders;
     
     create table products (
       id serial primary key,
@@ -18,6 +23,7 @@ async function buildTables() {
       description varchar(255) not null,
       price integer not null
     );
+    
     create table orders (
       orderID serial primary key,
       "orderUserID" references users(id),
@@ -31,6 +37,7 @@ async function buildTables() {
       orderShipped BOOLEAN default false,
       orderTrackingNumber VARCHAR(80)
     );
+    
     CREATE TABLE Users (
       id SERIAL PRIMARY KEY,
       username varchar(255) UNIQUE NOT NULL,
@@ -40,14 +47,15 @@ async function buildTables() {
       userLastName varchar(255) UNIQUE NOT NULL,
       userLocation varchar(255) NOT NULL,
       active BOOLEAN DEFAULT true
-    );  
+    );
+    
     CREATE TABLE active_cart (
       id SERIAL PRIMARY KEY,
       username varchar(255) UNIQUE NOT NULL,
       name  varchar(255) NOT NULL,
       address varchar(255) NOT NULL
     );
-   `);
+  `);
 
     console.log('finished dropping and creating tables')
     // build tables in correct order
