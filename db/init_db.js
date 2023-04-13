@@ -15,6 +15,19 @@ async function buildTables() {
           description varchar(255) not null,
           price integer not null
       );
+      create table orders (
+        orderID serial primary key,
+        "orderUserID" references users(id),
+        orderShipName VARCHAR(100),
+        orderShipAddress VARCHAR(100),
+        orderShipAddress2 VARCHAR(100),
+        orderCity VARCHAR(100),
+        orderState VARCHAR(100),
+        orderZip VARCHAR(10),
+        orderEmail VARCHAR(100),
+        orderShipped BOOLEAN default false,
+        orderTrackingNumber VARCHAR(80)
+      );
     `);
 
     // drop tables in correct order
