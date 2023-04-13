@@ -8,8 +8,8 @@ async function buildTables() {
   try {
     client.connect();
 
-    await client.query(`
-    
+    await client.query(`  
+      drop table if exsists product-to-category;
       drop table if exists categories;
       drop table if exists products;
       drop table if exists product_category;
@@ -38,6 +38,7 @@ async function buildTables() {
       orderTrackingNumber VARCHAR(80)
     );
     
+
     CREATE TABLE Users (
       id SERIAL PRIMARY KEY,
       username varchar(255) UNIQUE NOT NULL,
@@ -60,13 +61,19 @@ async function buildTables() {
       categoryID SERIAL PRIMARY KEY,
       categoryname VARCHAR(50) UNIQUE NOT NULL
     );
+   
+       CREATE TABLE product-to-category (
+        id SERIAL PRIMARY KEY,
+        "productId" INTEGER REFERENCES products(id),
+        "categoryId" INTEGER REFERENCES categories(id),
+        UNIQUE ("productId", "categoryId")
+      );
   `);
 
     console.log('finished dropping and creating tables')
     // build tables in correct order
-
   } catch (error) {
-    console.log('error dropping tables')
+    console.log('error dropping tables');
     throw error;
   }
 }
