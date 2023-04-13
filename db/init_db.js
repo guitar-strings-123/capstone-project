@@ -8,6 +8,15 @@ async function buildTables() {
   try {
     client.connect();
 
+    await client.query(`
+      create table products (
+          id serial primary key,
+          name varchar(255) unique not null,
+          description varchar(255) not null,
+          price varchar(255) not null
+      );
+    `);
+
     // drop tables in correct order
 
     // build tables in correct order
