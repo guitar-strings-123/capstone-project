@@ -11,9 +11,9 @@ async function buildTables() {
     await client.query(`
       drop table if exists categories;
       drop table if exists products;
-      drop table if exists product-category;
+      drop table if exists product_category;
       drop table if exists users;
-      drop table if exists active-cart;
+      drop table if exists active_cart;
       drop table if exists orders;
     `)
 
