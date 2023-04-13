@@ -9,6 +9,15 @@ async function buildTables() {
     client.connect();
 
     await client.query(`
+      drop table if exists categories;
+      drop table if exists products;
+      drop table if exists product-category;
+      drop table if exists users;
+      drop table if exists active-cart;
+      drop table if exists orders;
+    `)
+
+    await client.query(`
       create table products (
           id serial primary key,
           name varchar(255) unique not null,
