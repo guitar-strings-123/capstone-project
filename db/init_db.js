@@ -12,6 +12,50 @@ async function buildTables() {
 
     // build tables in correct order
     await client.query(`
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     CREATE table categories (
       categoryID SERIAL PRIMARY KEY,
       categoryname VARCHAR(50) UNIQUE NOT NULL
