@@ -103,7 +103,7 @@ async function populateInitialData() {
         },
       ];
       const products = await Promise.all(
-        productsToCreate.map((product) => createProduct(product))
+        productsToCreate.map((product) => Products.createProduct(product))
       );
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
