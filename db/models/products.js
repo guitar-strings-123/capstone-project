@@ -3,7 +3,7 @@ const client = require("../client");
 
 module.exports = {
     // add your database adapter fns here
-    createProducts,
+    createProduct,
     getAllProducts,
   };
 
@@ -11,7 +11,7 @@ module.exports = {
     pass in an object, so later you can pass in an array of objects and .map() through them
     to easily create multiple products with one function call
   */
-  async function createProducts({ name, description, price }) {
+  async function createProduct({ name, description, price }) {
     try {
         const { rows: [product] } = await client.query(
           `
