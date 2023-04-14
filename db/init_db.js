@@ -1,6 +1,7 @@
 const {
   client,
   User,
+  Categories,
   // declare your model imports here
   // for example, User
 } = require('./index');
@@ -84,6 +85,27 @@ async function populateInitialData() {
     // create useful starting data by leveraging your
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
+
+    async function createInitialCategories() {
+      console.log('starting to create categories...');
+    
+      const categoriesToCreate = [
+        {
+          categoryname: 'Classical'
+        },
+        {
+          categoryname: 'Acoustic'
+        },
+        {
+          categoryname: 'Electric'
+        }
+      ];
+      const categories = await Promise.all(
+        categoriesToCreate.map((category) => Categories.createCategory(category))
+      );
+      console.log('Categories Created: ', categories);
+      console.log('Finished creating categories.');
+    }
   } catch (error) {
     throw error;
   }
