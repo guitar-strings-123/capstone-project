@@ -1,5 +1,6 @@
 const {
   client,
+  User,
   // declare your model imports here
   // for example, User
 } = require('./index');
@@ -70,7 +71,7 @@ async function buildTables() {
       );
   `);
 
-    console.log('finished dropping and creating tables')
+    console.log('finished dropping and creating tables');
     // build tables in correct order
   } catch (error) {
     console.log('error dropping tables');
