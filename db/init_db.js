@@ -2,6 +2,7 @@ const {
   client,
   User,
   Categories,
+  Products,
   // declare your model imports here
   // for example, User
 } = require('./index');
@@ -86,6 +87,7 @@ async function populateInitialData() {
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
 
+
     async function createInitialCategories() {
       console.log('starting to create categories...');
     
@@ -105,6 +107,29 @@ async function populateInitialData() {
       );
       console.log('Categories Created: ', categories);
       console.log('Finished creating categories.');
+
+
+    async function createInitialProducts() {
+      console.log('starting to create products...');
+    
+      const productsToCreate = [
+        {
+          name: 'Air Guitar',
+          description: 'Sleek and lightweight design.',
+          price: 35000
+        },
+        {
+          name: 'The Chuck Berry',
+          description: 'Gunny sack not included.',
+          price: 599
+        },
+      ];
+      const products = await Promise.all(
+        productsToCreate.map((product) => Products.createProduct(product))
+      );
+      console.log('Products Created: ', products);
+      console.log('Finished creating products.');
+
     }
   } catch (error) {
     throw error;
