@@ -1,6 +1,7 @@
 const {
   client,
   User,
+  Categories,
   Products,
   // declare your model imports here
   // for example, User
@@ -87,6 +88,27 @@ async function populateInitialData() {
     // const user1 = await User.createUser({ ...user info goes here... })
 
 
+    async function createInitialCategories() {
+      console.log('starting to create categories...');
+    
+      const categoriesToCreate = [
+        {
+          categoryname: 'Classical'
+        },
+        {
+          categoryname: 'Acoustic'
+        },
+        {
+          categoryname: 'Electric'
+        }
+      ];
+      const categories = await Promise.all(
+        categoriesToCreate.map((category) => Categories.createCategory(category))
+      );
+      console.log('Categories Created: ', categories);
+      console.log('Finished creating categories.');
+
+
     async function createInitialProducts() {
       console.log('starting to create products...');
     
@@ -107,6 +129,7 @@ async function populateInitialData() {
       );
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
+
     }
   } catch (error) {
     throw error;
