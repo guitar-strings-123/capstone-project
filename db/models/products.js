@@ -19,7 +19,7 @@ module.exports = {
     try {
         const { rows: [product] } = await client.query(
           `
-            INSERT INTO products(name, description, price, categoryID) 
+            INSERT INTO products(name, description, price, "categoryId") 
             VALUES($1, $2, $3, $4) 
             ON CONFLICT (name) DO NOTHING 
             RETURNING *;
