@@ -24,7 +24,8 @@ async function buildTables() {
       id serial primary key,
       name varchar(255) unique not null,
       description varchar(255) not null,
-      price integer not null
+      price integer not null,
+      categoryID integer not null
     );
     
     create table orders (
