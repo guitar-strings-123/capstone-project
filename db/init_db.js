@@ -130,7 +130,42 @@ async function populateInitialData() {
       );
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
-      
+
+      async function crateInitialUsers() {
+        console.log('starting to create users...')
+
+        const usersToCreate = [
+          {
+            username: 'hendrix123',
+            password: '123guitar',
+            userEmail: 'jimi@hendrix.com',
+            userFirstName: 'Jimi',
+            userLastName: 'Hendrix',
+            userLocation: 'Seattle, Washington'
+          },
+          {
+            username: 'spaceman',
+            password: '123queen',
+            userEmail: 'brian@queen.com',
+            userFirstName: 'Brian',
+            userLastName: 'May',
+            userLocation: 'London, England'
+          },
+          {
+            username: 'santana',
+            password: 'password123',
+            userEmail: 'carlos@santana.com',
+            userFirstName: 'Carlos',
+            userLastName: 'Santana',
+            userLocation: 'Jalisco, Mexico'
+          },
+        ]
+        const users = await Promise.all(
+          usersToCreate.map((user) => User.createUser(user))
+        )
+        console.log('Users Created: ', users);
+        console.log('Finished creating users.');
+      }
     }
   } catch (error) {
     throw error;
