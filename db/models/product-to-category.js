@@ -12,7 +12,7 @@ async function prodToCategory() {
             SELECT products.id, name, categoryname
                 FROM products
             JOIN categories 
-                ON products.id = categories.categoryID
+                ON products.categoryID = categories.categoryID
             `)
 
         return prodCategories
