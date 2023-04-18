@@ -25,7 +25,7 @@ async function buildTables() {
       name varchar(255) unique not null,
       description varchar(255) not null,
       price integer not null,
-      categoryID integer not null
+      "categoryId" integer not null
     );
     
     create table orders (
@@ -62,7 +62,7 @@ async function buildTables() {
     );
 
     CREATE table categories (
-      categoryID SERIAL PRIMARY KEY,
+      id SERIAL PRIMARY KEY,
       categoryname VARCHAR(50) UNIQUE NOT NULL
     );
    
@@ -88,7 +88,6 @@ async function populateInitialData() {
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
 
-
     async function createInitialCategories() {
       console.log('starting to create categories...');
 
@@ -108,7 +107,6 @@ async function populateInitialData() {
       );
       console.log('Categories Created: ', categories);
       console.log('Finished creating categories.');
-
     }
 
     async function createInitialProducts() {
