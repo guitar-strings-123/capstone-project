@@ -1,3 +1,4 @@
+
 const apiRouter = require('express').Router();
 
 apiRouter.get('/', (req, res, next) => {
@@ -13,5 +14,7 @@ apiRouter.get('/health', (req, res, next) => {
 });
 
 // place your routers here
+const productRouter = require('./product');
+apiRouter.use('/product', productRouter)
 
 module.exports = apiRouter;
