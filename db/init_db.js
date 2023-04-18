@@ -90,7 +90,7 @@ async function populateInitialData() {
 
     async function createInitialCategories() {
       console.log('starting to create categories...');
-    
+
       const categoriesToCreate = [
         {
           categoryname: 'Classical'
@@ -108,10 +108,11 @@ async function populateInitialData() {
       console.log('Categories Created: ', categories);
       console.log('Finished creating categories.');
 
+    }
 
     async function createInitialProducts() {
       console.log('starting to create products...');
-    
+
       const productsToCreate = [
         {
           name: 'Air Guitar',
@@ -129,7 +130,7 @@ async function populateInitialData() {
       );
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
-
+      
     }
   } catch (error) {
     throw error;
