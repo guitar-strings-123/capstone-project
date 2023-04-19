@@ -9,6 +9,7 @@ module.exports = {
     createProduct,
     getAllProducts,
     addProduct,
+    removeProduct,
   };
 
   /*
@@ -68,3 +69,29 @@ async function addProduct({name, description, price, categoryID}) {
         };
     }
 };
+
+async function removeProduct(id) {
+    const users = await User.getallUsers();
+    // under construction: have to add curUser variable that stores user info upon login
+    const user = users.filter(entry => entry.username == curUser.username)
+
+    if (user.isAdmin) {
+        try {
+            const { rows: [product] } = await client.query(`
+                delete from products
+                where products.id=$1
+                returning *;
+            `, [id])
+    
+            // should return the deleted object
+            return product;
+        } catch (error) {
+            throw error;
+        }
+    } else {
+        return {
+            name: `InvalidAuthorizationError`,
+            message: 'This account lacks administrative privilege'
+        }
+    }
+}
