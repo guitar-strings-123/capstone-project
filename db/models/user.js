@@ -14,18 +14,19 @@ async function createUser({
   userFirstName,
   userLastName,
   userLocation,
+  isAdmin,
 }) {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-        INSERT INTO users(username, password, userEmail, userFirstName, userLastName, userLocation) 
-        VALUES($1, $2, $3, $4, $5, $6) 
+        INSERT INTO users(username, password, userEmail, userFirstName, userLastName, userLocation, isAdmin) 
+        VALUES($1, $2, $3, $4, $5, $6, $7) 
         ON CONFLICT (username) DO NOTHING 
         RETURNING *;
       `,
-      [username, password, userEmail, userFirstName, userLastName, userLocation]
+      [username, password, userEmail, userFirstName, userLastName, userLocation, isAdmin]
     );
 
     return user;
