@@ -3,7 +3,8 @@ const client = require('../client');
 module.exports = {
     // add your database adapter fns here
     createCategory,
-    getAllCategories
+    getAllCategories,
+    getCategoryById
 };
 
 async function createCategory({ categoryname }) {
@@ -24,6 +25,20 @@ async function getAllCategories() {
     try {
         const { rows } = await client.query(`
             SELECT * FROM categories;
+        `)
+
+        return rows;
+    } catch (err) {
+        throw err
+    }
+}
+
+async function getCategoryById(id) {
+    try {
+        const { rows } = await client.query(`
+            SELECT * 
+            FROM categories
+            WHERE categoryID=${id};
         `)
 
         return rows;

@@ -1,10 +1,15 @@
 // queried from table 'products'
 const client = require("../client");
+const {
+  User
+} = require('./models')
 
 module.exports = {
   // add your database adapter fns here
   createProduct,
   getAllProducts,
+  addProduct,
+  removeProduct,
   getProductById,
   updateProduct
 };
@@ -13,16 +18,16 @@ module.exports = {
   pass in an object, so later you can pass in an array of objects and .map() through them
   to easily create multiple products with one function call
 */
-async function createProduct({ name, description, price }) {
+async function createProduct({ name, description, price, categoryID }) {
   try {
     const { rows: [product] } = await client.query(
       `
-            INSERT INTO products(name, description, price) 
-            VALUES($1, $2, $3) 
+            INSERT INTO products(name, description, price, "categoryId") 
+            VALUES($1, $2, $3, $4) 
             ON CONFLICT (name) DO NOTHING 
             RETURNING *;
           `,
-      [name, description, price]
+      [name, description, price, categoryID]
     );
 
     return product;
@@ -44,13 +49,62 @@ async function getAllProducts() {
   }
 };
 
+// function for administrator to add product to database
+async function addProduct({ name, description, price, categoryID }) {
+  const users = await User.getallUsers();
+  // under construction: have to add curUser variable that stores user info upon login
+  const user = users.filter(entry => entry.username == curUser.username)
+
+  if (user.isAdmin) {
+    try {
+      const result = await createProduct({ name, description, price, categoryID });
+
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  } else {
+    // return an error object to use in the front end to display the error message
+    return {
+      name: `InvalidAuthorizationError`,
+      message: 'This account lacks administrative privilege'
+    };
+  }
+};
+
+async function removeProduct(id) {
+  const users = await User.getallUsers();
+  // under construction: have to add curUser variable that stores user info upon login
+  const user = users.filter(entry => entry.username == curUser.username)
+
+  if (user.isAdmin) {
+    try {
+      const { rows: [product] } = await client.query(`
+                delete from products
+                where products.id=$1
+                returning *;
+            `, [id])
+
+      // should return the deleted object
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  } else {
+    return {
+      name: `InvalidAuthorizationError`,
+      message: 'This account lacks administrative privilege'
+    }
+  }
+}
+
 async function getProductById(productId) {
   try {
     const { rows: [product] } = await client.query(`
-      SELECT *
-      FROM products
-      WHERE id=$1;
-    `, [productId]);
+          SELECT *
+          FROM products
+          WHERE id=$1;
+        `, [productId]);
 
     if (!product) {
       throw {
@@ -77,11 +131,11 @@ async function updateProduct({ id, ...fields }) {
 
   try {
     const { rows } = await client.query(`
-        update products
-        set ${setString}
-        where id=${id}
-        returning *
-    `, Object.values(fields))
+            update products
+            set ${setString}
+            where id=${id}
+            returning *
+        `, Object.values(fields))
 
     return rows
   } catch (err) {
