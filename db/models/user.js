@@ -1,5 +1,5 @@
 // grab our db client connection to use with our adapters
-const client = require("../client");
+const client = require('../client');
 
 module.exports = {
   // add your database adapter fns here
@@ -45,5 +45,24 @@ async function getAllUsers() {
     return rows;
   } catch (error) {
     throw error;
+  }
+}
+
+async function getUserByUsername(username) {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT *
+      FROM users
+      WHERE username = $1;
+    `,
+      [username]
+    );
+    if (!rows || !rows.length) return null;
+    const [user] = rows;
+    delete user.password;
+    return user;
+  } catch (error) {
+    console.error(error);
   }
 }
