@@ -1,15 +1,16 @@
-const homeRouter = require('express').Router();
-// const {
-    
-// } = require ('../db')
+const express = require('express')
+const {
+    getAllProducts
+} = require ('../db/models/products')
+const homeRouter = express.Router()
 
 //get api/home
 homeRouter.get("/", async (req, res, next) => {
     try {
-        // const allProducts = await getAllProducts();
-        res.send('aliiiive');
+        const allProducts = await getAllProducts();
+        res.send(allProducts);
     } catch(err){
-        next(err)
+        console.log(err, "error")
     }
 })
 
