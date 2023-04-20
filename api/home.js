@@ -1,8 +1,14 @@
 const express = require('express')
 const {
     getAllProducts
-} = require ('../db/models/products')
+} = require ('../db/models/products.js')
 const homeRouter = express.Router()
+
+homeRouter.use((req, res, next) => {
+    console.log('a request is being made to /product')
+
+    next()
+})
 
 //get api/home
 homeRouter.get("/", async (req, res, next) => {
@@ -10,7 +16,7 @@ homeRouter.get("/", async (req, res, next) => {
         const allProducts = await getAllProducts();
         res.send(allProducts);
     } catch(err){
-        console.log(err, "error")
+        next(err)
     }
 })
 

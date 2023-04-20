@@ -1,6 +1,7 @@
 const {
   client,
   User,
+  Products,
   // declare your model imports here
   // for example, User
 } = require('./index');
@@ -81,6 +82,7 @@ async function buildTables() {
 
 async function populateInitialData() {
   try {
+    
     // create useful starting data by leveraging your
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
