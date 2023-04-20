@@ -131,7 +131,7 @@ async function populateInitialData() {
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
 
-      async function crateInitialUsers() {
+      async function createInitialUsers() {
         console.log('starting to create users...')
 
         const usersToCreate = [
@@ -167,6 +167,9 @@ async function populateInitialData() {
         console.log('Finished creating users.');
       }
     }
+    createInitialCategories()
+    createInitialProducts()
+    createInitialUsers()
   } catch (error) {
     throw error;
   }
