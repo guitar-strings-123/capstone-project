@@ -1,3 +1,4 @@
+
 const apiRouter = require('express').Router();
 
 apiRouter.get('/', (req, res, next) => {
@@ -13,6 +14,8 @@ apiRouter.get('/health', (req, res, next) => {
 });
 
 // place your routers here
+const productRouter = require('./product');
+apiRouter.use('/product', productRouter)
 
 // this makes all of the calls to the module /api/products.js to use the /api/products/ route
 // for example, from cURLs, Postman, or 3rd party apps using our api
