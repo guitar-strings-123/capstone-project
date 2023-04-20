@@ -5,6 +5,7 @@ module.exports = {
   // add your database adapter fns here
   getAllUsers,
   createUser,
+  getUserByUsername,
 };
 
 async function createUser({
