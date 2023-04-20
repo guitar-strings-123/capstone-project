@@ -21,7 +21,7 @@ productRouter.get('/:productId', async (req, res, next) => {
     const {productId} = req.params
     try {
         const singleProduct = await getProductById(productId)
-        res.send(allProducts)
+        res.send(singleProduct)
     } catch (err) {
         console.log(err, 'error getting single product')
     }
