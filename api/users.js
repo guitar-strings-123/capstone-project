@@ -91,7 +91,7 @@ router.get('/:username/orders', async (req, res, next) => {
         message: `Could not find user: ${username}`,
       });
     } else if (req.user && user.id === req.user.id) {
-      const orders = await Orders.getAllOrdersByUserId(user.id);
+      const orders = await Orders.getAllOrdersByUserID(user.id);
       res.send(orders);
     }
   } catch (error) {
