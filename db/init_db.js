@@ -3,6 +3,7 @@ const {
   User,
   Categories,
   Products,
+  Orders,
   // declare your model imports here
   // for example, User
 } = require('./index');
@@ -130,46 +131,71 @@ async function populateInitialData() {
       );
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
-
-      async function createInitialUsers() {
-        console.log('starting to create users...')
-
-        const usersToCreate = [
-          {
-            username: 'hendrix123',
-            password: '123guitar',
-            userEmail: 'jimi@hendrix.com',
-            userFirstName: 'Jimi',
-            userLastName: 'Hendrix',
-            userLocation: 'Seattle, Washington'
-          },
-          {
-            username: 'spaceman',
-            password: '123queen',
-            userEmail: 'brian@queen.com',
-            userFirstName: 'Brian',
-            userLastName: 'May',
-            userLocation: 'London, England'
-          },
-          {
-            username: 'santana',
-            password: 'password123',
-            userEmail: 'carlos@santana.com',
-            userFirstName: 'Carlos',
-            userLastName: 'Santana',
-            userLocation: 'Jalisco, Mexico'
-          },
-        ]
-        const users = await Promise.all(
-          usersToCreate.map((user) => User.createUser(user))
-        )
-        console.log('Users Created: ', users);
-        console.log('Finished creating users.');
-      }
     }
+
+    async function createInitialUsers() {
+      console.log('starting to create users...')
+
+      const usersToCreate = [
+        {
+          username: 'hendrix123',
+          password: '123guitar',
+          userEmail: 'jimi@hendrix.com',
+          userFirstName: 'Jimi',
+          userLastName: 'Hendrix',
+          userLocation: 'Seattle, Washington'
+        },
+        {
+          username: 'spaceman',
+          password: '123queen',
+          userEmail: 'brian@queen.com',
+          userFirstName: 'Brian',
+          userLastName: 'May',
+          userLocation: 'London, England'
+        },
+        {
+          username: 'santana',
+          password: 'password123',
+          userEmail: 'carlos@santana.com',
+          userFirstName: 'Carlos',
+          userLastName: 'Santana',
+          userLocation: 'Jalisco, Mexico'
+        },
+      ]
+      const users = await Promise.all(
+        usersToCreate.map((user) => User.createUser(user))
+      )
+      console.log('Users Created: ', users);
+      console.log('Finished creating users.');
+    }
+
+    async function createInitialOrders() {
+      console.log('starting to create orders')
+
+      const ordersToCreate = [
+        {
+          orderUserID: 1,
+          orderShipName: 'Jimi Hendrix',
+          ordershipAddress: '123 California Ave',
+          orderCity: 'Seattle',
+          orderState: 'Washington',
+          orderZip: '12345',
+          orderEmail: 'jimi@hendrix.com',
+          orderShipped: true,
+          orderTrackingNumber: 00004325
+        }
+      ]
+      const orders = await Promise.all(
+        ordersToCreate.map((order) => Orders.createOrder(order))
+      )
+      console.log('Orders Created: ', orders)
+      console.log('Finished creating orders')
+    }
+
     createInitialCategories()
     createInitialProducts()
     createInitialUsers()
+    createInitialOrders()
   } catch (error) {
     throw error;
   }
