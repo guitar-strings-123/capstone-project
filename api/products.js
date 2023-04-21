@@ -1,13 +1,42 @@
-const apiRouter = require('express').Router();
+const express = require('express')
+const productRouter = express.Router()
 // we can create a requireUser() in a utils file to check if a user is logged in
-// const {requireUser} = require('./utils');
+const {requireUser} = require('./utils');
 
 const {
     // require relevant models, including the Products model from db/index.js
     Products,
 } = require("../db");
 
-apiRouter.post('/', requireUser(), async (req, res, next) => {
+
+productRouter.use((req, res, next) => {
+    console.log('a request is being made to /product')
+
+    next()
+})
+
+productRouter.get('/', async (req, res, next) => {
+    try {
+        const allProducts = await getAllProducts()
+        res.send(allProducts)
+    } catch (err) {
+        console.log(err, "error receiving products")
+        next()
+    }
+})
+
+productRouter.get('/:productId', async (req, res, next) => {
+    const {productId} = req.params
+    try {
+        const singleProduct = await getProductById(productId)
+        res.send(singleProduct)
+    } catch (err) {
+        console.log(err, 'error getting single product')
+        next()
+    }
+})
+
+productRouter.post('/', requireUser, async (req, res, next) => {
     // requireUser() should check if there's a current user logged in and if not, handle the error
 
     // the content of req.body will be created in the fetch command of the frontend
@@ -24,8 +53,8 @@ apiRouter.post('/', requireUser(), async (req, res, next) => {
     }
 } )
 
-apiRouter.route('/:productId')
-    .patch(requireUser(), async (req, res, next) => {
+productRouter.route('/:productId')
+    .patch(requireUser, async (req, res, next) => {
         const { productId } = req.params;
         const { name, description, price, categoryID } = req.body;
 
@@ -56,7 +85,7 @@ apiRouter.route('/:productId')
             res.send({name: result.name, description: result.description, price: result.price, categoryID: result.categoryID });
         }
     } )
-    .delete(requireUser(), async (req, res, next) => {
+    .delete(requireUser, async (req, res, next) => {
         const { productId } = req.params;
         const result = await Products.removeProduct(productId);
 
@@ -68,3 +97,5 @@ apiRouter.route('/:productId')
             res.send({name: result.name, description: result.description, price: result.price, categoryID: result.categoryID });
         }
     } )
+
+module.exports = productRouter
