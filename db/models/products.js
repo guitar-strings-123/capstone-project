@@ -1,8 +1,6 @@
 // queried from table 'products'
-const client = require("../client");
-const {
-  User
-} = require('./models')
+const client = require('../client');
+const { User } = require('./');
 
 module.exports = {
   // add your database adapter fns here
@@ -11,7 +9,7 @@ module.exports = {
   addProduct,
   removeProduct,
   getProductById,
-  updateProduct
+  updateProduct,
 };
 
 /*
@@ -20,7 +18,9 @@ module.exports = {
 */
 async function createProduct({ name, description, price, categoryID }) {
   try {
-    const { rows: [product] } = await client.query(
+    const {
+      rows: [product],
+    } = await client.query(
       `
             INSERT INTO products(name, description, price, "categoryId") 
             VALUES($1, $2, $3, $4) 
@@ -34,7 +34,7 @@ async function createProduct({ name, description, price, categoryID }) {
   } catch (error) {
     throw error;
   }
-};
+}
 
 async function getAllProducts() {
   try {
@@ -47,17 +47,22 @@ async function getAllProducts() {
   } catch (error) {
     throw error;
   }
-};
+}
 
 // function for administrator to add product to database
 async function addProduct({ name, description, price, categoryID }) {
   const users = await User.getallUsers();
   // under construction: have to add curUser variable that stores user info upon login
-  const user = users.filter(entry => entry.username == curUser.username)
+  const user = users.filter((entry) => entry.username == curUser.username);
 
   if (user.isAdmin) {
     try {
-      const result = await createProduct({ name, description, price, categoryID });
+      const result = await createProduct({
+        name,
+        description,
+        price,
+        categoryID,
+      });
 
       return result;
     } catch (error) {
@@ -67,23 +72,28 @@ async function addProduct({ name, description, price, categoryID }) {
     // return an error object to use in the front end to display the error message
     return {
       name: `InvalidAuthorizationError`,
-      message: 'This account lacks administrative privilege'
+      message: 'This account lacks administrative privilege',
     };
   }
-};
+}
 
 async function removeProduct(id) {
   const users = await User.getallUsers();
   // under construction: have to add curUser variable that stores user info upon login
-  const user = users.filter(entry => entry.username == curUser.username)
+  const user = users.filter((entry) => entry.username == curUser.username);
 
   if (user.isAdmin) {
     try {
-      const { rows: [product] } = await client.query(`
+      const {
+        rows: [product],
+      } = await client.query(
+        `
                 delete from products
                 where products.id=$1
                 returning *;
-            `, [id])
+            `,
+        [id]
+      );
 
       // should return the deleted object
       return product;
@@ -93,23 +103,28 @@ async function removeProduct(id) {
   } else {
     return {
       name: `InvalidAuthorizationError`,
-      message: 'This account lacks administrative privilege'
-    }
+      message: 'This account lacks administrative privilege',
+    };
   }
 }
 
 async function getProductById(productId) {
   try {
-    const { rows: [product] } = await client.query(`
+    const {
+      rows: [product],
+    } = await client.query(
+      `
           SELECT *
           FROM products
           WHERE id=$1;
-        `, [productId]);
+        `,
+      [productId]
+    );
 
     if (!product) {
       throw {
-        name: "ProductNotFoundError",
-        message: "Could not find a product with that productId"
+        name: 'ProductNotFoundError',
+        message: 'Could not find a product with that productId',
       };
     }
 
@@ -120,25 +135,27 @@ async function getProductById(productId) {
 }
 
 async function updateProduct({ id, ...fields }) {
-
-  const setString = Object.keys(fields).map(
-    (key, index) => `"${key}"=$${index + 1}`
-  ).join(',')
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(',');
 
   if (setString.length === 0) {
-    return
+    return;
   }
 
   try {
-    const { rows } = await client.query(`
+    const { rows } = await client.query(
+      `
             update products
             set ${setString}
             where id=${id}
             returning *
-        `, Object.values(fields))
+        `,
+      Object.values(fields)
+    );
 
-    return rows
+    return rows;
   } catch (err) {
-    throw err
+    throw err;
   }
 }
