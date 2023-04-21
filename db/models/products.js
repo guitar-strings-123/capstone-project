@@ -1,6 +1,6 @@
 // queried from table 'products'
 const client = require('../client');
-const { User } = require('./');
+const { User } = require('./user');
 
 module.exports = {
   // add your database adapter fns here
@@ -51,7 +51,7 @@ async function getAllProducts() {
 
 // function for administrator to add product to database
 async function addProduct({ name, description, price, categoryID }) {
-  const users = await User.getallUsers();
+  const users = await User.getAllUsers();
   // under construction: have to add curUser variable that stores user info upon login
   const user = users.filter((entry) => entry.username == curUser.username);
 
@@ -78,7 +78,7 @@ async function addProduct({ name, description, price, categoryID }) {
 }
 
 async function removeProduct(id) {
-  const users = await User.getallUsers();
+  const users = await User.getAllUsers();
   // under construction: have to add curUser variable that stores user info upon login
   const user = users.filter((entry) => entry.username == curUser.username);
 

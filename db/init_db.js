@@ -6,7 +6,7 @@ const {
   Orders,
   // declare your model imports here
   // for example, User
-} = require('./index');
+} = require('./db');
 
 async function buildTables() {
   try {
@@ -88,27 +88,27 @@ async function populateInitialData() {
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
 
-
     async function createInitialCategories() {
       console.log('starting to create categories...');
 
       const categoriesToCreate = [
         {
-          categoryname: 'Classical'
+          categoryname: 'Classical',
         },
         {
-          categoryname: 'Acoustic'
+          categoryname: 'Acoustic',
         },
         {
-          categoryname: 'Electric'
-        }
+          categoryname: 'Electric',
+        },
       ];
       const categories = await Promise.all(
-        categoriesToCreate.map((category) => Categories.createCategory(category))
+        categoriesToCreate.map((category) =>
+          Categories.createCategory(category)
+        )
       );
       console.log('Categories Created: ', categories);
       console.log('Finished creating categories.');
-
     }
 
     async function createInitialProducts() {
@@ -118,12 +118,12 @@ async function populateInitialData() {
         {
           name: 'Air Guitar',
           description: 'Sleek and lightweight design.',
-          price: 35000
+          price: 35000,
         },
         {
           name: 'The Chuck Berry',
           description: 'Gunny sack not included.',
-          price: 599
+          price: 599,
         },
       ];
       const products = await Promise.all(
@@ -134,7 +134,7 @@ async function populateInitialData() {
     }
 
     async function createInitialUsers() {
-      console.log('starting to create users...')
+      console.log('starting to create users...');
 
       const usersToCreate = [
         {
@@ -143,7 +143,7 @@ async function populateInitialData() {
           userEmail: 'jimi@hendrix.com',
           userFirstName: 'Jimi',
           userLastName: 'Hendrix',
-          userLocation: 'Seattle, Washington'
+          userLocation: 'Seattle, Washington',
         },
         {
           username: 'spaceman',
@@ -151,7 +151,7 @@ async function populateInitialData() {
           userEmail: 'brian@queen.com',
           userFirstName: 'Brian',
           userLastName: 'May',
-          userLocation: 'London, England'
+          userLocation: 'London, England',
         },
         {
           username: 'santana',
@@ -159,18 +159,18 @@ async function populateInitialData() {
           userEmail: 'carlos@santana.com',
           userFirstName: 'Carlos',
           userLastName: 'Santana',
-          userLocation: 'Jalisco, Mexico'
+          userLocation: 'Jalisco, Mexico',
         },
-      ]
+      ];
       const users = await Promise.all(
         usersToCreate.map((user) => User.createUser(user))
-      )
+      );
       console.log('Users Created: ', users);
       console.log('Finished creating users.');
     }
 
     async function createInitialOrders() {
-      console.log('starting to create orders')
+      console.log('starting to create orders');
 
       const ordersToCreate = [
         {
@@ -182,20 +182,20 @@ async function populateInitialData() {
           orderZip: '12345',
           orderEmail: 'jimi@hendrix.com',
           orderShipped: true,
-          orderTrackingNumber: 00004325
-        }
-      ]
+          orderTrackingNumber: 00004325,
+        },
+      ];
       const orders = await Promise.all(
         ordersToCreate.map((order) => Orders.createOrder(order))
-      )
-      console.log('Orders Created: ', orders)
-      console.log('Finished creating orders')
+      );
+      console.log('Orders Created: ', orders);
+      console.log('Finished creating orders');
     }
 
-    createInitialCategories()
-    createInitialProducts()
-    createInitialUsers()
-    createInitialOrders()
+    createInitialCategories();
+    createInitialProducts();
+    createInitialUsers();
+    createInitialOrders();
   } catch (error) {
     throw error;
   }
