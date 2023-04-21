@@ -78,7 +78,7 @@ async function addProduct({ name, description, price, categoryID }) {
 }
 
 async function removeProduct(id) {
-  const users = await User.getllUsers();
+  const users = await User.getAllUsers();
   // under construction: have to add curUser variable that stores user info upon login
   const user = users.filter((entry) => entry.username == curUser.username);
 
