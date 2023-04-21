@@ -13,7 +13,7 @@ async function buildTables() {
     client.connect();
 
     await client.query(`  
-      drop table if exists product-to-category;
+      drop table if exists product_to_category;
       drop table if exists categories;
       drop table if exists product_category;
       drop table if exists active_cart;
@@ -42,7 +42,7 @@ async function buildTables() {
     
       create table orders (
         orderID serial primary key,
-        "orderUserID" references users(id),
+        "orderUserID" integer references users(id),
         orderShipName VARCHAR(100),
         orderShipAddress VARCHAR(100),
         orderShipAddress2 VARCHAR(100),
@@ -66,10 +66,10 @@ async function buildTables() {
         categoryname VARCHAR(50) UNIQUE NOT NULL
       );
    
-      CREATE TABLE product-to-category (
+      CREATE TABLE product_to_category (
         id SERIAL PRIMARY KEY,
         "productId" INTEGER REFERENCES products(id),
-        "categoryId" INTEGER REFERENCES categories(id),
+        "categoryId" INTEGER REFERENCES categories(categoryID),
         UNIQUE ("productId", "categoryId")
       );
   `);
@@ -91,7 +91,6 @@ async function populateInitialData() {
 
     async function createInitialCategories() {
       console.log('starting to create categories...');
-
       const categoriesToCreate = [
         {
           categoryname: 'Classical'
@@ -103,9 +102,7 @@ async function populateInitialData() {
           categoryname: 'Electric'
         }
       ];
-      const categories = await Promise.all(
-        categoriesToCreate.map((category) => Categories.createCategory(category))
-      );
+      const categories = await Promise.all(categoriesToCreate.map(Categories.createCategory));
       console.log('Categories Created: ', categories);
       console.log('Finished creating categories.');
 
@@ -126,9 +123,7 @@ async function populateInitialData() {
           price: 599
         },
       ];
-      const products = await Promise.all(
-        productsToCreate.map((product) => Products.createProduct(product))
-      );
+      const products = await Promise.all(productsToCreate.map(Products.createProduct));
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
     }
@@ -162,9 +157,7 @@ async function populateInitialData() {
           userLocation: 'Jalisco, Mexico'
         },
       ]
-      const users = await Promise.all(
-        usersToCreate.map((user) => User.createUser(user))
-      )
+      const users = await Promise.all( usersToCreate.map(User.createUser))
       console.log('Users Created: ', users);
       console.log('Finished creating users.');
     }
@@ -185,9 +178,7 @@ async function populateInitialData() {
           orderTrackingNumber: 00004325
         }
       ]
-      const orders = await Promise.all(
-        ordersToCreate.map((order) => Orders.createOrder(order))
-      )
+      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder))
       console.log('Orders Created: ', orders)
       console.log('Finished creating orders')
     }
