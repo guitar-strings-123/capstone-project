@@ -36,7 +36,7 @@ productRouter.get('/:productId', async (req, res, next) => {
     }
 })
 
-productRouter.post('/', requireUser(), async (req, res, next) => {
+productRouter.post('/', requireUser, async (req, res, next) => {
     // requireUser() should check if there's a current user logged in and if not, handle the error
 
     // the content of req.body will be created in the fetch command of the frontend
@@ -54,7 +54,7 @@ productRouter.post('/', requireUser(), async (req, res, next) => {
 } )
 
 productRouter.route('/:productId')
-    .patch(requireUser(), async (req, res, next) => {
+    .patch(requireUser, async (req, res, next) => {
         const { productId } = req.params;
         const { name, description, price, categoryID } = req.body;
 
@@ -85,7 +85,7 @@ productRouter.route('/:productId')
             res.send({name: result.name, description: result.description, price: result.price, categoryID: result.categoryID });
         }
     } )
-    .delete(requireUser(), async (req, res, next) => {
+    .delete(requireUser, async (req, res, next) => {
         const { productId } = req.params;
         const result = await Products.removeProduct(productId);
 
