@@ -6,7 +6,7 @@ const {
   Orders,
   // declare your model imports here
   // for example, User
-} = require('./index');
+} = require('./db');
 
 async function buildTables() {
   try {
@@ -89,24 +89,22 @@ async function populateInitialData() {
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
 
-
     async function createInitialCategories() {
       console.log('starting to create categories...');
       const categoriesToCreate = [
         {
-          categoryname: 'Classical'
+          categoryname: 'Classical',
         },
         {
-          categoryname: 'Acoustic'
+          categoryname: 'Acoustic',
         },
         {
-          categoryname: 'Electric'
-        }
+          categoryname: 'Electric',
+        },
       ];
       const categories = await Promise.all(categoriesToCreate.map(Categories.createCategory));
       console.log('Categories Created: ', categories);
       console.log('Finished creating categories.');
-
     }
 
     async function createInitialProducts() {
@@ -132,7 +130,7 @@ async function populateInitialData() {
     }
 
     async function createInitialUsers() {
-      console.log('starting to create users...')
+      console.log('starting to create users...');
 
       const usersToCreate = [
         {
@@ -141,7 +139,7 @@ async function populateInitialData() {
           userEmail: 'jimi@hendrix.com',
           userFirstName: 'Jimi',
           userLastName: 'Hendrix',
-          userLocation: 'Seattle, Washington'
+          userLocation: 'Seattle, Washington',
         },
         {
           username: 'spaceman',
@@ -149,7 +147,7 @@ async function populateInitialData() {
           userEmail: 'brian@queen.com',
           userFirstName: 'Brian',
           userLastName: 'May',
-          userLocation: 'London, England'
+          userLocation: 'London, England',
         },
         {
           username: 'santana',
@@ -157,7 +155,7 @@ async function populateInitialData() {
           userEmail: 'carlos@santana.com',
           userFirstName: 'Carlos',
           userLastName: 'Santana',
-          userLocation: 'Jalisco, Mexico'
+          userLocation: 'Jalisco, Mexico',
         },
         {
           username: 'bob',
@@ -175,7 +173,7 @@ async function populateInitialData() {
     }
 
     async function createInitialOrders() {
-      console.log('starting to create orders')
+      console.log('starting to create orders');
 
       const ordersToCreate = [
         {
@@ -205,6 +203,7 @@ async function populateInitialData() {
       console.log('Orders Created: ', orders)
       console.log('Finished creating orders')
     }
+
 
     await createInitialCategories()
     await createInitialProducts()
