@@ -15,8 +15,9 @@ const getAllOrders = async () => {
   }
 };
 
-const createOrder = async (
+async function createOrder({
   orderUserID,
+  orderShipName,
   orderShipAddress,
   orderShipAddress2,
   orderCity,
@@ -25,18 +26,19 @@ const createOrder = async (
   orderEmail,
   orderShipped,
   orderTrackingNumber
-) => {
+}) {
   try {
     const {
       rows: [order],
     } = await client.query(
       `
             INSERT INTO orders("orderUserID", orderShipName, orderShipAddress, orderShipAddress2, orderCity, orderState, orderZip, orderEmail, orderShipped, orderTrackingNumber)
-            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
             RETURNING *;
         `,
       [
         orderUserID,
+        orderShipName,
         orderShipAddress,
         orderShipAddress2,
         orderCity,
