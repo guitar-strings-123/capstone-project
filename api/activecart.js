@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const cartRouter = express.Router();
 const {
   getAllItemsInCart,
   createNewCart,
@@ -29,17 +29,6 @@ router.get("/:cartId", async (req, res, next) => {
     console.error(error);
   }
 });
-
-// router.get('/cart/:sessionId', async(req,res,next)=>{
-//     try{
-//         const sessId = req.params.sessionId
-//         const cart =  await getCartBySessionId(sessId)
-
-//         res.send(cart)
-//     }catch(error){
-//         console.error(error)
-//     }
-// })
 
 // POST
 
@@ -89,7 +78,7 @@ router.post("/:cartId", async (req, res, next) => {
   }
 });
 
-module.exports = router;
+module.exports = cartRouter;
 
 // import React, { useEffect } from "react";
 // import { useDispatch, useSelector } from "react-redux";
