@@ -6,7 +6,7 @@ const {
   Orders,
   // declare your model imports here
   // for example, User
-} = require("./db");
+} = require('./');
 
 async function buildTables() {
   try {
