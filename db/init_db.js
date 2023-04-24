@@ -14,12 +14,12 @@ async function buildTables() {
 
     await client.query(`  
       drop table if exists product_to_category;
+      drop table if exists products;
       drop table if exists categories;
       drop table if exists product_category;
       drop table if exists active_cart;
       drop table if exists active_cart_items;
       drop table if exists orders;
-      drop table if exists products;
       drop table if exists users;
 
       CREATE TABLE users (
@@ -33,26 +33,32 @@ async function buildTables() {
         active BOOLEAN DEFAULT true,
         isAdmin BOOLEAN DEFAULT false
       );
+      
+      CREATE TABLE categories (
+        categoryID SERIAL PRIMARY KEY,
+        categoryname VARCHAR(50) UNIQUE NOT NULL
+      );
 
       create table products (
         id serial primary key,
         name varchar(255) unique not null,
         description varchar(255) not null,
-        price integer not null
+        price integer not null,
+        "categoryId" integer references categories(categoryID)
       );
     
       create table orders (
         orderID serial primary key,
         "orderUserID" integer references users(id),
-        orderShipName VARCHAR(100),
-        orderShipAddress VARCHAR(100),
-        orderShipAddress2 VARCHAR(100),
-        orderCity VARCHAR(100),
-        orderState VARCHAR(100),
-        orderZip VARCHAR(10),
-        orderEmail VARCHAR(100),
+        orderShipName text,
+        orderShipAddress text,
+        orderShipAddress2 text,
+        orderCity text,
+        orderState text,
+        orderZip integer,
+        orderEmail text,
         orderShipped BOOLEAN default false,
-        orderTrackingNumber VARCHAR(80)
+        orderTrackingNumber integer
       );
    
       CREATE TABLE active_cart (
@@ -65,11 +71,6 @@ async function buildTables() {
         active_cart_id INTEGER REFERENCES active_cart(id),
         product_id INTEGER REFERENCES products(id),
         quantity INTEGER
-      );
-
-      CREATE TABLE categories (
-        categoryID SERIAL PRIMARY KEY,
-        categoryname VARCHAR(50) UNIQUE NOT NULL
       );
    
       CREATE TABLE product_to_category (
@@ -122,11 +123,13 @@ async function populateInitialData() {
           name: "Air Guitar",
           description: "Sleek and lightweight design.",
           price: 35000,
+          categoryID: 2
         },
         {
           name: "The Chuck Berry",
           description: "Gunny sack not included.",
           price: 599,
+          categoryID: 2
         },
       ];
       const products = await Promise.all(
@@ -164,10 +167,19 @@ async function populateInitialData() {
           userLastName: "Santana",
           userLocation: "Jalisco, Mexico",
         },
-      ];
-      const users = await Promise.all(usersToCreate.map(User.createUser));
-      console.log("Users Created: ", users);
-      console.log("Finished creating users.");
+        {
+          username: 'bob',
+          password: 'bob',
+          userEmail: 'bob@bob.com',
+          userFirstName: 'bob',
+          userLastName: 'bob',
+          userLocation: 'bob, bob',
+          isAdmin: true
+        },
+      ]
+      const users = await Promise.all(usersToCreate.map(User.createUser))
+      console.log('Users Created: ', users);
+      console.log('Finished creating users.');
     }
 
     async function createInitialOrders() {
@@ -176,25 +188,39 @@ async function populateInitialData() {
       const ordersToCreate = [
         {
           orderUserID: 1,
-          orderShipName: "Jimi Hendrix",
-          ordershipAddress: "123 California Ave",
-          orderCity: "Seattle",
-          orderState: "Washington",
-          orderZip: "12345",
-          orderEmail: "jimi@hendrix.com",
+          orderShipName: 'Jimi Hendrix',
+          orderShipAddress: '123 California Ave',
+          orderCity: 'Seattle',
+          orderState: 'Washington',
+          orderZip: 12345,
+          orderEmail: 'jimi@hendrix.com',
           orderShipped: true,
-          orderTrackingNumber: 00004325,
+          orderTrackingNumber: 4325
         },
-      ];
-      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder));
-      console.log("Orders Created: ", orders);
-      console.log("Finished creating orders");
+        {
+          orderUserID: 2,
+          orderShipName: 'Brian May',
+          orderShipAddress: '56 London Rd',
+          orderCity: 'London',
+          orderState: 'England',
+          orderZip: 32134,
+          orderEmail: 'brian@queen.com',
+          orderShipped: false,
+          orderTrackingNumber: 4326
+        },
+      ]
+      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder))
+      console.log('Orders Created: ', orders)
+      console.log('Finished creating orders')
     }
 
-    createInitialCategories();
-    createInitialProducts();
-    createInitialUsers();
-    createInitialOrders();
+
+    await createInitialCategories()
+    await createInitialProducts()
+    await createInitialUsers()
+    await createInitialOrders()
+
+    console.log('finished seeding data')
   } catch (error) {
     throw error;
   }
