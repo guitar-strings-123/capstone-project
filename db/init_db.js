@@ -6,7 +6,7 @@ const {
   Orders,
   // declare your model imports here
   // for example, User
-} = require('./db');
+} = require("./db");
 
 async function buildTables() {
   try {
@@ -17,6 +17,7 @@ async function buildTables() {
       drop table if exists categories;
       drop table if exists product_category;
       drop table if exists active_cart;
+      drop table if exists active_cart_items;
       drop table if exists orders;
       drop table if exists products;
       drop table if exists users;
@@ -56,9 +57,14 @@ async function buildTables() {
    
       CREATE TABLE active_cart (
         id SERIAL PRIMARY KEY,
-        username varchar(255) UNIQUE NOT NULL,
-        name  varchar(255) NOT NULL,
-        address varchar(255) NOT NULL
+        user_id INTEGER REFERENCES users(id)
+      );
+
+      CREATE TABLE active_cart_items (
+        id SERIAL PRIMARY KEY,
+        active_cart_id INTEGER REFERENCES active_cart(id),
+        product_id INTEGER REFERENCES products(id),
+        quantity INTEGER
       );
 
       CREATE TABLE categories (
@@ -74,10 +80,10 @@ async function buildTables() {
       );
   `);
 
-    console.log('finished dropping and creating tables');
+    console.log("finished dropping and creating tables");
     // build tables in correct order
   } catch (error) {
-    console.log('error dropping tables');
+    console.log("error dropping tables");
     throw error;
   }
 }
@@ -89,97 +95,100 @@ async function populateInitialData() {
     // const user1 = await User.createUser({ ...user info goes here... })
 
     async function createInitialCategories() {
-      console.log('starting to create categories...');
+      console.log("starting to create categories...");
       const categoriesToCreate = [
         {
-          categoryname: 'Classical',
+          categoryname: "Classical",
         },
         {
-          categoryname: 'Acoustic',
+          categoryname: "Acoustic",
         },
         {
-          categoryname: 'Electric',
+          categoryname: "Electric",
         },
       ];
-      const categories = await Promise.all(categoriesToCreate.map(Categories.createCategory));
-      console.log('Categories Created: ', categories);
-      console.log('Finished creating categories.');
+      const categories = await Promise.all(
+        categoriesToCreate.map(Categories.createCategory)
+      );
+      console.log("Categories Created: ", categories);
+      console.log("Finished creating categories.");
     }
 
     async function createInitialProducts() {
-      console.log('starting to create products...');
+      console.log("starting to create products...");
 
       const productsToCreate = [
         {
-          name: 'Air Guitar',
-          description: 'Sleek and lightweight design.',
+          name: "Air Guitar",
+          description: "Sleek and lightweight design.",
           price: 35000,
         },
         {
-          name: 'The Chuck Berry',
-          description: 'Gunny sack not included.',
+          name: "The Chuck Berry",
+          description: "Gunny sack not included.",
           price: 599,
         },
       ];
-      const products = await Promise.all(productsToCreate.map(Products.createProduct));
-      console.log('Products Created: ', products);
-      console.log('Finished creating products.');
+      const products = await Promise.all(
+        productsToCreate.map(Products.createProduct)
+      );
+      console.log("Products Created: ", products);
+      console.log("Finished creating products.");
     }
 
     async function createInitialUsers() {
-      console.log('starting to create users...');
+      console.log("starting to create users...");
 
       const usersToCreate = [
         {
-          username: 'hendrix123',
-          password: '123guitar',
-          userEmail: 'jimi@hendrix.com',
-          userFirstName: 'Jimi',
-          userLastName: 'Hendrix',
-          userLocation: 'Seattle, Washington',
+          username: "hendrix123",
+          password: "123guitar",
+          userEmail: "jimi@hendrix.com",
+          userFirstName: "Jimi",
+          userLastName: "Hendrix",
+          userLocation: "Seattle, Washington",
         },
         {
-          username: 'spaceman',
-          password: '123queen',
-          userEmail: 'brian@queen.com',
-          userFirstName: 'Brian',
-          userLastName: 'May',
-          userLocation: 'London, England',
+          username: "spaceman",
+          password: "123queen",
+          userEmail: "brian@queen.com",
+          userFirstName: "Brian",
+          userLastName: "May",
+          userLocation: "London, England",
         },
         {
-          username: 'santana',
-          password: 'password123',
-          userEmail: 'carlos@santana.com',
-          userFirstName: 'Carlos',
-          userLastName: 'Santana',
-          userLocation: 'Jalisco, Mexico',
+          username: "santana",
+          password: "password123",
+          userEmail: "carlos@santana.com",
+          userFirstName: "Carlos",
+          userLastName: "Santana",
+          userLocation: "Jalisco, Mexico",
         },
-
-      ]
-      const users = await Promise.all( usersToCreate.map(User.createUser))
-      console.log('Users Created: ', users);
-      console.log('Finished creating users.');
+      ];
+      const users = await Promise.all(usersToCreate.map(User.createUser));
+      console.log("Users Created: ", users);
+      console.log("Finished creating users.");
     }
 
     async function createInitialOrders() {
-      console.log('starting to create orders');
+      console.log("starting to create orders");
 
       const ordersToCreate = [
         {
           orderUserID: 1,
-          orderShipName: 'Jimi Hendrix',
-          ordershipAddress: '123 California Ave',
-          orderCity: 'Seattle',
-          orderState: 'Washington',
-          orderZip: '12345',
-          orderEmail: 'jimi@hendrix.com',
+          orderShipName: "Jimi Hendrix",
+          ordershipAddress: "123 California Ave",
+          orderCity: "Seattle",
+          orderState: "Washington",
+          orderZip: "12345",
+          orderEmail: "jimi@hendrix.com",
           orderShipped: true,
-          orderTrackingNumber: 00004325
-        }
-      ]
-      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder))
-      console.log('Orders Created: ', orders)
-      console.log('Finished creating orders')
+          orderTrackingNumber: 00004325,
+        },
+      ];
+      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder));
+      console.log("Orders Created: ", orders);
+      console.log("Finished creating orders");
     }
 
     createInitialCategories();
