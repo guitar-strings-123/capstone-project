@@ -6,6 +6,7 @@ module.exports = {
   getAllUsers,
   createUser,
   getUserByUsername,
+  getUser,
 };
 
 async function createUser({
@@ -27,7 +28,15 @@ async function createUser({
         ON CONFLICT (username) DO NOTHING 
         RETURNING *;
       `,
-      [username, password, userEmail, userFirstName, userLastName, userLocation, isAdmin]
+      [
+        username,
+        password,
+        userEmail,
+        userFirstName,
+        userLastName,
+        userLocation,
+        isAdmin,
+      ]
     );
 
     return user;
@@ -49,6 +58,24 @@ async function getAllUsers() {
     throw error;
   }
 }
+async function getUser({ username, password }) {
+  if (!username || !password) {
+    return;
+  }
+
+  try {
+    const user = await getUserByUsername(username);
+    if (!user) return;
+    if (password === user.password) {
+      delete user.password;
+      return user;
+    } else {
+      return;
+    }
+  } catch (error) {
+    throw error;
+  }
+}
 
 async function getUserByUsername(username) {
   try {
@@ -62,7 +89,6 @@ async function getUserByUsername(username) {
     );
     if (!rows || !rows.length) return null;
     const [user] = rows;
-    delete user.password;
     return user;
   } catch (error) {
     console.error(error);

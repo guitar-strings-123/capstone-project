@@ -3,16 +3,17 @@ const {
   User,
   Categories,
   Products,
+  Orders,
   // declare your model imports here
   // for example, User
-} = require('./index');
+} = require('./db');
 
 async function buildTables() {
   try {
     client.connect();
 
     await client.query(`  
-      drop table if exists product-to-category;
+      drop table if exists product_to_category;
       drop table if exists categories;
       drop table if exists product_category;
       drop table if exists active_cart;
@@ -41,7 +42,7 @@ async function buildTables() {
     
       create table orders (
         orderID serial primary key,
-        "orderUserID" references users(id),
+        "orderUserID" integer references users(id),
         orderShipName VARCHAR(100),
         orderShipAddress VARCHAR(100),
         orderShipAddress2 VARCHAR(100),
@@ -65,10 +66,10 @@ async function buildTables() {
         categoryname VARCHAR(50) UNIQUE NOT NULL
       );
    
-      CREATE TABLE product-to-category (
+      CREATE TABLE product_to_category (
         id SERIAL PRIMARY KEY,
         "productId" INTEGER REFERENCES products(id),
-        "categoryId" INTEGER REFERENCES categories(id),
+        "categoryId" INTEGER REFERENCES categories(categoryID),
         UNIQUE ("productId", "categoryId")
       );
   `);
@@ -87,27 +88,22 @@ async function populateInitialData() {
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
 
-
     async function createInitialCategories() {
       console.log('starting to create categories...');
-
       const categoriesToCreate = [
         {
-          categoryname: 'Classical'
+          categoryname: 'Classical',
         },
         {
-          categoryname: 'Acoustic'
+          categoryname: 'Acoustic',
         },
         {
-          categoryname: 'Electric'
-        }
+          categoryname: 'Electric',
+        },
       ];
-      const categories = await Promise.all(
-        categoriesToCreate.map((category) => Categories.createCategory(category))
-      );
+      const categories = await Promise.all(categoriesToCreate.map(Categories.createCategory));
       console.log('Categories Created: ', categories);
       console.log('Finished creating categories.');
-
     }
 
     async function createInitialProducts() {
@@ -117,59 +113,79 @@ async function populateInitialData() {
         {
           name: 'Air Guitar',
           description: 'Sleek and lightweight design.',
-          price: 35000
+          price: 35000,
         },
         {
           name: 'The Chuck Berry',
           description: 'Gunny sack not included.',
-          price: 599
+          price: 599,
         },
       ];
-      const products = await Promise.all(
-        productsToCreate.map((product) => Products.createProduct(product))
-      );
+      const products = await Promise.all(productsToCreate.map(Products.createProduct));
       console.log('Products Created: ', products);
       console.log('Finished creating products.');
-
-      async function createInitialUsers() {
-        console.log('starting to create users...')
-
-        const usersToCreate = [
-          {
-            username: 'hendrix123',
-            password: '123guitar',
-            userEmail: 'jimi@hendrix.com',
-            userFirstName: 'Jimi',
-            userLastName: 'Hendrix',
-            userLocation: 'Seattle, Washington'
-          },
-          {
-            username: 'spaceman',
-            password: '123queen',
-            userEmail: 'brian@queen.com',
-            userFirstName: 'Brian',
-            userLastName: 'May',
-            userLocation: 'London, England'
-          },
-          {
-            username: 'santana',
-            password: 'password123',
-            userEmail: 'carlos@santana.com',
-            userFirstName: 'Carlos',
-            userLastName: 'Santana',
-            userLocation: 'Jalisco, Mexico'
-          },
-        ]
-        const users = await Promise.all(
-          usersToCreate.map((user) => User.createUser(user))
-        )
-        console.log('Users Created: ', users);
-        console.log('Finished creating users.');
-      }
     }
-    createInitialCategories()
-    createInitialProducts()
-    createInitialUsers()
+
+    async function createInitialUsers() {
+      console.log('starting to create users...');
+
+      const usersToCreate = [
+        {
+          username: 'hendrix123',
+          password: '123guitar',
+          userEmail: 'jimi@hendrix.com',
+          userFirstName: 'Jimi',
+          userLastName: 'Hendrix',
+          userLocation: 'Seattle, Washington',
+        },
+        {
+          username: 'spaceman',
+          password: '123queen',
+          userEmail: 'brian@queen.com',
+          userFirstName: 'Brian',
+          userLastName: 'May',
+          userLocation: 'London, England',
+        },
+        {
+          username: 'santana',
+          password: 'password123',
+          userEmail: 'carlos@santana.com',
+          userFirstName: 'Carlos',
+          userLastName: 'Santana',
+          userLocation: 'Jalisco, Mexico',
+        },
+
+      ]
+      const users = await Promise.all( usersToCreate.map(User.createUser))
+      console.log('Users Created: ', users);
+      console.log('Finished creating users.');
+    }
+
+    async function createInitialOrders() {
+      console.log('starting to create orders');
+
+      const ordersToCreate = [
+        {
+          orderUserID: 1,
+          orderShipName: 'Jimi Hendrix',
+          ordershipAddress: '123 California Ave',
+          orderCity: 'Seattle',
+          orderState: 'Washington',
+          orderZip: '12345',
+          orderEmail: 'jimi@hendrix.com',
+          orderShipped: true,
+          orderTrackingNumber: 00004325
+        }
+      ]
+      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder))
+      console.log('Orders Created: ', orders)
+      console.log('Finished creating orders')
+    }
+
+    createInitialCategories();
+    createInitialProducts();
+    createInitialUsers();
+    createInitialOrders();
   } catch (error) {
     throw error;
   }
