@@ -10,7 +10,7 @@ const {
 } = require("../db/models/activecart");
 
 // GET
-router.get(`/:userId/items`, async (req, res, next) => {
+cartRouter.get(`/:userId/items`, async (req, res, next) => {
   const userId = req.params.userId;
   try {
     const cartId = await getActiveCart(userId);
@@ -22,7 +22,7 @@ router.get(`/:userId/items`, async (req, res, next) => {
   }
 });
 
-router.get("/:cartId", async (req, res, next) => {
+cartRouter.get("/:cartId", async (req, res, next) => {
   const cartId = req.params;
   try {
     const cart = await getAllItemsInCart(cartId);
@@ -32,7 +32,7 @@ router.get("/:cartId", async (req, res, next) => {
   }
 });
 
-router.get("/:userId", async (req, res, next) => {
+cartRouter.get("/:userId", async (req, res, next) => {
   const { userId } = req.params;
   try {
     const cart = await getActiveCart(userId);
@@ -44,7 +44,7 @@ router.get("/:userId", async (req, res, next) => {
 
 //POST
 
-router.post("/:userId", async (req, res, next) => {
+cartRouter.post("/:userId", async (req, res, next) => {
   const { userId } = req.params;
   try {
     const newCart = await createActiveCart(userId);
@@ -54,7 +54,7 @@ router.post("/:userId", async (req, res, next) => {
   }
 });
 
-router.post("/:cartId", async (req, res, next) => {
+cartRouter.post("/:cartId", async (req, res, next) => {
   const { cartId } = req.params;
   const { productId, quantity } = req.body;
   try {
@@ -67,7 +67,7 @@ router.post("/:cartId", async (req, res, next) => {
 
 //DELETE
 
-router.delete("/:itemId", async (req, res, next) => {
+cartRouter.delete("/:itemId", async (req, res, next) => {
   const { itemId } = req.params;
   try {
     const item = await removeItemFromCart(itemId);
