@@ -21,6 +21,7 @@ async function createUser({
   userLocation,
   isAdmin,
 }) {
+  const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
     const {
       rows: [user],
@@ -33,7 +34,7 @@ async function createUser({
       `,
       [
         username,
-        password,
+        hashedPassword,
         userEmail,
         userFirstName,
         userLastName,
@@ -69,12 +70,11 @@ async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
     if (!user) return;
-    if (password === user.password) {
-      delete user.password;
-      return user;
-    } else {
-      return;
-    }
+    const hashedPassword = user.password;
+    const passwordsMatch = await bcrypt.compare(password, hashedPassword);
+    if (!passwordsMatch) return;
+    delete user.password;
+    return user;
   } catch (error) {
     throw error;
   }
