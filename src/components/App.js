@@ -5,6 +5,9 @@ import React, { useState, useEffect } from 'react';
 import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 
+// import components
+import { default as HomePage } from './HomePage';
+
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
 
@@ -22,6 +25,7 @@ const App = () => {
     getAPIStatus();
   }, []);
 
+  // render all components below
   return (
     <div className="app-container">
       <h1>Hello, World!</h1>
