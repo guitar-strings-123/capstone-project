@@ -28,8 +28,25 @@ const App = () => {
   // render all components below
   return (
     <div className="app-container">
-      <h1>Hello, World!</h1>
-      <p>API Status: {APIHealth}</p>
+      <div class="header">
+        {' '}
+        <h1>Hello, World!</h1>
+      </div>
+      <div class="title">
+        <p>API Status: {APIHealth}</p>
+      </div>
+      <div class="feature">feature component here</div>
+      <div class="products">
+        <div class="productCard">Product Card here</div>
+        <div class="productCard">Product Card here</div>
+        <div class="productCard">Product Card here</div>
+        <div class="productCard">Product Card here</div>
+        <div class="productCard">Product Card here</div>
+        <div class="productCard">Product Card here</div>
+        <div class="productCard">Product Card here</div>
+        <div class="productCard">Product Card here</div>
+      </div>
+      <div class="footer">footer</div>
     </div>
   );
 };
