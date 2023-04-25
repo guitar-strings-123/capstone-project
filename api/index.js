@@ -19,6 +19,9 @@ apiRouter.get('/health', (req, res, next) => {
 // this makes all of the calls to the module /api/products.js to use the /api/products/ route
 // for example, from cURLs, Postman, or 3rd party apps using our api
 const productsRouter = require('./products');
+const homeRouter = require('./home');
+
 apiRouter.use('/products', productsRouter);
+apiRouter.use('/', homeRouter);
 
 module.exports = apiRouter;
