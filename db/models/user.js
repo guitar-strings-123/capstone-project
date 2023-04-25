@@ -1,5 +1,8 @@
 // grab our db client connection to use with our adapters
 const client = require('../client');
+const bcrypt = require('bcrypt');
+// salt_count increased to 11 for extra security without too much speed loss
+const SALT_COUNT = 11;
 
 module.exports = {
   // add your database adapter fns here
