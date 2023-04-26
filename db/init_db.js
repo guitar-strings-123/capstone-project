@@ -4,9 +4,11 @@ const {
   Categories,
   Products,
   Orders,
+  ActiveCart,
   // declare your model imports here
   // for example, User
 } = require('./');
+const { getUserByUsername, getAllUsers } = require('./models/user');
 
 async function buildTables() {
   try {
@@ -14,11 +16,11 @@ async function buildTables() {
 
     await client.query(`  
       drop table if exists product_to_category;
+      drop table if exists active_cart_items;
       drop table if exists products;
       drop table if exists categories;
       drop table if exists product_category;
       drop table if exists active_cart;
-      drop table if exists active_cart_items;
       drop table if exists orders;
       drop table if exists users;
 
@@ -63,13 +65,13 @@ async function buildTables() {
    
       CREATE TABLE active_cart (
         id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users(id)
+        "user_id" INTEGER REFERENCES users(id)
       );
 
       CREATE TABLE active_cart_items (
         id SERIAL PRIMARY KEY,
-        active_cart_id INTEGER REFERENCES active_cart(id),
-        product_id INTEGER REFERENCES products(id),
+        "active_cart_id" INTEGER REFERENCES active_cart(id),
+        "product_id" INTEGER REFERENCES products(id),
         quantity INTEGER
       );
    
@@ -214,11 +216,40 @@ async function populateInitialData() {
       console.log('Finished creating orders')
     }
 
+    async function createInitialCarts() {
+      console.log('starting to create carts')
+      const [ hendrix123 ] = await getAllUsers()
+
+      const cartsToCreate = [
+        {
+          userId: hendrix123.id
+        }
+      ]
+
+      const itemsInCarts = [
+        {
+          cartId: 1,
+          productId: 1,
+          quantity: 3
+        },
+        {
+          cartId: 1,
+          productId: 2,
+          quantity: 5
+        },
+      ]
+      const carts = await Promise.all(cartsToCreate.map(ActiveCart.createActiveCart))
+      const items = await Promise.all(itemsInCarts.map(ActiveCart.addItemToCart))
+      console.log('Carts created ', carts, items)
+      console.log('finished creating carts')
+    }
+
 
     await createInitialCategories()
     await createInitialProducts()
     await createInitialUsers()
     await createInitialOrders()
+    await createInitialCarts()
 
     console.log('finished seeding data')
   } catch (error) {
