@@ -15,11 +15,15 @@ export default function Register() {
             const response = await fetch("http://localhost:4000/api/users/register/", {
                 method: 'POST',
                 headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": 'application/json',
                 },
                 body: JSON.stringify({
                     username: newUserName,
                     password: newPassword,
+                    useremail: newEmail,
+                    userFirestName: newFirstName,
+                    userLastName: newLastName,
+                    userLocation: newLocation,
                 }),
             }
             );
