@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 
 export default function Cart() {
     let token = localStorage.getItem('token')
     let username = localStorage.getItem('username')
     const [cart, setCart] = useState([])
     const [products, setProducts] = useState([])
+    const {userId, cartId} = useParams()
 
     useEffect(() => {
         async function getCart() {
