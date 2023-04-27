@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import {Routes, Route} from 'react-router-dom';
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
@@ -28,8 +29,10 @@ const App = () => {
   // render all components below
   return (
     <div className="app-container">
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+      </Routes>
       <div class="header">
-        {' '}
         <h1>Hello, World!</h1>
       </div>
       <div class="title">

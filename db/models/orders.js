@@ -63,7 +63,7 @@ async function getAllOrdersByUserID(userID) {
       `
         SELECT *
         FROM orders
-        WHERE orderUserID = $1;
+        WHERE "orderUserID" = $1;
       `,
       [userID]
     );
@@ -75,8 +75,27 @@ async function getAllOrdersByUserID(userID) {
   }
 }
 
+async function getAllOrdersByOrderID(orderID) {
+  try {
+    const { rows } = await client.query(
+      `
+        SELECT * 
+        FROM orders
+        WHERE id = $1
+      `,
+      [orderID]
+    )
+    if (!rows || !rows.length) return null
+    const [order] = rows
+    return order
+  } catch (err) {
+    console.error(err)
+  }
+}
+ 
 module.exports = {
   getAllOrders,
   createOrder,
   getAllOrdersByUserID,
+  getAllOrdersByOrderID
 };
