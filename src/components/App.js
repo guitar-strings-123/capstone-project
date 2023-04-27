@@ -8,6 +8,7 @@ import '../style/App.css';
 
 // import components
 import { default as HomePage } from './HomePage';
+import {default as Cart} from './Cart';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -31,6 +32,7 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/cart' element={<Cart />} />
       </Routes>
       <h1>Hello, World!</h1>
       <p>API Status: {APIHealth}</p>
