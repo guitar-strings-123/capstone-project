@@ -1,13 +1,34 @@
 .app-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  display: grid; 
+  grid-template-columns: 1fr; 
+  grid-template-rows: 0.6fr 0.9fr 0.6fr 2.4fr 0.5fr; 
+  gap: 0px 0px; 
+  grid-template-areas: 
+    "header"
+    "title"
+    "feature"
+    "products"
+    "footer"; 
+  width: 100vw;
+  height:100vh;
 }
+.header { grid-area: header; }
+.title { grid-area: title; }
+.feature { grid-area: feature; }
+.products { grid-area: products; }
+.footer { grid-area: footer; }
 
 .app-container h1 {
   color: var(--green);
   padding: 1rem;
+}
+
+.products{
+  border: solid 1px;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+}
+.productCard{
+  border: solid 1px;
 }
