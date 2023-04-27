@@ -23,6 +23,7 @@ export default function Login ({token, setToken}) {
             console.log(result);
             setToken(result.token);
             localStorage.setItem('token', result.token)
+            localStorage.setItem('username', result.user.username)
 
 
         } catch(err) {
@@ -33,7 +34,7 @@ export default function Login ({token, setToken}) {
     return (
         <form onSubmit={(event) => loginUser(event)}>
             {token?<div>logged in</div>:null}
-            
+
             <label>Username:</label>
             <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
             <label>Password:</label>
