@@ -1,6 +1,6 @@
 import {useEffect, useState } from 'react';
 
-export default function Login ({setToken}) {
+export default function Login ({token, setToken}) {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -32,6 +32,8 @@ export default function Login ({setToken}) {
     loginUser()
     return (
         <form onSubmit={(event) => loginUser(event)}>
+            {token?<div>logged in</div>:null}
+            
             <label>Username:</label>
             <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
             <label>Password:</label>
