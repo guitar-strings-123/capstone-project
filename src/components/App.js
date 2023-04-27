@@ -8,9 +8,11 @@ import '../style/App.css';
 
 // import components
 import { default as HomePage } from './HomePage';
+import { default as Register } from './Register';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -31,6 +33,7 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/register' element={<Register token={token} setToken={setToken} />} />
       </Routes>
       <div class="header">
         <h1>Hello, World!</h1>
