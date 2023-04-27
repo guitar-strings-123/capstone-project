@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { getAllProducts } from '../../db/models/products';
+// import { getAllProducts } from '../../db/models/products';
 
 export default function ProductCard() {
   const [products, setProducts] = useState([]);
