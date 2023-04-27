@@ -33,7 +33,7 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/register' element={<Register token={token} setToken={setToken} />} />
+        <Route path='/Register' element={<Register token={token} setToken={setToken} />} />
       </Routes>
       <div class="header">
         <h1>Hello, World!</h1>
