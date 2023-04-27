@@ -12,6 +12,7 @@ import { default as Login } from './Login'
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
+  const [token, setToken] = useState(localStorage.getItem('token'));
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -32,7 +33,7 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/login' element={<Login setToken={setToken} />} />
       </Routes>
       <div class="header">
         <h1>Hello, World!</h1>

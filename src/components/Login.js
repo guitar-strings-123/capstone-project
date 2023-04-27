@@ -1,6 +1,6 @@
 import {useEffect, useState } from 'react';
 
-export default function Login () {
+export default function Login ({setToken}) {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -19,8 +19,11 @@ export default function Login () {
                 })
             })
 
-            let result = await response.json();
-            console.log(result)
+            const result = await response.json();
+            console.log(result);
+            setToken(result.token);
+            localStorage.setItem('token', result.token)
+
 
         } catch(err) {
             console.error(err)
