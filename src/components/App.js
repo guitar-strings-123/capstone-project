@@ -8,6 +8,7 @@ import '../style/App.css';
 
 // import components
 import { default as HomePage } from './HomePage';
+import { default as Login } from './Login'
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -31,6 +32,7 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
       <div class="header">
         <h1>Hello, World!</h1>

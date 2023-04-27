@@ -28,6 +28,7 @@ router.post("/login", async (req, res, next) => {
         { expiresIn: "1w" }
       );
       res.send({ user, message: "logged in!", token });
+      console.log('logged in!')
     }
   } catch (error) {
     next(error);
