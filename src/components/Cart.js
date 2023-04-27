@@ -10,7 +10,7 @@ export default function Cart() {
     useEffect(() => {
         async function getCart() {
             try {
-                const response = await fetch(`http://localhost:4000/api/cart/:userId`, {
+                const response = await fetch(`http://localhost:4000/api/cart/${userId}`, {
                     headers: {
                         'Content-type': 'application/json'
                     }
@@ -23,7 +23,7 @@ export default function Cart() {
         }
         async function getProducts() {
             try {
-                const response = await fetch(`http://localhost:4000/api/cart/:cartId`, {
+                const response = await fetch(`http://localhost:4000/api/cart/${cartId}`, {
                     headers: {
                         'Content-type': 'application/json'
                     }
