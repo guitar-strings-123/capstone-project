@@ -7,7 +7,7 @@ const {
     // require relevant models, including the Products model from db/index.js
     Products,
 } = require("../db");
-
+const { getAllProducts, createProduct, getProductById, updateProduct } = require('../db/models/products')
 
 productRouter.use((req, res, next) => {
     console.log('a request is being made to /product')

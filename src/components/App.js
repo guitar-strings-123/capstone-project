@@ -32,24 +32,24 @@ const App = () => {
       <Routes>
         <Route path='/' element={<HomePage />} />
       </Routes>
-      <div class="header">
+      <div className="header">
         <h1>Hello, World!</h1>
       </div>
-      <div class="title">
+      <div className="title">
         <p>API Status: {APIHealth}</p>
       </div>
-      <div class="feature">feature component here</div>
-      <div class="products">
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
+      <div className="feature">feature component here</div>
+      <div className="products">
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
       </div>
-      <div class="footer">footer</div>
+      <div className="footer">footer</div>
     </div>
   );
 };
