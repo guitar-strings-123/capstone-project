@@ -8,6 +8,10 @@ import '../style/App.css';
 
 // import components
 import { default as HomePage } from './HomePage';
+import {
+  AdminProducts,
+  AddProduct,
+} from './admin/index.js'
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -31,6 +35,8 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/AdminProducts' element={<AdminProducts />} />
+        <Route path='/AddProduct' element={<AddProduct />} />
       </Routes>
       <div className="header">
         <h1>Hello, World!</h1>
