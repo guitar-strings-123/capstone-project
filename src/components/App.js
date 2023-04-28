@@ -8,6 +8,12 @@ import '../style/App.css';
 
 // import components
 import { default as HomePage } from './HomePage';
+
+import {
+  AdminProducts,
+  AddProduct,
+} from './admin/index.js'
+
 import {default as Cart} from './Cart';
 
 const App = () => {
@@ -32,6 +38,8 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/AdminProducts' element={<AdminProducts />} />
+        <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
       </Routes>
       <div className="header">
