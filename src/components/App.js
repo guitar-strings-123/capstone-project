@@ -8,6 +8,7 @@ import "../style/App.css";
 
 // import components
 import { default as HomePage } from "./HomePage";
+import { default as Cart } from "./Cart";
 import { default as Footer } from "./Footer";
 
 const App = () => {
@@ -32,25 +33,26 @@ const App = () => {
     <div className="app-container">
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
-      <div class="header">
+      <div className="header">
         <h1>Hello, World!</h1>
       </div>
-      <div class="title">
+      <div className="title">
         <p>API Status: {APIHealth}</p>
       </div>
-      <div class="feature">feature component here</div>
-      <div class="products">
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
-        <div class="productCard">Product Card here</div>
+      <div className="feature">feature component here</div>
+      <div className="products">
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
+        <div className="productCard">Product Card here</div>
       </div>
-      <Footer />
+      <div className="footer">footer</div>
     </div>
   );
 };
