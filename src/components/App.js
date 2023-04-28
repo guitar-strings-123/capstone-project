@@ -52,7 +52,7 @@ const App = () => {
         <div className="productCard">Product Card here</div>
         <div className="productCard">Product Card here</div>
       </div>
-      <div className="footer">footer</div>
+      <Footer />
     </div>
   );
 };
