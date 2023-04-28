@@ -9,6 +9,7 @@ import '../style/App.css';
 // import components
 import { default as HomePage } from './HomePage';
 import { default as Register} from './Register'
+import { default as Login } from './Login'
 
 import {
   AdminProducts,
@@ -43,6 +44,7 @@ const App = () => {
         <Route path='/AdminProducts' element={<AdminProducts />} />
         <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
         <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
       <div className="header">
