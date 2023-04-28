@@ -37,20 +37,6 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-body {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  min-height: 100vh;
-}
-
 .footer {
   position: relative;
   width: 100%;
@@ -61,6 +47,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 300px;
 }
 
 .social-icon,
