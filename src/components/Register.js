@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from 'react';
 
 
-export default function Register(token, setToken) {
+export default function Register({setToken}) {
     const [newUserName, setNewUserName] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newEmail, setNewEmail] = useState("");
@@ -34,7 +34,7 @@ export default function Register(token, setToken) {
             const result = await response.json();
             console.log(result)
             setToken(result.token)
-            localStorage.addItem('token', result.token)
+            localStorage.setItem('token', result.token)
         } catch (err) {
             console.error(err)
         }
