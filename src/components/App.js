@@ -12,6 +12,7 @@ import { default as HomePage } from './HomePage';
 import {
   AdminProducts,
   AddProduct,
+  AdminUsers,
 } from './admin/index.js'
 
 import {default as Cart} from './Cart';
@@ -41,6 +42,7 @@ const App = () => {
         <Route path='/AdminProducts' element={<AdminProducts />} />
         <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/AdminUsers' element={<AdminUsers />} />
       </Routes>
       <div className="header">
         <h1>Hello, World!</h1>

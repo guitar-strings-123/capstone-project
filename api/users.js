@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { User, Orders } = require("../db/models");
+const { getAllUsers } = require("../db/models/user");
 const { JWT_SECRET = "so safe and so secure" } = process.env;
 const { requireUser } = require("./utils");
 
@@ -100,5 +101,13 @@ router.get("/:username/orders", async (req, res, next) => {
   }
 });
 
+router.get('/', async (req, res, next) => {
+  try {
+    const allUsers = await getAllUsers()
+    res.send(allUsers)
+  } catch (err) {
+    next(err)
+  }
+})
 
 module.exports = router;
