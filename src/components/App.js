@@ -27,9 +27,25 @@ const App = () => {
     getAPIStatus();
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+  }
+
+  // const logoutButton = document.getElementById('logoutButton');
+  // logoutButton.onclick(
+  //   logout
+  // )
+
   // render all components below
   return (
     <div className="app-container">
+      {/* will eventually need to add ternary here to check for token */}
+      {<button onClick={(event=>{
+        event.preventDefault();
+        logout();
+      })}>Logout</button>
+      }
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/cart' element={<Cart />} />
