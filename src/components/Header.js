@@ -1,8 +1,9 @@
 import React from 'react';
 import CartIcon from '@material-ui/icons/ShoppingCart'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function Header() {
+    const {isAdmin} = useParams()
 
     return (
         <div id='header'>
@@ -17,6 +18,9 @@ export default function Header() {
                 {/* cart div should be on the far right of the center_header */}
                 <div id='cart'>
                     <Link to={<Cart />} >{<CartIcon />}</Link>
+                    {isAdmin ? <div id='admin'>
+                        <Link to={<AdminHomePage />} />
+                    </div> : null}
                 </div>
             </div>
         </div>
