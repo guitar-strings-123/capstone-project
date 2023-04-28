@@ -83,10 +83,10 @@ async function buildTables() {
       );
   `);
 
-    console.log("finished dropping and creating tables");
+    console.log('finished dropping and creating tables');
     // build tables in correct order
   } catch (error) {
-    console.log("error dropping tables");
+    console.log('error dropping tables');
     throw error;
   }
 }
@@ -98,76 +98,112 @@ async function populateInitialData() {
     // const user1 = await User.createUser({ ...user info goes here... })
 
     async function createInitialCategories() {
-      console.log("starting to create categories...");
+      console.log('starting to create categories...');
       const categoriesToCreate = [
         {
-          categoryname: "Classical",
+          categoryname: 'Classical',
         },
         {
-          categoryname: "Acoustic",
+          categoryname: 'Acoustic',
         },
         {
-          categoryname: "Electric",
+          categoryname: 'Electric',
         },
       ];
       const categories = await Promise.all(
         categoriesToCreate.map(Categories.createCategory)
       );
-      console.log("Categories Created: ", categories);
-      console.log("Finished creating categories.");
+      console.log('Categories Created: ', categories);
+      console.log('Finished creating categories.');
     }
 
     async function createInitialProducts() {
-      console.log("starting to create products...");
+      console.log('starting to create products...');
 
       const productsToCreate = [
         {
-          name: "Air Guitar",
-          description: "Sleek and lightweight design.",
+          name: 'Air Guitar',
+          description: 'Sleek and lightweight design.',
           price: 35000,
-          categoryID: 2
+          categoryID: 2,
         },
         {
-          name: "The Chuck Berry",
-          description: "Gunny sack not included.",
+          name: 'The Chuck Berry',
+          description: 'Gunny sack not included.',
           price: 599,
-          categoryID: 2
+          categoryID: 2,
+        },
+        {
+          name: 'Fender Strat',
+          description: 'Made in USA.',
+          price: 1500,
+          categoryID: 2,
+        },
+        {
+          name: 'Gibson Les Paul',
+          description: 'The OG shredder.',
+          price: 2300,
+          categoryID: 2,
+        },
+        {
+          name: 'Jackson Dinky',
+          description: 'Smooth playing.',
+          price: 666,
+          categoryID: 2,
+        },
+        {
+          name: 'FGN Illiad',
+          description: 'Japanese quality at a fraction of the price.',
+          price: 599,
+          categoryID: 2,
+        },
+        {
+          name: 'B.C. Rich',
+          description: 'The mall ninja of guitars.',
+          price: 333,
+          categoryID: 2,
+        },
+        {
+          name: 'Harmony Juno',
+          description: 'American made, dual p90s.',
+          price: 1100,
+          categoryID: 2,
         },
       ];
       const products = await Promise.all(
         productsToCreate.map(Products.createProduct)
       );
-      console.log("Products Created: ", products);
-      console.log("Finished creating products.");
+      console.log('Products Created: ', products);
+      console.log('Finished creating products.');
     }
 
     async function createInitialUsers() {
-      console.log("starting to create users...");
+      console.log('starting to create users...');
 
       const usersToCreate = [
         {
-          username: "hendrix123",
-          password: "123guitar",
-          userEmail: "jimi@hendrix.com",
-          userFirstName: "Jimi",
-          userLastName: "Hendrix",
-          userLocation: "Seattle, Washington",
+          username: 'hendrix123',
+          password: '123guitar',
+          userEmail: 'jimi@hendrix.com',
+          userFirstName: 'Jimi',
+          userLastName: 'Hendrix',
+          userLocation: 'Seattle, Washington',
         },
         {
-          username: "spaceman",
-          password: "123queen",
-          userEmail: "brian@queen.com",
-          userFirstName: "Brian",
-          userLastName: "May",
-          userLocation: "London, England",
+          username: 'spaceman',
+          password: '123queen',
+          userEmail: 'brian@queen.com',
+          userFirstName: 'Brian',
+          userLastName: 'May',
+          userLocation: 'London, England',
         },
         {
-          username: "santana",
-          password: "password123",
-          userEmail: "carlos@santana.com",
-          userFirstName: "Carlos",
-          userLastName: "Santana",
-          userLocation: "Jalisco, Mexico",
+          username: 'santana',
+          password: 'password123',
+          userEmail: 'carlos@santana.com',
+          userFirstName: 'Carlos',
+          userLastName: 'Santana',
+          userLocation: 'Jalisco, Mexico',
         },
         {
           username: 'bob',
@@ -176,16 +212,16 @@ async function populateInitialData() {
           userFirstName: 'bob',
           userLastName: 'bob',
           userLocation: 'bob, bob',
-          isAdmin: true
+          isAdmin: true,
         },
-      ]
-      const users = await Promise.all(usersToCreate.map(User.createUser))
+      ];
+      const users = await Promise.all(usersToCreate.map(User.createUser));
       console.log('Users Created: ', users);
       console.log('Finished creating users.');
     }
 
     async function createInitialOrders() {
-      console.log("starting to create orders");
+      console.log('starting to create orders');
 
       const ordersToCreate = [
         {
@@ -197,7 +233,7 @@ async function populateInitialData() {
           orderZip: 12345,
           orderEmail: 'jimi@hendrix.com',
           orderShipped: true,
-          orderTrackingNumber: 4325
+          orderTrackingNumber: 4325,
         },
         {
           orderUserID: 2,
@@ -208,50 +244,53 @@ async function populateInitialData() {
           orderZip: 32134,
           orderEmail: 'brian@queen.com',
           orderShipped: false,
-          orderTrackingNumber: 4326
+          orderTrackingNumber: 4326,
         },
-      ]
-      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder))
-      console.log('Orders Created: ', orders)
-      console.log('Finished creating orders')
+      ];
+      const orders = await Promise.all(ordersToCreate.map(Orders.createOrder));
+      console.log('Orders Created: ', orders);
+      console.log('Finished creating orders');
     }
 
     async function createInitialCarts() {
-      console.log('starting to create carts')
-      const [ hendrix123 ] = await getAllUsers()
+      console.log('starting to create carts');
+      const [hendrix123] = await getAllUsers();
 
       const cartsToCreate = [
         {
-          userId: hendrix123.id
-        }
-      ]
+          userId: hendrix123.id,
+        },
+      ];
 
       const itemsInCarts = [
         {
           cartId: 1,
           productId: 1,
-          quantity: 3
+          quantity: 3,
         },
         {
           cartId: 1,
           productId: 2,
-          quantity: 5
+          quantity: 5,
         },
-      ]
-      const carts = await Promise.all(cartsToCreate.map(ActiveCart.createActiveCart))
-      const items = await Promise.all(itemsInCarts.map(ActiveCart.addItemToCart))
-      console.log('Carts created ', carts, items)
-      console.log('finished creating carts')
+      ];
+      const carts = await Promise.all(
+        cartsToCreate.map(ActiveCart.createActiveCart)
+      );
+      const items = await Promise.all(
+        itemsInCarts.map(ActiveCart.addItemToCart)
+      );
+      console.log('Carts created ', carts, items);
+      console.log('finished creating carts');
     }
 
+    await createInitialCategories();
+    await createInitialProducts();
+    await createInitialUsers();
+    await createInitialOrders();
+    await createInitialCarts();
 
-    await createInitialCategories()
-    await createInitialProducts()
-    await createInitialUsers()
-    await createInitialOrders()
-    await createInitialCarts()
-
-    console.log('finished seeding data')
+    console.log('finished seeding data');
   } catch (error) {
     throw error;
   }
