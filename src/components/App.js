@@ -8,14 +8,13 @@ import '../style/App.css';
 
 // import components
 import { default as HomePage } from './HomePage';
+import { default as Cart } from './Cart';
+import { default as Header } from './Header';
 import { default as Register} from './Register'
-
 import {
   AdminProducts,
   AddProduct,
 } from './admin/index.js'
-
-import {default as Cart} from './Cart';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -48,6 +47,7 @@ const App = () => {
   // render all components below
   return (
     <div className="app-container">
+      <Header />
       {/* will eventually need to add ternary here to check for token */}
       {<button onClick={(event=>{
         event.preventDefault();
