@@ -10,9 +10,16 @@ import '../style/App.css';
 import { default as Header } from './Header';
 import { default as HomePage } from './HomePage';
 import { default as Cart } from './Cart';
+import { default as Header } from './Header';
+import { default as Register} from './Register'
+import {
+  AdminProducts,
+  AddProduct,
+} from './admin/index.js'
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -28,13 +35,32 @@ const App = () => {
     getAPIStatus();
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+  }
+
+  // const logoutButton = document.getElementById('logoutButton');
+  // logoutButton.onclick(
+  //   logout
+  // )
+
   // render all components below
   return (
     <div className="app-container">
       <Header />
+      {/* will eventually need to add ternary here to check for token */}
+      {<button onClick={(event=>{
+        event.preventDefault();
+        logout();
+      })}>Logout</button>
+      }
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/AdminProducts' element={<AdminProducts />} />
+        <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
       <div className="header">
         <h1>Hello, World!</h1>
