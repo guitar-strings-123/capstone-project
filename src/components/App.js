@@ -7,9 +7,9 @@ import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 
 // import components
+import { default as Header } from './Header';
 import { default as HomePage } from './HomePage';
 import { default as Cart } from './Cart';
-import { default as Header } from './Header';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
