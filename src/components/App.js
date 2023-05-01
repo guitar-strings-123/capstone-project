@@ -9,7 +9,7 @@ import '../style/App.css';
 // import components
 import { default as HomePage } from './HomePage';
 import { default as Cart } from './Cart';
-import { default as Header } from './Header';
+// import { default as Header } from './Header';
 import { default as Register} from './Register'
 import { default as Login } from './Login'
 
@@ -18,7 +18,7 @@ import {
   AddProduct,
 } from './admin/index.js'
 
-import {default as Cart} from './Cart';
+// import {default as Cart} from './Cart';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
