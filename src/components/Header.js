@@ -1,6 +1,7 @@
 import React from 'react';
 import CartIcon from '@material-ui/icons/ShoppingCart'
 import { Link } from 'react-router-dom';
+import { default as Cart } from './Cart';
 
 export default function Header() {
 
