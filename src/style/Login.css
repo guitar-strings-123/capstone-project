@@ -1,0 +1,24 @@
+form {
+    margin-bottom: 1vw;
+    display: flex;
+    justify-content: center;
+    gap: 4vw;
+    width: 100vw;
+}
+
+.form-input {
+    display: flex;
+    
+}
+
+label {
+    font-size: 3vh;
+}
+
+input {
+    height: 3vh;
+}
+
+button {
+    margin-left: -3vw;
+}

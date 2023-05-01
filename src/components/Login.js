@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from 'react';
+import '../style/Login.css';
 
 export default function Login ({token, setToken}) {
 
@@ -36,10 +37,15 @@ export default function Login ({token, setToken}) {
         <form onSubmit={(event) => loginUser(event)}>
             {token?<div>logged in</div>:null}
 
-            <label>Username:</label>
-            <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
-            <label>Password:</label>
-            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+            <div className='form-input'> 
+                <label>Username:</label>
+                <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
+            </div>
+
+            <div className='form-input'> 
+                <label>Password:</label>
+                <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+            </div> 
             <button type="submit">Login</button>
         </form>
     )
