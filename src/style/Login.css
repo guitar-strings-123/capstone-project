@@ -4,11 +4,12 @@ form {
     justify-content: center;
     gap: 4vw;
     width: 100vw;
+    align-items: stretch;
 }
 
 .form-input {
     display: flex;
-    
+
 }
 
 label {
@@ -21,4 +22,5 @@ input {
 
 button {
     margin-left: -3vw;
+    margin-bottom: .5vh;
 }
