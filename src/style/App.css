@@ -37,17 +37,20 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap");
 
+.footer-container {
+  height: 400px;
+}
+
 .footer {
-  position: relative;
+  position: absolute;
+  bottom: 0px;
   width: 100%;
   background: #3586ff;
   min-height: 100px;
-  padding: 20px 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 300px;
 }
 
 .social-icon,

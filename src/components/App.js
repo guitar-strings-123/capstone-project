@@ -35,9 +35,6 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
-      <div className="header">
-        <h1>Hello, World!</h1>
-      </div>
       <div className="title">
         <p>API Status: {APIHealth}</p>
       </div>
