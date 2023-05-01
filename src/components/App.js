@@ -9,12 +9,16 @@ import '../style/App.css';
 // import components
 import { default as HomePage } from './HomePage';
 import { default as Cart } from './Cart';
-import { default as Header } from './Header';
+// import { default as Header } from './Header';
 import { default as Register} from './Register'
+import { default as Login } from './Login'
+
 import {
   AdminProducts,
   AddProduct,
 } from './admin/index.js'
+
+// import {default as Cart} from './Cart';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -34,31 +38,15 @@ const App = () => {
     getAPIStatus();
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
-  }
-
-  // const logoutButton = document.getElementById('logoutButton');
-  // logoutButton.onclick(
-  //   logout
-  // )
-
   // render all components below
   return (
     <div className="app-container">
-      <Header />
-      {/* will eventually need to add ternary here to check for token */}
-      {<button onClick={(event=>{
-        event.preventDefault();
-        logout();
-      })}>Logout</button>
-      }
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/AdminProducts' element={<AdminProducts />} />
         <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
         <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
       <div className="header">
