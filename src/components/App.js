@@ -35,10 +35,22 @@ const App = () => {
     getAPIStatus();
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+  }
+
   // render all components below
   return (
     <div className="app-container">
       <Header />
+        {/* will eventually need to add ternary here to check for token */}
+        {
+          <button onClick={(event=>{
+            event.preventDefault();
+            logout();
+          })}>Logout</button>
+        }
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/AdminProducts' element={<AdminProducts />} />
