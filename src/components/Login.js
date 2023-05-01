@@ -32,9 +32,14 @@ export default function Login ({token, setToken}) {
             console.error(err)
         }
     }
+
+    // const formReset = () => {
+    //     document.submitLogin.reset()
+    //     console.log('wassup bitchesssss')
+    // }
     
     return (
-        <form onSubmit={(event) => loginUser(event)}>
+        <form onSubmit={(event) => loginUser(event)} name='submitLogin'>
             {token?<div>logged in</div>:null}
 
             <div className='form-input'> 
@@ -46,7 +51,7 @@ export default function Login ({token, setToken}) {
                 <label>Password:</label>
                 <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
             </div> 
-            <button type="submit">Login</button>
+            <button type="submit">Login</button >
         </form>
     )
 }

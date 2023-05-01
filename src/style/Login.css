@@ -20,7 +20,7 @@ input {
     height: 3vh;
 }
 
-button {
+.btnsubmit {
     margin-left: -3vw;
     margin-bottom: .5vh;
 }
