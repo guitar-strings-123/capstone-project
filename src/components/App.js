@@ -10,9 +10,16 @@ import '../style/App.css';
 import { default as Header } from './Header';
 import { default as HomePage } from './HomePage';
 import { default as Cart } from './Cart';
+import { default as Register} from './Register'
+import { default as Login } from './Login'
+import {
+  AdminProducts,
+  AddProduct,
+} from './admin/index.js'
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -34,7 +41,11 @@ const App = () => {
       <Header />
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/AdminProducts' element={<AdminProducts />} />
+        <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
+        <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
       <div className="header">
         <h1>Hello, World!</h1>

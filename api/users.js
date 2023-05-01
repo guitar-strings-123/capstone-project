@@ -36,7 +36,7 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/register", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, userEmail, userFirstName, userLastName, userLocation } = req.body;
     const queriedUser = await User.getUserByUsername(username);
     if (queriedUser) {
       res.status(401);
@@ -54,6 +54,10 @@ router.post("/register", async (req, res, next) => {
       const user = await User.createUser({
         username,
         password,
+        userEmail,
+        userFirstName,
+        userLastName,
+        userLocation
       });
       if (!user) {
         next({
