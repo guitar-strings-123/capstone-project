@@ -1,3 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&family=Gloock&display=swap');
+
+#logoutButton {
+    color: white;
+    background-color: rgb(0, 0, 0, .3);
+    /* border-left: thick solid white;
+    border-right: none;
+    border-top: none;
+    border-bottom: none; */
+    border: none;
+    height: 100%;
+    width: 8vw;
+    font-size: 2vw;
+    font-family: 'Fira Sans Condensed', sans-serif;
+font-family: 'Gloock', serif;
+}
+
 #header {
     position: fixed;
     background-color: white;
@@ -27,7 +44,7 @@
 #right_wrapper {
     margin-right: 1rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
 }
 

@@ -36,15 +36,15 @@ const App = () => {
     getAPIStatus();
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
-  }
+  // const logout = () => {
+  //   localStorage.removeItem('username');
+  //   localStorage.removeItem('token');
+  // }
 
   // render all components below
   return (
     <div className="app-container">
-      <Header />
+      <Header token={token}/>
         {/* will eventually need to add ternary here to check for token */}
         {
           <button onClick={(event=>{
