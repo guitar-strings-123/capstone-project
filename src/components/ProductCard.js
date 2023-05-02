@@ -8,7 +8,16 @@ export default function ProductCard() {
     Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
       arr.slice(i * size, i * size + size)
     );
-  let chunked = [];
+  let featuredProducts = [
+    products[0],
+    products[1],
+    products[2],
+    products[3],
+    products[4],
+    products[5],
+    products[6],
+    products[7],
+  ];
   const getProducts = async () => {
     try {
       const response = await fetch('http://localhost:4000/api/products/', {
@@ -41,7 +50,7 @@ export default function ProductCard() {
   return (
     <div className="products">
       {products.length ? (
-        products.map((product) => {
+        featuredProducts.map((product) => {
           return (
             <div className="productCard" key={product.id}>
               <p>name: {product.name}</p>
