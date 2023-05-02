@@ -27,13 +27,21 @@ export default function Header({ token }) {
                 <div id='right_wrapper'>
                     {
                         token ?
-                            <button id="logoutButton" onClick={(event => {
-                                event.preventDefault();
-                                logout();
-                            })}>Logout</button>
-                            : null
+                            <div id="logoutBlock">
+                                <button id="logoutButton" onClick={(event => {
+                                    event.preventDefault();
+                                    logout();
+                                })}>Logout</button>
+                            </div>
+                            : (
+                                <div id="loginRegisterBlock">
+                                    <div id="loginRegister"><Link to="Login">Login</Link><div className="divider">|</div><Link to="Register">Register</Link></div>
+                                </div>
+                            )
                     }
-                    <Link to="Cart">{<CartIcon sx={{ color: "white" }} />}</Link>
+                    <div id="cartBlock">
+                        <Link to="Cart">{<CartIcon sx={{ color: "white" }} />}</Link>
+                    </div>
                 </div>
             </div>
 

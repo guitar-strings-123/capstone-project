@@ -36,22 +36,16 @@ const App = () => {
     getAPIStatus();
   }, []);
 
-  // const logout = () => {
-  //   localStorage.removeItem('username');
-  //   localStorage.removeItem('token');
-  // }
+  const logout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+  }
 
   // render all components below
   return (
     <div className="app-container">
-      <Header token={token}/>
+      <Header token={token} />
         {/* will eventually need to add ternary here to check for token */}
-        {
-          <button onClick={(event=>{
-            event.preventDefault();
-            logout();
-          })}>Logout</button>
-        }
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/AdminProducts' element={<AdminProducts />} />
@@ -60,9 +54,6 @@ const App = () => {
         <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
         <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
-      <div className="title">
-        <p>API Status: {APIHealth}</p>
-      </div>
       <div className="feature">feature component here</div>
       <div className="products">
         <div className="productCard">Product Card here</div>

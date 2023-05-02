@@ -33,14 +33,16 @@ export default function Login ({token, setToken}) {
     }
     
     return (
-        <form onSubmit={(event) => loginUser(event)}>
-            {token?<div>logged in</div>:null}
+        <div className="title">
+            <form onSubmit={(event) => loginUser(event)}>
+                {token?<div>logged in</div>:null}
 
-            <label>Username:</label>
-            <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
-            <label>Password:</label>
-            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
-            <button type="submit">Login</button>
-        </form>
+                <label>Username:</label>
+                <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
+                <label>Password:</label>
+                <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     )
 }
