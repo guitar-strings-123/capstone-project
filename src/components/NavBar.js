@@ -7,7 +7,7 @@ export default function NavBar() {
     return (
         <div id='nav_bar_inner'>
             <div id='home'>
-                <Link style={{ textDecoration: 'none', color: 'black'}} to="HomePage">Home</Link>
+                <Link style={{ textDecoration: 'none', color: 'black'}} to="/">Home</Link>
             </div>
             <div id='products'>
                 <Link style={{ textDecoration: 'none', color: 'black'}} to="Products">Products</Link>
