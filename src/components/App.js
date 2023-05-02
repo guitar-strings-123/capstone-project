@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import {Routes, Route} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
-import { getAPIHealth } from '../axios-services';
-import '../style/App.css';
+import { getAPIHealth } from "../axios-services";
+import "../style/App.css";
 
 // import components
 import { default as Header } from './Header';
@@ -12,6 +12,7 @@ import { default as HomePage } from './HomePage';
 import { default as Cart } from './Cart';
 import { default as Register} from './Register'
 import { default as Login } from './Login'
+import { default as Footer } from "./Footer";
 import {
   AdminProducts,
   AddProduct,
@@ -27,7 +28,7 @@ const App = () => {
     // invoke the adapter, await the response, and set the data
     const getAPIStatus = async () => {
       const { healthy } = await getAPIHealth();
-      setAPIHealth(healthy ? 'api is up! :D' : 'api is down :/');
+      setAPIHealth(healthy ? "api is up! :D" : "api is down :/");
     };
 
     // second, after you've defined your getter above
@@ -59,9 +60,6 @@ const App = () => {
         <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
         <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
-      <div className="header">
-        <h1>Hello, World!</h1>
-      </div>
       <div className="title">
         <p>API Status: {APIHealth}</p>
       </div>
@@ -76,7 +74,7 @@ const App = () => {
         <div className="productCard">Product Card here</div>
         <div className="productCard">Product Card here</div>
       </div>
-      <div className="footer">footer</div>
+      <Footer />
     </div>
   );
 };
