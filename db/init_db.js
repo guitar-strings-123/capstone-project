@@ -45,6 +45,7 @@ async function buildTables() {
         id serial primary key,
         name varchar(255) unique not null,
         description varchar(255) not null,
+        imgURL vachar(255) not null,
         price integer not null,
         "categoryId" integer references categories(categoryID)
       );
@@ -124,48 +125,64 @@ async function populateInitialData() {
         {
           name: 'Air Guitar',
           description: 'Sleek and lightweight design.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 35000,
           categoryID: 2,
         },
         {
           name: 'The Chuck Berry',
           description: 'Gunny sack not included.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 599,
           categoryID: 2,
         },
         {
           name: 'Fender Strat',
           description: 'Made in USA.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 1500,
           categoryID: 2,
         },
         {
           name: 'Gibson Les Paul',
           description: 'The OG shredder.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 2300,
           categoryID: 2,
         },
         {
           name: 'Jackson Dinky',
           description: 'Smooth playing.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 666,
           categoryID: 2,
         },
         {
           name: 'FGN Illiad',
           description: 'Japanese quality at a fraction of the price.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 599,
           categoryID: 2,
         },
         {
           name: 'B.C. Rich',
           description: 'The mall ninja of guitars.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 333,
           categoryID: 2,
         },
         {
           name: 'Harmony Juno',
           description: 'American made, dual p90s.',
+          imgURL:
+            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
           price: 1100,
           categoryID: 2,
         },

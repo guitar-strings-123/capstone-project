@@ -3,7 +3,6 @@ import React from 'react';
 
 export default function ProductCard() {
   const [products, setProducts] = useState([]);
-  const [chunkedProducts, setChunkedProducts] = useState([]);
   const chunk = (arr, size) =>
     Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
       arr.slice(i * size, i * size + size)
@@ -56,6 +55,13 @@ export default function ProductCard() {
               <p>name: {product.name}</p>
               <p>price: {product.price}</p>
               <p>description: {product.description}</p>
+              <img src={product.imgURL} />
+              {/* <img
+                src={`/assets/${product.name
+                  .split(' ')
+                  .join('')
+                  .toLowerCase()}-${product.id}`}
+              /> */}
             </div>
           );
         })
