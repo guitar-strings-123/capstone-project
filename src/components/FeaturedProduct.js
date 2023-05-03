@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 export default function ProductCard() {
   const [products, setProducts] = useState([]);
-  const chunk = (arr, size) =>
-    Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-      arr.slice(i * size, i * size + size)
-    );
+  // const chunk = (arr, size) =>
+  //   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
+  //     arr.slice(i * size, i * size + size)
+  //   );
   let featuredProducts = [
     products[0],
     products[1],
@@ -25,7 +26,7 @@ export default function ProductCard() {
         },
       });
       let result = await response.json();
-      console.log('result', result, chunk(result, 4));
+      console.log(result);
       return result;
     } catch (err) {
       console.error(err);
@@ -52,10 +53,12 @@ export default function ProductCard() {
         featuredProducts.map((product) => {
           return (
             <div className="productCard" key={product.id}>
-              <p>name: {product.name}</p>
-              <p>price: {product.price}</p>
-              <p>description: {product.description}</p>
-              <img src={product.imgURL} />
+              <p>{product.name}</p>
+              <p>{product.price}</p>
+              <p>{product.description}</p>
+              <Link to={`/:${product.id}`}>
+                <img className="imgSmall" src={product.imgurl} />
+              </Link>
               {/* <img
                 src={`/assets/${product.name
                   .split(' ')
@@ -66,7 +69,7 @@ export default function ProductCard() {
           );
         })
       ) : (
-        <p>hi</p>
+        <p>Error loading products</p>
       )}
     </div>
   );

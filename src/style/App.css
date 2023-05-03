@@ -34,3 +34,7 @@
 .productCard{
   border: solid 1px;
 }
+
+.imgSmall{
+max-width: 210px;
+}
