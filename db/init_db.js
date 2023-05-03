@@ -45,7 +45,7 @@ async function buildTables() {
         id serial primary key,
         name varchar(255) unique not null,
         description varchar(255) not null,
-        imgURL vachar(255) not null,
+        imgURL varchar(255) not null,
         price integer not null,
         "categoryId" integer references categories(categoryID)
       );
