@@ -53,8 +53,9 @@ export default function ProductCard() {
         featuredProducts.map((product) => {
           return (
             <div className="productCard" key={product.id}>
-              <p>{product.name}</p>
-              <p>{product.price}</p>
+              <p>
+                {product.name} : {product.price}
+              </p>
               <p>{product.description}</p>
               <Link to={`/:${product.id}`}>
                 <img className="imgSmall" src={product.imgurl} />
