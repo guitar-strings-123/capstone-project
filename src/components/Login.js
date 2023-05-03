@@ -1,7 +1,9 @@
 import React from "react";
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import "../style/Login.css";
 
-export default function Login ({token, setToken}) {
+export default function Login({ token, setToken }) {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -27,20 +29,39 @@ export default function Login ({token, setToken}) {
             localStorage.setItem('username', result.user.username)
 
 
-        } catch(err) {
+        } catch (err) {
             console.error(err)
         }
     }
-    
-    return (
-        <form onSubmit={(event) => loginUser(event)}>
-            {token?<div>logged in</div>:null}
 
-            <label>Username:</label>
-            <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
-            <label>Password:</label>
-            <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
-            <button type="submit">Login</button>
-        </form>
+    return (
+        <div id="loginContent">
+            <div className="loginCard">
+                <form onSubmit={(event) => loginUser(event)}>
+                    {
+                        token ? (
+                            <div id="redirectContainer">
+                                <div>Logged in.</div>
+                                <div>Redirecting...</div>
+                            </div>
+                        )
+                            : (
+                                <>
+                                    <div id="username">
+                                        <label id="usernameLabel">Username</label>
+                                        <input type="text" value={userName} onChange={(event) => setUserName(event.target.value)}></input>
+                                    </div>
+                                    <div id="password">
+                                        <label id="passwordLabel">Password</label>
+                                        <input type="password" value={password} onChange={(event) => setPassword(event.target.value)}></input>
+                                    </div>
+                                    <button type="submit">Login</button>
+                                    <div id="registerContainer">No account? <Link to="../Register">Register here</Link></div>
+                                </>
+                            )
+                    }
+                </form>
+            </div>
+        </div>
     )
 }
