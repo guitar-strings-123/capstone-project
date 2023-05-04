@@ -16,18 +16,18 @@ module.exports = {
   pass in an object, so later you can pass in an array of objects and .map() through them
   to easily create multiple products with one function call
 */
-async function createProduct({ name, description, price, categoryID }) {
+async function createProduct({ name, description, imgURL, price, categoryID }) {
   try {
     const {
       rows: [product],
     } = await client.query(
       `
-            INSERT INTO products(name, description, price, "categoryId") 
-            VALUES($1, $2, $3, $4) 
+            INSERT INTO products(name, description, imgURL, price, "categoryId") 
+            VALUES($1, $2, $3, $4, $5) 
             ON CONFLICT (name) DO NOTHING 
             RETURNING *;
           `,
-      [name, description, price, categoryID]
+      [name, description, imgURL, price, categoryID]
     );
 
     return product;
