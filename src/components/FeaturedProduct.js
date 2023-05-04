@@ -53,11 +53,14 @@ export default function ProductCard() {
         featuredProducts.map((product) => {
           return (
             <div className="productCard" key={product.id}>
-              <p>
-                {product.name} : {product.price}
-              </p>
-              <p>{product.description}</p>
-              <Link to={`/:${product.id}`}>
+              <div className="cardTitle">
+                <p style={{ marginBottom: 0, padding: 0 }}>
+                  {product.name} : {product.price}
+                  <br />
+                  {product.description}
+                </p>
+              </div>
+              <Link to={`/${product.id}`}>
                 <img className="imgSmall" src={product.imgurl} />
               </Link>
               {/* <img

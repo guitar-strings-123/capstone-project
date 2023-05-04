@@ -126,15 +126,15 @@ async function populateInitialData() {
           name: 'Air Guitar',
           description: 'Sleek and lightweight design.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
-          price: 35000,
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
+          price: 0,
           categoryID: 2,
         },
         {
           name: 'The Chuck Berry',
           description: 'Gunny sack not included.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 599,
           categoryID: 2,
         },
@@ -142,7 +142,7 @@ async function populateInitialData() {
           name: 'Fender Strat',
           description: 'Made in USA.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1500,
           categoryID: 2,
         },
@@ -150,7 +150,7 @@ async function populateInitialData() {
           name: 'Gibson Les Paul',
           description: 'The OG shredder.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 2300,
           categoryID: 2,
         },
@@ -158,7 +158,7 @@ async function populateInitialData() {
           name: 'Jackson Dinky',
           description: 'Smooth playing.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 666,
           categoryID: 2,
         },
@@ -166,7 +166,7 @@ async function populateInitialData() {
           name: 'FGN Illiad',
           description: 'Japanese quality at a fraction of the price.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 599,
           categoryID: 2,
         },
@@ -174,7 +174,7 @@ async function populateInitialData() {
           name: 'B.C. Rich',
           description: 'The mall ninja of guitars.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 333,
           categoryID: 2,
         },
@@ -182,7 +182,7 @@ async function populateInitialData() {
           name: 'Harmony Juno',
           description: 'American made, dual p90s.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
@@ -190,7 +190,7 @@ async function populateInitialData() {
           name: 'Harmony Rocket',
           description: 'American made, dual p90s.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
@@ -198,7 +198,7 @@ async function populateInitialData() {
           name: 'Epihpone Les Paul',
           description: 'Pretty much the same but without the name',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 499,
           categoryID: 2,
         },
@@ -206,7 +206,7 @@ async function populateInitialData() {
           name: 'Jackson Flying V',
           description: 'Not reccomended for actual flight',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1200,
           categoryID: 2,
         },
@@ -214,7 +214,7 @@ async function populateInitialData() {
           name: 'Fender Acoustisonic',
           description: 'Who is this for?',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1300,
           categoryID: 2,
         },
@@ -222,7 +222,7 @@ async function populateInitialData() {
           name: 'Fender HM Strat',
           description: 'Start for metal or whatever',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1400,
           categoryID: 2,
         },
@@ -230,7 +230,7 @@ async function populateInitialData() {
           name: 'Taylor 210CE',
           description: 'Acoustic',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
@@ -238,7 +238,7 @@ async function populateInitialData() {
           name: 'Schecter C-1',
           description: 'Yuh',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
@@ -246,7 +246,7 @@ async function populateInitialData() {
           name: 'Gretsch Penguin',
           description: 'Oh Lawd',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 2300,
           categoryID: 2,
         },
@@ -254,7 +254,7 @@ async function populateInitialData() {
           name: 'EVH Wolgang Standard',
           description: 'Functional',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 550,
           categoryID: 2,
         },
@@ -262,7 +262,7 @@ async function populateInitialData() {
           name: 'PRS SE Classic',
           description: 'Paul Reed Smith',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 800,
           categoryID: 2,
         },
@@ -270,7 +270,7 @@ async function populateInitialData() {
           name: 'Fender American Professional',
           description: 'For the professional american',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
@@ -282,11 +282,12 @@ async function populateInitialData() {
           price: 1100,
           categoryID: 2,
         },
+
         {
           name: 'Martin D28',
           description: 'Martin.',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 2800,
           categoryID: 2,
         },
@@ -294,7 +295,7 @@ async function populateInitialData() {
           name: 'Alverez RF26',
           description: 'Affordable',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 250,
           categoryID: 2,
         },
@@ -302,7 +303,7 @@ async function populateInitialData() {
           name: 'Blueridge BR-183',
           description: 'Historic',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1700,
           categoryID: 2,
         },
@@ -310,7 +311,7 @@ async function populateInitialData() {
           name: 'Breedlove Oregon CE',
           description: 'Colorful',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 3000,
           categoryID: 2,
         },
@@ -318,7 +319,7 @@ async function populateInitialData() {
           name: 'Taylor 417 Grand Pacific',
           description: 'Sings',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 3000,
           categoryID: 2,
         },
@@ -326,7 +327,7 @@ async function populateInitialData() {
           name: 'Fender Precision Bass',
           description: 'Accurate',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
@@ -334,7 +335,7 @@ async function populateInitialData() {
           name: 'Fender Jazz Bass',
           description: 'Jazzy',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
@@ -342,7 +343,7 @@ async function populateInitialData() {
           name: 'Gibson SG',
           description: 'Thunderstruck',
           imgURL:
-            'https://www.firstbenefits.org/wp-content/uploads/2017/10/placeholder.png',
+            'https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg',
           price: 1100,
           categoryID: 2,
         },
