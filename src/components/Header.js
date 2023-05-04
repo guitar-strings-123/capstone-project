@@ -1,11 +1,16 @@
 import React from 'react';
+import CartIcon from '@material-ui/icons/ShoppingCart'
+import { Link, useParams } from 'react-router-dom';
+
+export default function Header() {
+    const {isAdmin} = useParams()
 import CartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { default as NavBar } from './NavBar';
 import '../style/Header.css';
 
 export default function Header({ token }) {
-
+    const {isAdmin} = useParams()
     const logout = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('token');
@@ -42,6 +47,9 @@ export default function Header({ token }) {
                     <div id="cartBlock">
                         <Link to="Cart">{<CartIcon sx={{ color: "white" }} />}</Link>
                     </div>
+                    {isAdmin ? <div id='admin'>
+                        <Link to={<AdminHomePage />} />
+                    </div> : null}
                 </div>
             </div>
 

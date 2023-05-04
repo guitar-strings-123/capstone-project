@@ -4,6 +4,7 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 export default function AdminProducts() {
     const { isAdmin } = useParams()
     const [products, setProducts] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function getProducts() {
@@ -35,6 +36,7 @@ export default function AdminProducts() {
                                         <div>{product.name}</div>
                                         <div>{product.description}</div>
                                         <div>{product.price}</div>
+                                        <br/>
                                     </div>
                                 )
                             })}
@@ -42,6 +44,7 @@ export default function AdminProducts() {
                         <Link to='/AddProduct'>
                             <button>Add Product</button>
                         </Link>
+                        <button onClick={() => navigate(-1)}>Go Back</button>
                     </div>
                     : 'You are not authorized to be on this page'
             }

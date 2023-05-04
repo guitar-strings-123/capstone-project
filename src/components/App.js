@@ -16,6 +16,7 @@ import { default as Footer } from "./Footer";
 import {
   AdminProducts,
   AddProduct,
+  AdminHomePage,
   AdminUsers,
 } from './admin/index.js'
 
@@ -49,10 +50,11 @@ const App = () => {
         {/* will eventually need to add ternary here to check for token */}
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/AdminHomePage' element={<AdminHomePage />} />
         <Route path='/AdminProducts' element={<AdminProducts />} />
+        <Route path='/AdminUsers' element={<AdminUsers />} />
         <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
-        <Route path='/AdminUsers' element={<AdminUsers />} />
         <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
         <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
