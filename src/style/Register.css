@@ -1,0 +1,59 @@
+#registerContent {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.registerCard {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    margin: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #64b5f6, #f403d1);
+}
+
+.registerCard::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    transform: translateY(30px) scale(0.9);
+    z-index: -1;
+    background: linear-gradient(135deg, #64b5f6, #f403d1);
+    filter: blur(25px);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#username, #password, #firstName, #lastName, #email, #location {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#usernameLabel, #passwordLabel, #firstNameLabel, #lastNameLabel, #emailLabel, #locationLabel {
+    margin-right: 1rem;
+    color: white;
+}
+
+button {
+    max-width: 40%;
+    margin-bottom: .5rem;
+}
+
+#loginContainer, #loginContainer > * {
+    color: white;
+    font-size: .9rem;
+    text-decoration: none;
+}
+
+#loginContainer > *:hover {
+    text-decoration:underline;
+}
