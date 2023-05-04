@@ -74,8 +74,8 @@ export default function AddProduct() {
                     />
                 </div>
                 <button className="submit-btn" type="submit">Add Product</button>
+                <button onClick={() => navigate(-1)}>Go Back</button>
             </form>
         </div>
     );
-
 }

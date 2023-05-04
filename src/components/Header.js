@@ -1,11 +1,11 @@
 import React from 'react';
 import CartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { default as NavBar } from './NavBar';
 import '../style/Header.css';
 
 export default function Header({ token }) {
-
+    const {isAdmin} = useParams()
     const logout = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('token');
@@ -27,13 +27,24 @@ export default function Header({ token }) {
                 <div id='right_wrapper'>
                     {
                         token ?
-                            <button id="logoutButton" onClick={(event => {
-                                event.preventDefault();
-                                logout();
-                            })}>Logout</button>
-                            : null
+                            <div id="logoutBlock">
+                                <button id="logoutButton" onClick={(event => {
+                                    event.preventDefault();
+                                    logout();
+                                })}>Logout</button>
+                            </div>
+                            : (
+                                <div id="loginRegisterBlock">
+                                    <div id="loginRegister"><Link to="Login">Login</Link><div className="divider">|</div><Link to="Register">Register</Link></div>
+                                </div>
+                            )
                     }
-                    <Link to="Cart">{<CartIcon sx={{ color: "white" }} />}</Link>
+                    <div id="cartBlock">
+                        <Link to="Cart">{<CartIcon sx={{ color: "white" }} />}</Link>
+                    </div>
+                    {isAdmin ? <div id='admin'>
+                        <Link to={<AdminHomePage />} />
+                    </div> : null}
                 </div>
             </div>
 
