@@ -16,6 +16,7 @@ import { default as Footer } from "./Footer";
 import {
   AdminProducts,
   AddProduct,
+  AdminUsers,
 } from './admin/index.js'
 
 const App = () => {
@@ -51,6 +52,7 @@ const App = () => {
         <Route path='/AdminProducts' element={<AdminProducts />} />
         <Route path='/AddProduct' element={<AddProduct />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/AdminUsers' element={<AdminUsers />} />
         <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
         <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />
       </Routes>
