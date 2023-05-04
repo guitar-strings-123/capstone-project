@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
 const { User, Orders } = require("../db/models");
+const { getAllUsers } = require("../db/models/user");
 const { JWT_SECRET = "so safe and so secure" } = process.env;
 const { requireUser } = require("./utils");
 
@@ -36,7 +37,7 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/register", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { username, password, userEmail, userFirstName, userLastName, userLocation } = req.body;
     const queriedUser = await User.getUserByUsername(username);
     if (queriedUser) {
       res.status(401);
@@ -54,6 +55,10 @@ router.post("/register", async (req, res, next) => {
       const user = await User.createUser({
         username,
         password,
+        userEmail,
+        userFirstName,
+        userLastName,
+        userLocation
       });
       if (!user) {
         next({
@@ -100,5 +105,13 @@ router.get("/:username/orders", async (req, res, next) => {
   }
 });
 
-
+router.get('/', async (req, res, next) => {
+    try {
+      const allUsers = await getAllUsers()
+      res.send(allUsers)
+    } catch (err) {
+      next(err)
+    }
+  })
+  
 module.exports = router;

@@ -7,10 +7,22 @@ import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 
 // import components
+import { default as Header } from './Header';
 import { default as HomePage } from './HomePage';
+import { default as Cart } from './Cart';
+import { default as Register } from './Register';
+import { default as Login } from './Login';
+import { default as Footer } from './Footer';
+import {
+  AdminProducts,
+  AddProduct,
+  AdminHomePage,
+  AdminUsers,
+} from './admin/index.js';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
+  const [token, setToken] = useState('');
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -26,20 +38,34 @@ const App = () => {
     getAPIStatus();
   }, []);
 
+  const logout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+  };
+
   // render all components below
   return (
     <div className="app-container">
+      <Header token={token} />
+      {/* will eventually need to add ternary here to check for token */}
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/AdminHomePage" element={<AdminHomePage />} />
+        <Route path="/AdminProducts" element={<AdminProducts />} />
+        <Route path="/AdminUsers" element={<AdminUsers />} />
+        <Route path="/AddProduct" element={<AddProduct />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/login"
+          element={<Login token={token} setToken={setToken} />}
+        />
+        <Route
+          path="/register"
+          element={<Register token={token} setToken={setToken} />}
+        />
       </Routes>
-      <div className="header">
-        <h1>Hello, World!</h1>
-      </div>
-      <div className="title">
-        <p>API Status: {APIHealth}</p>
-      </div>
-      <div className="feature">feature component here</div>
-      <div className="footer">footer</div>
+
+      <div class="feature">feature component here</div>
     </div>
   );
 };
