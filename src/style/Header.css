@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@300&family=Gloock&display=swap');
 
+/* fixed */
+
 #header {
     position: fixed;
     background-color: white;

@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { default as NavBar } from './NavBar';
 import '../style/Header.css';
 
+// fixed
+
 export default function Header({ token }) {
 
     const logout = () => {
