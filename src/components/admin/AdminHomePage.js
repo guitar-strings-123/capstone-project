@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
-export default function AdminHomePage() {
-    const { isAdmin } = useParams()
+export default function AdminHomePage({isAdmin}) {
 
 
     return (
         <>
             {
-                !isAdmin ?
-                    <div>
+                isAdmin ?
+                    <div id='test'>
                         <Link to='/AdminProducts'>
                             <button>All Products</button>
                         </Link>

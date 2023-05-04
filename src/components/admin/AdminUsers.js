@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams} from "react-router-dom";
 
-export default function AdminUsers() {
-    const { isAdmin } = useParams()
+export default function AdminUsers({isAdmin}) {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
@@ -25,7 +24,7 @@ export default function AdminUsers() {
     return (
         <>
             {
-                !isAdmin ?
+                isAdmin ?
                     <div>
                         <h1>All Users</h1>
                         <div className="adminUsers">

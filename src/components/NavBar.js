@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/NavBar.css';
 
-export default function NavBar() {
+export default function NavBar({isAdmin}) {
 
     return (
         <div id='nav_bar_inner'>
@@ -18,6 +18,11 @@ export default function NavBar() {
             <div id='cart'>
                 <Link style={{ textDecoration: 'none', color: 'black'}} to="Cart">Cart</Link>
             </div>
+            {isAdmin ? 
+            <div id='admin'>
+                <Link style={{ textDecoration: 'none', color: 'black'}} to="AdminHomePage">Admin</Link>
+            </div>
+            : null}
         </div>
     )
 }

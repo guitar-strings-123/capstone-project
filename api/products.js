@@ -36,7 +36,7 @@ productRouter.get('/:productId', async (req, res, next) => {
     }
 })
 
-productRouter.post('/', requireUser, async (req, res, next) => {
+productRouter.post('/', async (req, res, next) => {
     // requireUser() should check if there's a current user logged in and if not, handle the error
 
     // the content of req.body will be created in the fetch command of the frontend

@@ -25,7 +25,9 @@ export default function Login ({token, setToken}) {
             setToken(result.token);
             localStorage.setItem('token', result.token)
             localStorage.setItem('username', result.user.username)
-
+            if (result.user.isadmin == true) {
+                localStorage.setItem('isAdmin', result.user.isadmin)
+            }
 
         } catch(err) {
             console.error(err)

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
-export default function AdminProducts() {
-    const { isAdmin } = useParams()
+export default function AdminProducts({isAdmin}) {
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
 
@@ -27,7 +26,7 @@ export default function AdminProducts() {
         <>
             {
                 isAdmin ?
-                    <div>
+                    <div id='test'>
                         <h1>Product Page</h1>
                         <div className="adminProduct">
                             {products.map((product) => {

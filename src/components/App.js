@@ -38,22 +38,19 @@ const App = () => {
     getAPIStatus();
   }, []);
 
-  const logout = () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
-  }
+const isAdmin = localStorage.getItem('isAdmin')
 
   // render all components below
   return (
     <div className="app-container">
-      <Header token={token} />
+      <Header token={token} isAdmin={isAdmin}/>
         {/* will eventually need to add ternary here to check for token */}
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/AdminHomePage' element={<AdminHomePage />} />
-        <Route path='/AdminProducts' element={<AdminProducts />} />
-        <Route path='/AdminUsers' element={<AdminUsers />} />
-        <Route path='/AddProduct' element={<AddProduct />} />
+        <Route path='/AdminHomePage' element={<AdminHomePage isAdmin={isAdmin} />} />
+        <Route path='/AdminProducts' element={<AdminProducts isAdmin={isAdmin} />} />
+        <Route path='/AdminUsers' element={<AdminUsers isAdmin={isAdmin} />} />
+        <Route path='/AddProduct' element={<AddProduct isAdmin={isAdmin} />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/login' element={<Login token={token} setToken={setToken}/>} />
         <Route path='/register' element = {<Register token={token} setToken={setToken}/>} />

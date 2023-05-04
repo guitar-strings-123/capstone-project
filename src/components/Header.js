@@ -4,11 +4,11 @@ import { Link, useParams } from 'react-router-dom';
 import { default as NavBar } from './NavBar';
 import '../style/Header.css';
 
-export default function Header({ token }) {
-    const {isAdmin} = useParams()
+export default function Header({ token, isAdmin }) {
     const logout = () => {
         localStorage.removeItem('username');
         localStorage.removeItem('token');
+        localStorage.removeItem('isAdmin')
         window.location.reload()
     }
 
@@ -20,7 +20,7 @@ export default function Header({ token }) {
                     <div className="dropdown">
                         <button className='link'>Menu</button>
                         <div id='nav_bar'>
-                            <NavBar />
+                            <NavBar isAdmin={isAdmin}/>
                         </div>
                     </div>
                 </div>
@@ -42,9 +42,11 @@ export default function Header({ token }) {
                     <div id="cartBlock">
                         <Link to="Cart">{<CartIcon sx={{ color: "white" }} />}</Link>
                     </div>
-                    {isAdmin ? <div id='admin'>
-                        <Link to={<AdminHomePage />} />
-                    </div> : null}
+                    {/* {!isAdmin ?  */}
+                    <div id='admin'>
+                        <Link to='AdminHomePage' />
+                    </div> 
+                    {/* : null} */}
                 </div>
             </div>
 
