@@ -65,7 +65,7 @@ const App = () => {
         />
       </Routes>
 
-      <div class="feature">feature component here</div>
+      <Footer />
     </div>
   );
 };
