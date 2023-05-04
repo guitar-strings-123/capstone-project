@@ -1,12 +1,5 @@
 const express = require('express');
 const productRouter = express.Router();
-const {
-  getAllProducts,
-  createProduct,
-  getProductById,
-  updateProduct,
-} = require('../db/models/products');
-
 // we can create a requireUser() in a utils file to check if a user is logged in
 const { requireUser } = require('./utils');
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-export default function ProductCard() {
+export default function featuredProducts() {
   const [products, setProducts] = useState([]);
   // const chunk = (arr, size) =>
   //   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
