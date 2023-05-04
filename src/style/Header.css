@@ -45,17 +45,22 @@
 .dropdown {
     position: relative;
     margin-left: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: 100%;
 }
 
 .link {
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     border: none;
     background-color: inherit;
     font: inherit;
     color: white;
+}
+
+.link:hover {
+    cursor:default;
 }
 
 #logoutButton {

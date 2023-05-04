@@ -18,7 +18,7 @@ export default function Header({ token, isAdmin }) {
                 <div id='left_wrapper'>
                     <div id='company_logo'>STRUM ON IN</div>
                     <div className="dropdown">
-                        <button className='link'>Menu</button>
+                        <div className='link'>Menu</div>
                         <div id='nav_bar'>
                             <NavBar isAdmin={isAdmin}/>
                         </div>
