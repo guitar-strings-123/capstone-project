@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function AddProduct() {
+export default function AddProduct({isAdmin}) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
-    const { isAdmin } = useParams()
 
     async function addProduct(event) {
         event.preventDefault()
