@@ -9,6 +9,12 @@ export default function NavBar() {
             <div id='home'>
                 <Link style={{ textDecoration: 'none', color: 'black'}} to="HomePage">Home</Link>
             </div>
+            <div id='products'>
+                <Link style={{ textDecoration: 'none', color: 'black'}} to="Products">Products</Link>
+            </div>
+            <div id='profile'>
+                <Link style={{ textDecoration: 'none', color: 'black'}} to="Profile">Profile</Link>
+            </div>
             <div id='cart'>
                 <Link style={{ textDecoration: 'none', color: 'black'}} to="Cart">Cart</Link>
             </div>
