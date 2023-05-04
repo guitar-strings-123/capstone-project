@@ -1,9 +1,4 @@
 import React from 'react';
-import CartIcon from '@material-ui/icons/ShoppingCart'
-import { Link, useParams } from 'react-router-dom';
-
-export default function Header() {
-    const {isAdmin} = useParams()
 import CartIcon from '@mui/icons-material/ShoppingCart';
 import { Link, useParams } from 'react-router-dom';
 import { default as NavBar } from './NavBar';
