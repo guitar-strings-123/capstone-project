@@ -26,7 +26,7 @@ export default function AdminProducts() {
     return (
         <>
             {
-                !isAdmin ?
+                isAdmin ?
                     <div>
                         <h1>Product Page</h1>
                         <div className="adminProduct">
