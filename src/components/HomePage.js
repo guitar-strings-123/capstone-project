@@ -1,5 +1,5 @@
 import React from 'react';
-import FeaturedProducts from './FeaturedProducts';
+import { FeaturedProducts } from './';
 
 export default function HomePage() {
   return (
