@@ -1,6 +1,7 @@
 const express = require('express');
 const { createOrder } = require('../db/models/orders');
 const { requireUser } = require('./utils');
+const { getAllOrdersByOrderID, getAllOrders } = require('../db/models/orders')
 const router = express.Router();
 
 
@@ -8,7 +9,7 @@ const router = express.Router();
 // if user.isAdmin == true, then they can use this function
 router.get('/', requireUser, async (req, res, next) => {
     try {
-        const orders = Orders.getAllOrders()
+        const orders = getAllOrders()
         if (!orders) {
             next({
                 name: "NoOrders",
@@ -26,7 +27,7 @@ router.get('/', requireUser, async (req, res, next) => {
 router.get('/:orderID/orders', requireUser, async (req, res, next) => {
     try {
         const { orderID } = req.params
-        const order = Orders.getAllOrdersByOrderID(orderID)
+        const order = getAllOrdersByOrderID(orderID)
         if (!order) {
             next({
                 name: 'Order',

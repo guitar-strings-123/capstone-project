@@ -13,6 +13,7 @@ import { default as Cart } from './Cart';
 import { default as Register } from './Register';
 import { default as Login } from './Login';
 import { default as Footer } from './Footer';
+import { default as Profile } from './Profile';
 import {
   AdminProducts,
   AddProduct,
@@ -61,6 +62,7 @@ const isAdmin = localStorage.getItem('isAdmin')
           path="/register"
           element={<Register token={token} setToken={setToken} />}
         />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       <Footer />
