@@ -50,7 +50,7 @@ async function getAllProducts() {
 }
 
 // function for administrator to add product to database
-async function addProduct({ name, description, price, categoryID }) {
+async function addProduct({ name, description, imgURL, price, categoryID }) {
   const users = await User.getAllUsers();
   // under construction: have to add curUser variable that stores user info upon login
   const user = users.filter((entry) => entry.username == curUser.username);
@@ -60,6 +60,7 @@ async function addProduct({ name, description, price, categoryID }) {
       const result = await createProduct({
         name,
         description,
+        imgURL,
         price,
         categoryID,
       });
