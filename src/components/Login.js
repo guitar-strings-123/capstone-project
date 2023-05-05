@@ -42,7 +42,6 @@ export default function Login({ token, setToken }) {
   };
 
   return (
-    // <div style={{ backgroundImage: `url("https://i.imgur.com/FqHABPk.jpg")` }}>
     <div id="loginContent">
       <div className="loginCard">
         <form onSubmit={(event) => loginUser(event)}>
@@ -78,6 +77,5 @@ export default function Login({ token, setToken }) {
         </form>
       </div>
     </div>
-    // </div>
   );
 }
