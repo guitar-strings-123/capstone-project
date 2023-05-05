@@ -35,27 +35,14 @@ form {
     justify-content: center;
 }
 
-#username {
+#username, #password {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#usernameLabel {
-    margin-right: 1rem;
-    color: white;
-
-}
-
-#password {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#passwordLabel {
+#usernameLabel, #passwordLabel {
     margin-right: 1rem;
     color: white;
 }
@@ -69,4 +56,8 @@ button {
     color: white;
     font-size: .9rem;
     text-decoration: none;
+}
+
+#registerContainer > *:hover {
+    text-decoration:underline;
 }
