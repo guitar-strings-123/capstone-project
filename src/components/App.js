@@ -11,6 +11,7 @@ import { default as Header } from './Header';
 import { default as HomePage } from './HomePage';
 import { default as Cart } from './Cart';
 import { default as Register } from './Register';
+import { default as Products } from './Products';
 import { default as Login } from './Login';
 import { default as Footer } from './Footer';
 import {
@@ -38,21 +39,27 @@ const App = () => {
     getAPIStatus();
   }, []);
 
-
-const isAdmin = localStorage.getItem('isAdmin')
+  const isAdmin = localStorage.getItem('isAdmin');
 
   // render all components below
   return (
     <div className="app-container">
-      <Header token={token} isAdmin={isAdmin}/>
-        {/* will eventually need to add ternary here to check for token */}
+      <Header token={token} isAdmin={isAdmin} />
+      {/* will eventually need to add ternary here to check for token */}
       <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/AdminHomePage' element={<AdminHomePage isAdmin={isAdmin} />} />
-        <Route path='/AdminProducts' element={<AdminProducts isAdmin={isAdmin} />} />
-        <Route path='/AdminUsers' element={<AdminUsers isAdmin={isAdmin} />} />
-        <Route path='/AddProduct' element={<AddProduct isAdmin={isAdmin} />} />
-        <Route path='/cart' element={<Cart />} />
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/AdminHomePage"
+          element={<AdminHomePage isAdmin={isAdmin} />}
+        />
+        <Route
+          path="/AdminProducts"
+          element={<AdminProducts isAdmin={isAdmin} />}
+        />
+        <Route path="/AdminUsers" element={<AdminUsers isAdmin={isAdmin} />} />
+        <Route path="/AddProduct" element={<AddProduct isAdmin={isAdmin} />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/products" element={<Products />} />
         <Route
           path="/login"
           element={<Login token={token} setToken={setToken} />}
