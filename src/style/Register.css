@@ -1,3 +1,7 @@
+#redirectContainer {
+    color: white;
+}
+
 #registerContent {
     display: flex;
     flex-direction: row;
