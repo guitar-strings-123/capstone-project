@@ -52,8 +52,9 @@ max-height:230px;
 }
 
 .footer {
-  position: absolute;
+  position:fixed;
   bottom: 0px;
+  left: 0px;
   width: 100%;
   background: #3586ff;
   min-height: 100px;
