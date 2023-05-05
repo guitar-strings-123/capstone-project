@@ -47,12 +47,12 @@ export default function Footer() {
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="ComingSoon">
               Team
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="ComingSoon">
               Contact
             </a>
           </li>
