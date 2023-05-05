@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 
 export default function Login({ token, setToken }) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
   let storedToken = '';
 
   // reload token on page refresh
@@ -13,6 +14,16 @@ export default function Login({ token, setToken }) {
     storedToken = localStorage.getItem('token');
     setToken(storedToken);
   }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      // wait 3 seconds and then redirect to home if token
+      if (token) {
+        navigate('/');
+      }
+    }, 1500);
+    return () => clearTimeout(timer);
+  }, [token]);
 
   const loginUser = async (event) => {
     event.preventDefault();
