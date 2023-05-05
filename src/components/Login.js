@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "../style/Login.css";
 
 export default function Login({ token, setToken }) {
-
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    let storedToken = '';
+
+    // reload token on page refresh
+    useEffect(() => {
+        storedToken = localStorage.getItem('token');
+        setToken(storedToken);
+    }, [])
 
     const loginUser = async (event) => {
         event.preventDefault()
