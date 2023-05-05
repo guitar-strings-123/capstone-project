@@ -62,13 +62,13 @@ export default function Products() {
               <div className="productCard" key={product.id}>
                 <div className="cardTitle">
                   <p style={{ marginBottom: 0, padding: 0 }}>
-                    {product.name} : {product.price}
+                    {product.name} : ${product.price}
                     <br />
                     {product.description}
                   </p>
                 </div>
-                <Link to={`/${product.id}`}>
-                  <img className="imgSmall" src={product.imgurl} />
+                <Link to={`/Products/${product.id}`}>
+                 {product.imgurl ? <img className="imgSmall" src={product.imgurl} />: <img className="imgSmall" src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"/>}
                 </Link>
               </div>
             );
