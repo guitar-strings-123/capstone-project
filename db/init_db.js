@@ -40,12 +40,12 @@ async function buildTables() {
         categoryID SERIAL PRIMARY KEY,
         categoryname VARCHAR(50) UNIQUE NOT NULL
       );
-
+ 
       create table products (
         id serial primary key,
         name varchar(255) unique not null,
         description varchar(255) not null,
-        imgURL varchar(255) not null,
+        imgURL varchar(255),
         price integer not null,
         "categoryId" integer references categories(categoryID)
       );
