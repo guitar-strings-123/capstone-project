@@ -32,18 +32,18 @@ export default function Footer() {
         </ul>
         <ul className="menu">
           <li className="menu__item">
-            <a className="menu__link" href="#">
+            <a className="menu__link" href="/">
               Home
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
-              About
+            <a className="menu__link" href="Products">
+              Products
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="#">
-              Services
+            <a className="menu__link" href="Profile">
+              Profile
             </a>
           </li>
           <li className="menu__item">
