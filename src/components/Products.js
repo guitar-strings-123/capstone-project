@@ -49,6 +49,7 @@ export default function Products() {
       <div id="search">
         Search products:&nbsp;
         <input
+          className="productsInput"
           placeholder="Type here"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
@@ -56,26 +57,28 @@ export default function Products() {
         />
       </div>
       <div className="title">
-        {products.length ? (
-          filteredProducts.map((product) => {
-            return (
-              <div className="productCard" key={product.id}>
-                <div className="cardTitle">
-                  <p style={{ marginBottom: 0, padding: 0 }}>
-                    {product.name} : {product.price}
-                    <br />
-                    {product.description}
-                  </p>
+        <div className="products-container">
+          {products.length ? (
+            filteredProducts.map((product) => {
+              return (
+                <div className="productCard" key={product.id}>
+                  <div className="cardTitle">
+                    <p style={{ marginBottom: 0, padding: 0 }}>
+                      {product.name} : {product.price}
+                      <br />
+                      {product.description}
+                    </p>
+                  </div>
+                  <Link to={`/${product.id}`}>
+                    <img className="imgSmall" src={product.imgurl} />
+                  </Link>
                 </div>
-                <Link to={`/${product.id}`}>
-                  <img className="imgSmall" src={product.imgurl} />
-                </Link>
-              </div>
-            );
-          })
-        ) : (
-          <p>Error loading products</p>
-        )}
+              );
+            })
+          ) : (
+            <p>Error loading products</p>
+          )}
+        </div>
       </div>
     </>
   );
