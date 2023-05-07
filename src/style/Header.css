@@ -2,7 +2,7 @@
 
 #header {
     position: fixed;
-    background-color: white;
+    /* background-color: white; */
     width: 100vw;
     height: 5vh;
     display: flex;
@@ -10,13 +10,16 @@
     align-items: center;
     font-family: 'Fira Sans Condensed', sans-serif;
     font-family: 'Gloock', serif;
+    z-index: 1;
 }
 
 #center_header {
+    border: solid 1px white;
+    border-top: none;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(0, 0, 0, .3);
+    background-color: #3586FF;
     width: 60%;
     height: 100%;
 }
@@ -40,8 +43,12 @@
     flex-direction: column;
     justify-content: center;
     color: white;
+    margin-right: 15px;
 }
-
+#logoImg{
+    height: 30px;
+    margin-top: -5px;
+}
 .dropdown {
     position: relative;
     margin-left: 1rem;

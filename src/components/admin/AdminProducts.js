@@ -32,9 +32,10 @@ export default function AdminProducts({isAdmin}) {
                             {products.map((product) => {
                                 return (
                                     <div key={product.id}>
-                                        <div>{product.name}</div>
-                                        <div>{product.description}</div>
-                                        <div>{product.price}</div>
+                                        <div>Name: {product.name}</div>
+                                        <div>Description: {product.description}</div>
+                                        <img src={"https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"} width="100"/>
+                                        <div>$ {product.price}</div>
                                         <br/>
                                     </div>
                                 )

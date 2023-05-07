@@ -49,6 +49,7 @@ export default function Products() {
       <div id="search">
         Search products:&nbsp;
         <input
+          className="productsInput"
           placeholder="Type here"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
@@ -56,26 +57,28 @@ export default function Products() {
         />
       </div>
       <div className="title">
-        {products.length ? (
-          filteredProducts.map((product) => {
-            return (
-              <div className="productCard" key={product.id}>
-                <div className="cardTitle">
-                  <p style={{ marginBottom: 0, padding: 0 }}>
-                    {product.name} : ${product.price}
-                    <br />
-                    {product.description}
-                  </p>
+        <div className="products-container">
+          {products.length ? (
+            filteredProducts.map((product) => {
+              return (
+                <div className="productCard" key={product.id}>
+                  <div className="cardTitle">
+                    <p style={{ marginBottom: 0, padding: 0 }}>
+                      {product.name} : {product.price}
+                      <br />
+                      {product.description}
+                    </p>
+                  </div>
+                  <Link to={`/${product.id}`}>
+                     {product.imgurl ? <img className="imgSmall" src={product.imgurl} />: <img className="imgSmall" src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"/>}
+                  </Link>
                 </div>
-                <Link to={`/Products/${product.id}`}>
-                 {product.imgurl ? <img className="imgSmall" src={product.imgurl} />: <img className="imgSmall" src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"/>}
-                </Link>
-              </div>
-            );
-          })
-        ) : (
-          <p>Error loading products</p>
-        )}
+              );
+            })
+          ) : (
+            <p>Error loading products</p>
+          )}
+        </div>
       </div>
     </>
   );
