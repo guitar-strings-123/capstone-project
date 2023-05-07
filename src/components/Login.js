@@ -7,13 +7,6 @@ export default function Login({ token, setToken }) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  let storedToken = '';
-
-  // reload token on page refresh
-  useEffect(() => {
-    storedToken = localStorage.getItem('token');
-    setToken(storedToken);
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
