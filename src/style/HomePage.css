@@ -1,0 +1,64 @@
+#homeContainer {
+  width: 100vw;
+}
+
+.heroContainer {
+  min-width: 100%;
+  min-height: 40vh;
+  margin-bottom: 1rem;
+}
+
+.hero {
+  min-width: inherit;
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../hero.png');
+  background-position: center center;
+}
+
+.hero>h1,
+h3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: white;
+}
+
+:root {
+  --neon: RGB(73, 251, 53);
+  /* --neon: pink; */
+}
+
+.hero > h1 {
+  text-decoration:underline;
+  animation: pulsate 1.5s infinite alternate;
+}
+
+.hero > h3 {
+  filter: drop-shadow(2px 2px 2px black)
+}
+
+@keyframes pulsate {
+  0% {
+    text-shadow:
+      0 0 2px white,
+      0 0 4px white,
+      0 0 6px white,
+      0 0 9px var(--neon),
+      0 0 22px var(--neon),
+      0 0 33px var(--neon),
+      0 0 45px var(--neon)
+  }
+  100% {
+    text-shadow:
+      0 0 5px white,
+      0 0 9px white,
+      0 0 18px white,
+      0 0 36px var(--neon),
+      0 0 49px var(--neon),
+      0 0 65px var(--neon),
+      0 0 89px var(--neon)
+  }
+}
