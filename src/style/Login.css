@@ -1,8 +1,11 @@
+
 #redirectContainer {
     color: white;
 }
 
 #loginContent {
+    background-image: url("https://i.imgur.com/FqHABPk.jpg");
+    height: 100vh;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -13,10 +16,11 @@
     width: 300px;
     height: 200px;
     margin: 40px;
+    margin-top: 200px;;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #64b5f6, #f403d1);
+    background: linear-gradient(135deg, #3586ff, #b3d2ff);
 }
 
 .loginCard::before {
@@ -25,7 +29,7 @@
     inset: -4px;
     transform: translateY(30px) scale(0.9);
     z-index: -1;
-    background: linear-gradient(135deg, #64b5f6, #f403d1);
+    background: linear-gradient(135deg, #3586ff, #8cb9fc);
     filter: blur(25px);
 }
 
@@ -35,27 +39,14 @@ form {
     justify-content: center;
 }
 
-#username {
+#username, #password {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#usernameLabel {
-    margin-right: 1rem;
-    color: white;
-
-}
-
-#password {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-#passwordLabel {
+#usernameLabel, #passwordLabel {
     margin-right: 1rem;
     color: white;
 }
@@ -69,4 +60,8 @@ button {
     color: white;
     font-size: .9rem;
     text-decoration: none;
+}
+
+#registerContainer > *:hover {
+    text-decoration:underline;
 }
