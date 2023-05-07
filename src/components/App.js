@@ -25,7 +25,8 @@ import SingleProduct from './SingleProduct';
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
-
+  const [cart, setCart] = useState([])
+  const activeCart = localStorage.getItem('activeCart')
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
     // first, create an async function that will wrap your axios service adapter
@@ -61,7 +62,7 @@ const App = () => {
         <Route path="/AddProduct" element={<AddProduct isAdmin={isAdmin} />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<SingleProduct />} />
+        <Route path="/products/:productId" element={<SingleProduct activeCart={activeCart} cart={cart} setCart={setCart}/>} />
         <Route
           path="/login"
           element={<Login token={token} setToken={setToken} />}
