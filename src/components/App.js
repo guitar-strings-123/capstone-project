@@ -25,6 +25,12 @@ const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
 
+  // reload token on page refresh
+  useEffect(() => {
+    let storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+  }, []);
+
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
     // first, create an async function that will wrap your axios service adapter

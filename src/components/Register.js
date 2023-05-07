@@ -11,13 +11,6 @@ export default function Register({ token, setToken }) {
     const [newLastName, setNewLastName] = useState("");
     const [newLocation, setNewLocation] = useState("");
     const navigate = useNavigate();
-    let storedToken = '';
-
-    // reload token on page refresh
-    useEffect(() => {
-        storedToken = localStorage.getItem('token');
-        setToken(storedToken);
-    }, [])
 
     useEffect(() => {
         const timer = setTimeout(() => {
