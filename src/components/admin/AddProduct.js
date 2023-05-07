@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function AddProduct({isAdmin}) {
+export default function AddProduct({ isAdmin }) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
+    const [categoryID, setCategoryID] = useState(0)
+    const [imgURL, setImgURL] = useState('https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg')
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
-
+ 
     async function addProduct(event) {
         event.preventDefault()
 
@@ -36,7 +38,7 @@ export default function AddProduct({isAdmin}) {
                 navigate('/AdminProducts')
             }
         }
-    } 
+    }
 
     return (
         <div className="add-product-container" >
@@ -72,9 +74,18 @@ export default function AddProduct({isAdmin}) {
                         onChange={(e) => setPrice(e.target.value)}
                     />
                 </div>
+                <div>
+                    <label htmlFor="categoryId">Category</label>
+                    <select name="categoryId" id="categoryId" value={categoryID} onChange={(e) => setCategoryID(e.target.value)}>
+                            <option value="1">Classical</option>
+                            <option value="2">Acoustic</option>
+                            <option value="3">Electronic</option>
+                    </select>
+                </div >
                 <button className="submit-btn" type="submit">Add Product</button>
                 <button onClick={() => navigate(-1)}>Go Back</button>
-            </form>
-        </div>
+            </form >
+        </div >
     );
 }
+ 
