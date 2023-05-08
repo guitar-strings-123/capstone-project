@@ -21,11 +21,18 @@ import {
   AdminHomePage,
   AdminUsers,
 } from './admin/index.js';
+import SingleProduct from './SingleProduct';
 
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
+
+  // reload token on page refresh
+  useEffect(() => {
+    let storedToken = localStorage.getItem('token');
+    setToken(storedToken);
+  }, []);
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -62,6 +69,7 @@ const App = () => {
         <Route path="/AddProduct" element={<AddProduct isAdmin={isAdmin} />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/:productId" element={<SingleProduct />} />
         <Route
           path="/login"
           element={<Login token={token} setToken={setToken} />}

@@ -60,7 +60,7 @@ export default function FeaturedProducts() {
                   {product.description}
                 </p>
               </div>
-              <Link to={`/${product.id}`}>
+              <Link to={`/Products/${product.id}`}>
                 <img className="imgSmall" src={product.imgurl} />
               </Link>
               {/* <img
