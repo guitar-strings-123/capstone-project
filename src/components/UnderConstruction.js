@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../style/UnderConstruction.css";
+// import "../style/UnderConstruction.css";
 
 export default function UnderConstruction() {
   return (

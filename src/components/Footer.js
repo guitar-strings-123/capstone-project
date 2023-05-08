@@ -1,3 +1,4 @@
+import { useNavigate, useParams, Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="footer-container">
@@ -47,12 +48,12 @@ export default function Footer() {
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="ComingSoon">
+            <a className="menu__link" href="/UnderConstruction">
               Team
             </a>
           </li>
           <li className="menu__item">
-            <a className="menu__link" href="ComingSoon">
+            <a className="menu__link" href="/UnderConstruction">
               Contact
             </a>
           </li>
