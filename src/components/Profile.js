@@ -41,44 +41,58 @@ export default function Profile() {
         <>
             {username ?
 
-                <div id='userInfo-container'>
-                    {firstname ? <div id='welcome'>Welcome back, {firstname}!</div> : null}
+                <div id='profile-container'>
+                    {firstname ? <div id='welcome'>Welcome back, {firstname}!</div> : <div id='welcome'>Welcome back!</div>}
 
-                    <div
-                        className="infoStyle">Username: 
-                        {username ? <div>{username}</div> : null}
+                    <div id='userInfo-container'>
+                        <div
+                            className="infoStyle">Username:
+                            {username ? <div>{username}</div> : null}
+                        </div>
+
+                        <div
+                            className='infoStyle'>UserID:
+                            {userID ? <div id='testing'>{userID}</div>
+                                : <div>no ID</div>}
+                        </div>
+
+                        <div
+                            className='infoStyle'>Email:
+                            {email ? <div>{email}</div>
+                                : <div>No email provided</div>}
+                        </div>
+
+                        <div
+                            className='infoStyle'>Location:
+                            {location ? <div>{location}</div> : null}
+                        </div>
+
+                        {admin === 'true' ? <div>Admin Enabled</div> : null}
                     </div>
-
-                    <div
-                        className='infoStyle'>UserID: 
-                        {userID ? <div id='testing'>{userID}</div>
-                            : <div>no ID</div>}
-                    </div>
-
-                    <div
-                        className='infoStyle'>Email: 
-                        {email ? <div>{email}</div>
-                            : <div>No email provided</div>}
-                    </div>
-
-                    <div
-                        className='infoStyle'>Location:
-                        {location ? <div>{location}</div> : null}
-                    </div>
-
-                    {admin === 'true' ? <div>Admin Enabled</div> : null}
+                    
+                    <div id='prevOrderText'>Previous Orders:</div>
                     {
                         myOrders.map(order => {
 
                             return (
                                 <div id='orderContainer'>
                                     {order.orderemail === email ?
-                                        <div key={order.orderid} className='orders'>Previous orders:
-                                            <div>OrderID: {order.orderid}</div>
+                                        <div key={order.orderid} className='orders'>
+                                            <div className='orderInfo'>OrderID: {order.orderid}</div>
 
-                                            <div>Shipped to: {order.ordershipaddress}, {order.ordercity}, {order.orderstate}, {order.orderzip}</div>
+                                            <div className='orderInfo'>Shipped to: {order.ordershipaddress}, {order.ordercity}, {order.orderstate}, {order.orderzip}</div>
+
+                                            <div className='orderInfo'>Order name: {order.ordershipname}</div>
+                                            <div className='orderInfo'>Order email: {order.orderemail}</div>
+                                            {
+                                                order.ordershipped === false ?
+                                                    <>
+                                                        <div className='orderInfo'>Order not shipped</div>
+                                                    </>
+                                                    : <div className='orderInfo'>Order is on the way!</div>
+                                            }
                                         </div>
-                                    : null}
+                                        : null}
                                 </div>
                             )
                         })
