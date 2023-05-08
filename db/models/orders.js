@@ -4,9 +4,9 @@ const client = require('../client');
 const getAllOrders = async () => {
   try {
     const { rows } = await client.query(`
-            SELECT *
-            FROM orders;
-        `);
+      SELECT *
+      FROM orders;
+    `);
 
     return rows;
   } catch (err) {
@@ -30,12 +30,11 @@ async function createOrder({
   try {
     const {
       rows: [order],
-    } = await client.query(
-      `
-            INSERT INTO orders("orderUserID", orderShipName, orderShipAddress, orderShipAddress2, orderCity, orderState, orderZip, orderEmail, orderShipped, orderTrackingNumber)
-            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
-            RETURNING *;
-        `,
+    } = await client.query(`
+      INSERT INTO orders("orderUserID", orderShipName, orderShipAddress, orderShipAddress2, orderCity, orderState, orderZip, orderEmail, orderShipped, orderTrackingNumber)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      RETURNING *;
+    `,
       [
         orderUserID,
         orderShipName,
@@ -59,14 +58,11 @@ async function createOrder({
 
 async function getAllOrdersByUserID(userID) {
   try {
-    const { rows } = await client.query(
-      `
-        SELECT *
-        FROM orders
-        WHERE "orderUserID" = $1;
-      `,
-      [userID]
-    );
+    const { rows } = await client.query(`
+      SELECT *
+      FROM orders
+      WHERE "orderUserID" = $1;
+    `, [userID]);
     if (!rows || !rows.length) return null;
     const [order] = rows;
     return order;
@@ -77,14 +73,11 @@ async function getAllOrdersByUserID(userID) {
 
 async function getAllOrdersByOrderID(orderID) {
   try {
-    const { rows } = await client.query(
-      `
-        SELECT * 
-        FROM orders
-        WHERE id = $1
-      `,
-      [orderID]
-    )
+    const { rows } = await client.query(`
+      SELECT * 
+      FROM orders
+      WHERE id = $1
+    `, [orderID])
     if (!rows || !rows.length) return null
     const [order] = rows
     return order
@@ -92,7 +85,7 @@ async function getAllOrdersByOrderID(orderID) {
     console.error(err)
   }
 }
- 
+
 module.exports = {
   getAllOrders,
   createOrder,

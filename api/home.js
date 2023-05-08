@@ -1,9 +1,9 @@
 const express = require('express');
 const {
     getAllProducts
-} = require ('../db/models/products.js');
+} = require('../db/models/products.js');
 
-const {getAllCategories} = require ('../db/models/categories.js');
+const { getAllCategories } = require('../db/models/categories.js');
 
 const homeRouter = express.Router()
 
@@ -18,9 +18,9 @@ homeRouter.get("/", async (req, res, next) => {
     try {
         const allProducts = await getAllProducts();
         const allCategories = await getAllCategories();
-        
+
         res.send(allProducts, allCategories);
-    } catch(err){
+    } catch (err) {
         console.log(err, 'error getting products');
         next()
     }

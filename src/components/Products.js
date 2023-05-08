@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-export default function Products() {
+export default function Products({DB}) {
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState('');
 
@@ -16,7 +16,7 @@ export default function Products() {
   });
   const getProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/products/', {
+      const response = await fetch(`${DB}/api/products/`, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -69,8 +69,8 @@ export default function Products() {
                       {product.description}
                     </p>
                   </div>
-                  <Link to={`/${product.id}`}>
-                    <img className="imgSmall" src={product.imgurl} />
+                  <Link to={`/Products/${product.id}`}>
+                    {product.imgurl ? <img className="imgSmall" src={product.imgurl} /> : <img className="imgSmall" src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg" />}
                   </Link>
                 </div>
               );

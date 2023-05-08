@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-export default function FeaturedProducts() {
+export default function FeaturedProducts({DB}) {
   const [products, setProducts] = useState([]);
   // const chunk = (arr, size) =>
   //   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
@@ -20,13 +20,12 @@ export default function FeaturedProducts() {
   ];
   const getProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/products/', {
+      const response = await fetch(`${DB}/api/products/`, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
       let result = await response.json();
-      console.log(result);
       return result;
     } catch (err) {
       console.error(err);
@@ -60,7 +59,7 @@ export default function FeaturedProducts() {
                   {product.description}
                 </p>
               </div>
-              <Link to={`/${product.id}`}>
+              <Link to={`/Products/${product.id}`}>
                 <img className="imgSmall" src={product.imgurl} />
               </Link>
               {/* <img

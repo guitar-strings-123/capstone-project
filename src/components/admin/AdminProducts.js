@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-export default function AdminProducts({isAdmin}) {
+export default function AdminProducts({ isAdmin, DB }) {
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
         async function getProducts() {
             try {
-                const response = await fetch(`http://localhost:4000/api/products`, {
+                const response = await fetch(`${DB}/api/products`, {
                     headers: {
                         'Content-type': 'application/json'
                     }
@@ -34,9 +34,9 @@ export default function AdminProducts({isAdmin}) {
                                     <div key={product.id}>
                                         <div>Name: {product.name}</div>
                                         <div>Description: {product.description}</div>
-                                        <img src={"https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"} width="100"/>
+                                        <img src={"https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"} width="100" />
                                         <div>$ {product.price}</div>
-                                        <br/>
+                                        <br />
                                     </div>
                                 )
                             })}

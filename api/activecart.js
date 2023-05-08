@@ -1,6 +1,6 @@
 const express = require("express");
 const cartRouter = express.Router();
-const {} = require("../db");
+const { } = require("../db");
 const {
   getAllItemsInCart,
   getActiveCart,
@@ -29,6 +29,7 @@ cartRouter.get("/:cartId", async (req, res, next) => {
     res.status(200).json({ message: cart });
   } catch (error) {
     console.error(error);
+    next()
   }
 });
 
@@ -39,6 +40,7 @@ cartRouter.get("/:userId", async (req, res, next) => {
     res.status(200).json({ message: cart });
   } catch (error) {
     console.error(error);
+    next()
   }
 });
 
@@ -51,6 +53,7 @@ cartRouter.post("/:userId", async (req, res, next) => {
     res.status(201).json({ message: newCart });
   } catch (error) {
     console.error(error);
+    next()
   }
 });
 
@@ -62,6 +65,7 @@ cartRouter.post("/:cartId", async (req, res, next) => {
     res.status(201).json({ message: item });
   } catch (error) {
     console.error(error);
+    next()
   }
 });
 
@@ -74,6 +78,7 @@ cartRouter.delete("/:itemId", async (req, res, next) => {
     res.status(200).json({ message: "item removed" });
   } catch (error) {
     console.error(error);
+    next()
   }
 });
 

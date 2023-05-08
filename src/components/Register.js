@@ -1,9 +1,9 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import "../style/Register.css";
 
 
-export default function Register({ token, setToken }) {
+export default function Register({ token, setToken, DB }) {
     const [newUserName, setNewUserName] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newEmail, setNewEmail] = useState("");
@@ -14,18 +14,18 @@ export default function Register({ token, setToken }) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-          // wait 3 seconds and then redirect to home if token
-          if (token) {
-            navigate('/');
-          }
+            // wait 3 seconds and then redirect to home if token
+            if (token) {
+                navigate('/');
+            }
         }, 1500);
         return () => clearTimeout(timer);
-      }, [token]);
+    }, [token]);
 
     const newUser = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch("http://localhost:4000/api/users/register/", {
+            const response = await fetch(`${DB}/api/users/register/`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',

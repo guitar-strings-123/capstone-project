@@ -13,7 +13,7 @@ async function createCategory({ categoryname }) {
             INSERT INTO categories(categoryname)
             VALUES($1)
             RETURNING *;
-            `, [categoryname])
+        `, [categoryname])
 
         return category
     } catch (err) {
@@ -24,7 +24,8 @@ async function createCategory({ categoryname }) {
 async function getAllCategories() {
     try {
         const { rows } = await client.query(`
-            SELECT * FROM categories;
+            SELECT * 
+            FROM categories;
         `)
 
         return rows;
