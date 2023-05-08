@@ -106,12 +106,12 @@ router.get("/:username/orders", async (req, res, next) => {
 });
 
 router.get('/', async (req, res, next) => {
-    try {
-      const allUsers = await getAllUsers()
-      res.send(allUsers)
-    } catch (err) {
-      next(err)
-    }
-  })
-  
+  try {
+    const allUsers = await getAllUsers()
+    res.send(allUsers)
+  } catch (err) {
+    next(err)
+  }
+})
+
 module.exports = router;

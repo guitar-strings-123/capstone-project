@@ -70,7 +70,7 @@ export default function Products() {
                     </p>
                   </div>
                   <Link to={`/${product.id}`}>
-                     {product.imgurl ? <img className="imgSmall" src={product.imgurl} />: <img className="imgSmall" src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"/>}
+                    {product.imgurl ? <img className="imgSmall" src={product.imgurl} /> : <img className="imgSmall" src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg" />}
                   </Link>
                 </div>
               );

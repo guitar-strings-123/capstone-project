@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import "../style/Register.css";
 
@@ -14,13 +14,13 @@ export default function Register({ token, setToken }) {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-          // wait 3 seconds and then redirect to home if token
-          if (token) {
-            navigate('/');
-          }
+            // wait 3 seconds and then redirect to home if token
+            if (token) {
+                navigate('/');
+            }
         }, 1500);
         return () => clearTimeout(timer);
-      }, [token]);
+    }, [token]);
 
     const newUser = async (event) => {
         event.preventDefault()
