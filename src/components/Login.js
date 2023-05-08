@@ -21,7 +21,7 @@ export default function Login({ token, setToken, DB }) {
     const loginUser = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(`${DB}/users/login/`, {
+            const response = await fetch(`${DB}/api/users/login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

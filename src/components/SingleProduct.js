@@ -10,7 +10,7 @@ export default function SingleProduct({DB}) {
     useEffect(() => {
         const getProduct = async () => {
             try {
-                const response = await fetch(`${DB}/products/${productId}`, {
+                const response = await fetch(`${DB}/api/products/${productId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
