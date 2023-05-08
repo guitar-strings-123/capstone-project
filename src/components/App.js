@@ -23,7 +23,7 @@ import {
 } from './admin/index.js';
 import SingleProduct from './SingleProduct';
 
-DB = DATABASE_URL
+let DB = process.env.DATABASE_URL
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
