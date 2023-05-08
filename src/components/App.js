@@ -14,6 +14,7 @@ import { default as Register } from './Register';
 import { default as Products } from './Products';
 import { default as Login } from './Login';
 import { default as Footer } from './Footer';
+import { default as UnderConstruction } from './UnderConstruction';
 import {
   AdminProducts,
   AddProduct,
@@ -21,6 +22,7 @@ import {
   AdminUsers,
 } from './admin/index.js';
 import SingleProduct from './SingleProduct';
+
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -76,8 +78,8 @@ const App = () => {
           path="/register"
           element={<Register token={token} setToken={setToken} />}
         />
+        <Route path="/UnderConstruction" element={<UnderConstruction />} />
       </Routes>
-
       <Footer />
     </div>
   );
