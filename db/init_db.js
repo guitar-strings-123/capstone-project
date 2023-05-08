@@ -8,7 +8,7 @@ const {
   // declare your model imports here
   // for example, User
 } = require('./');
-const { getUserByUsername, getAllUsers } = require('./models/user');
+const { getAllUsers } = require('./models/user');
 
 async function buildTables() {
   try {

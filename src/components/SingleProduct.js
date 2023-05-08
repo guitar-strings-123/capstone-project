@@ -35,14 +35,13 @@ export default function SingleProduct() {
                             <br />
                             {product.description}
                             <br />
-                            <img src={product.imgurl} width='150'/>
+                            <img src={product.imgurl} width='150' />
                         </p>
                         <button className='add-to-cart'>Add To Cart</button>
                     </div> :
                     <p>Error loading products</p>
                 }
-                
-            <button className='back-button' onClick={() => navigate(-1)}>Go Back</button>
+                <button className='back-button' onClick={() => navigate(-1)}>Go Back</button>
             </div>
         </>
     );

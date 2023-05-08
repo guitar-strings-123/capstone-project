@@ -20,15 +20,12 @@ async function createProduct({ name, description, imgURL, price, categoryID }) {
   try {
     const {
       rows: [product],
-    } = await client.query(
-      `
-            INSERT INTO products(name, description, imgURL, price, "categoryId") 
-            VALUES($1, $2, $3, $4, $5) 
-            ON CONFLICT (name) DO NOTHING 
-            RETURNING *;
-          `,
-      [name, description, imgURL, price, categoryID]
-    );
+    } = await client.query(`
+        INSERT INTO products(name, description, imgURL, price, "categoryId") 
+        VALUES($1, $2, $3, $4, $5) 
+        ON CONFLICT (name) DO NOTHING 
+        RETURNING *;
+    `, [name, description, imgURL, price, categoryID]);
 
     return product;
   } catch (error) {
@@ -39,9 +36,9 @@ async function createProduct({ name, description, imgURL, price, categoryID }) {
 async function getAllProducts() {
   try {
     const { rows } = await client.query(`
-          SELECT *
-          FROM products;
-        `);
+      SELECT *
+      FROM products;
+    `);
 
     return rows;
   } catch (error) {
@@ -87,14 +84,11 @@ async function removeProduct(id) {
     try {
       const {
         rows: [product],
-      } = await client.query(
-        `
-                delete from products
-                where products.id=$1
-                returning *;
-            `,
-        [id]
-      );
+      } = await client.query(`
+        delete from products
+        where products.id=$1
+        returning *;
+      `, [id]);
 
       // should return the deleted object
       return product;
@@ -113,14 +107,11 @@ async function getProductById(productId) {
   try {
     const {
       rows: [product],
-    } = await client.query(
-      `
-          SELECT *
-          FROM products
-          WHERE id=$1;
-        `,
-      [productId]
-    );
+    } = await client.query( `
+      SELECT *
+      FROM products
+      WHERE id=$1;
+    `, [productId] );
 
     if (!product) {
       throw {
@@ -145,15 +136,12 @@ async function updateProduct({ id, ...fields }) {
   }
 
   try {
-    const { rows } = await client.query(
-      `
-            update products
-            set ${setString}
-            where id=${id}
-            returning *
-        `,
-      Object.values(fields)
-    );
+    const { rows } = await client.query(`
+      update products
+      set ${setString}
+      where id=${id}
+      returning *
+    `, Object.values(fields));
 
     return rows;
   } catch (err) {

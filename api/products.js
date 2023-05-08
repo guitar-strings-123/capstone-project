@@ -1,13 +1,13 @@
 const express = require('express')
 const productRouter = express.Router()
 // we can create a requireUser() in a utils file to check if a user is logged in
-const {requireUser} = require('./utils');
+const { requireUser } = require('./utils');
 
 const {
     // require relevant models, including the Products model from db/index.js
     Products,
 } = require("../db");
-const { getAllProducts, createProduct, getProductById, updateProduct } = require('../db/models/products')
+const { getAllProducts, getProductById } = require('../db/models/products')
 
 productRouter.use((req, res, next) => {
     console.log('a request is being made to /product')
@@ -26,7 +26,7 @@ productRouter.get('/', async (req, res, next) => {
 })
 
 productRouter.get('/:productId', async (req, res, next) => {
-    const {productId} = req.params
+    const { productId } = req.params
     try {
         const singleProduct = await getProductById(productId)
         res.send(singleProduct)
@@ -46,12 +46,12 @@ productRouter.post('/', async (req, res, next) => {
 
     if (result.message) {
         // handle the error message if the user is not an admin or if there was another error
-        next({name: result.name, message: result.message});
+        next({ name: result.name, message: result.message });
     } else {
         // send back an object containing the result if no error messages
-        res.send({name: name, description: description, price: price, categoryID: categoryID });
+        res.send({ name: name, description: description, price: price, categoryID: categoryID });
     }
-} )
+})
 
 productRouter.route('/:productId')
     .patch(requireUser, async (req, res, next) => {
@@ -79,23 +79,23 @@ productRouter.route('/:productId')
 
         if (result.message) {
             // handle the error message if the user is not an admin or if there was another error
-            next({name: result.name, message: result.message});
+            next({ name: result.name, message: result.message });
         } else {
             // send back an object containing the result if no error messages
-            res.send({name: result.name, description: result.description, price: result.price, categoryID: result.categoryID });
+            res.send({ name: result.name, description: result.description, price: result.price, categoryID: result.categoryID });
         }
-    } )
+    })
     .delete(requireUser, async (req, res, next) => {
         const { productId } = req.params;
         const result = await Products.removeProduct(productId);
 
         if (result.message) {
             // handle the error message if the user is not an admin or if there was another error
-            next({name: result.name, message: result.message});
+            next({ name: result.name, message: result.message });
         } else {
             // send back an object containing the result if no error messages
-            res.send({name: result.name, description: result.description, price: result.price, categoryID: result.categoryID });
+            res.send({ name: result.name, description: result.description, price: result.price, categoryID: result.categoryID });
         }
-    } )
+    })
 
 module.exports = productRouter
