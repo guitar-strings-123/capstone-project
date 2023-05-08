@@ -23,12 +23,12 @@ import {
 } from './admin/index.js';
 import SingleProduct from './SingleProduct';
 
-let DB = process.env.DATABASE_URL
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
-
+  
+  let DB = `https://strumonin.onrender.com`
   // reload token on page refresh
   useEffect(() => {
     let storedToken = localStorage.getItem('token');
