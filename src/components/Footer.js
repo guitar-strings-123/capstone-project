@@ -58,7 +58,7 @@ export default function Footer() {
             </a>
           </li>
         </ul>
-        <p>&copy;2023 Robert Green | All Rights Reserved</p>
+        <p>&copy;2023 Let Guitar = "strings" | All Rights Reserved</p>
         <script
           type="module"
           src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
