@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import "../style/UnderConstruction.css";
+import "../style/UnderConstruction.css";
 
 export default function UnderConstruction() {
   return (
-    <div>
+    <div className="construction">
       <div className="overlay"></div>
       <div className="stars" aria-hidden="true"></div>
       <div className="starts2" aria-hidden="true"></div>
