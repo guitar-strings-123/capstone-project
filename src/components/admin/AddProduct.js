@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function AddProduct({ isAdmin }) {
+export default function AddProduct({ isAdmin, DB }) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState('')
@@ -13,7 +13,7 @@ export default function AddProduct({ isAdmin }) {
         event.preventDefault()
 
         try {
-            const response = await fetch(`http://localhost:4000/api/products`, {
+            const response = await fetch(`${DB}/api/products`, {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json',

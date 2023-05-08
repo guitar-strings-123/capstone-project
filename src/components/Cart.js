@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useParams } from 'react-router-dom';
 
-export default function Cart() {
+export default function Cart({DB}) {
     let token = localStorage.getItem('token')
     let username = localStorage.getItem('username')
     const [cart, setCart] = useState([])
@@ -11,7 +11,7 @@ export default function Cart() {
     useEffect(() => {
         async function getCart() {
             try {
-                const response = await fetch(`http://localhost:4000/api/cart/${userId}`, {
+                const response = await fetch(`${DB}/api/cart/${userId}`, {
                     headers: {
                         'Content-type': 'application/json'
                     }
@@ -24,7 +24,7 @@ export default function Cart() {
         }
         async function getProducts() {
             try {
-                const response = await fetch(`http://localhost:4000/api/cart/${cartId}`, {
+                const response = await fetch(`${DB}/api/cart/${cartId}`, {
                     headers: {
                         'Content-type': 'application/json'
                     }

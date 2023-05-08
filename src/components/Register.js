@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import "../style/Register.css";
 
 
-export default function Register({ token, setToken }) {
+export default function Register({ token, setToken, DB }) {
     const [newUserName, setNewUserName] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [newEmail, setNewEmail] = useState("");
@@ -25,7 +25,7 @@ export default function Register({ token, setToken }) {
     const newUser = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch("http://localhost:4000/api/users/register/", {
+            const response = await fetch(`${DB}/users/register/`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',
