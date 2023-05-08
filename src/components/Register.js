@@ -25,7 +25,7 @@ export default function Register({ token, setToken, DB }) {
     const newUser = async (event) => {
         event.preventDefault()
         try {
-            const response = await fetch(`${DB}/users/register/`, {
+            const response = await fetch(`${DB}/api/users/register/`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": 'application/json',
