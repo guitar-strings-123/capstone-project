@@ -5,7 +5,7 @@ const { User, Orders } = require("../db/models");
 const { getAllUsers } = require("../db/models/user");
 const { JWT_SECRET = "so safe and so secure" } = process.env;
 const { requireUser } = require("./utils");
-const { getUserByID } = require('../db/models/user')
+const { getUserByID } = require('../db/models/user');
 
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
@@ -115,40 +115,5 @@ router.get('/', async (req, res, next) => {
     }
   })
 
-  router.use(async (req,res,next) => {
-    const prefix = 'Bearer ';
-    const auth = req.header('Authorization');
-
-    if (!auth) {
-      next();
-    } else if (auth.startsWith(prefix)) {
-      const token = auth.slice(prefix.length);
-
-      try {
-        const parsedToken = jwt.verify(token, JWT_SECRET);
-
-        const id = parsedToken && parsedToken.id;
-
-        if(id) {
-          req.user = await getUserByID(id);
-          next();
-        }
-      } catch(err) {
-        next(err)
-      }
-    }else {
-      next({
-        name: 'AuthorizationHeaderError',
-        message: `Authorization token must start with ${ prefix }`
-      });
-    }
-  });
-
-  router.use((req, res, next) => {
-    if (req.user) {
-      console.log("User is set:", req.user);
-    }
-    next();
-  });
   
 module.exports = router;

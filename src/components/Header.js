@@ -9,6 +9,10 @@ export default function Header({ token, isAdmin }) {
     localStorage.removeItem('username');
     localStorage.removeItem('token');
     localStorage.removeItem('isAdmin');
+    localStorage.removeItem('userlocation');
+    localStorage.removeItem('userfirstname');
+    localStorage.removeItem('userlastname');
+    localStorage.removeItem('useremail');
     window.location.reload();
   };
 

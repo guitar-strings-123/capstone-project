@@ -35,8 +35,12 @@ export default function Login({ token, setToken }) {
       const result = await response.json();
       console.log(result);
       setToken(result.token);
-      localStorage.setItem('token', result.token);
-      localStorage.setItem('username', result.user.username);
+      localStorage.setItem('token', result.token)
+      localStorage.setItem('userlastname', result.user.userlastname)
+      localStorage.setItem('userfirstname', result.user.userfirstname)
+      localStorage.setItem('userlocation', result.user.userlocation)
+      localStorage.setItem('useremail', result.user.useremail)
+      localStorage.setItem('username', result.user.username)
       if (result.user.isadmin == true) {
         localStorage.setItem('isAdmin', result.user.isadmin);
       }

@@ -1,4 +1,25 @@
-#testing {
-    font-size: 100px;
+
+.infoStyle {
+    display: flex;
+    flex-direction: row;
+}
+
+.notLoggedIn {
+    font-size: 12vw;
+    text-align: center;
+    margin-top: 10vh;
+    
+}
+
+#welcome {
+    text-align: center;
+    margin-bottom: 5vh;
+}
+
+#userInfo-container {
+    font-size: 15px;
     margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
 }

@@ -7,9 +7,9 @@ const router = express.Router();
 
 
 // if user.isAdmin == true, then they can use this function
-router.get('/', requireUser, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const orders = getAllOrders()
+        const orders = await getAllOrders()
         if (!orders) {
             next({
                 name: "NoOrders",

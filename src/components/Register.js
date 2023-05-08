@@ -50,6 +50,8 @@ export default function Register({ token, setToken }) {
             localStorage.setItem('userLocation', result.user.userLocation)
             localStorage.setItem('userlastname', result.user.userlastname)
             localStorage.setItem('userfirstname', result.user.userfirstname)
+            localStorage.setItem('userlocation', result.user.userlocation)
+            localStorage.setItem('useremail', result.user.useremail)
 
         } catch (err) {
             console.error(err)
