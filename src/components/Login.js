@@ -41,6 +41,7 @@ export default function Login({ token, setToken }) {
       localStorage.setItem('userlocation', result.user.userlocation)
       localStorage.setItem('useremail', result.user.useremail)
       localStorage.setItem('username', result.user.username)
+      localStorage.setItem('userID', result.user.id)
       if (result.user.isadmin == true) {
         localStorage.setItem('isAdmin', result.user.isadmin);
       }

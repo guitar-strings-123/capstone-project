@@ -11,9 +11,14 @@
     
 }
 
+#orderContainer {
+    margin-top: 4vw;
+}
+
 #welcome {
     text-align: center;
     margin-bottom: 5vh;
+    font-size: 10vw;
 }
 
 #userInfo-container {

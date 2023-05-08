@@ -18,7 +18,7 @@ export default function Profile() {
                 let result = await response.json();
                 console.log(result);
                 setMyOrders(result)
-            } catch(err) {
+            } catch (err) {
                 console.error(err)
             }
             console.log('this worked')
@@ -45,18 +45,18 @@ export default function Profile() {
                     {firstname ? <div id='welcome'>Welcome back, {firstname}!</div> : null}
 
                     <div
-                        className="infoStyle">Username:
+                        className="infoStyle">Username: 
                         {username ? <div>{username}</div> : null}
                     </div>
 
                     <div
-                        className='infoStyle'>UserID:
+                        className='infoStyle'>UserID: 
                         {userID ? <div id='testing'>{userID}</div>
                             : <div>no ID</div>}
                     </div>
 
                     <div
-                        className='infoStyle'>Email:
+                        className='infoStyle'>Email: 
                         {email ? <div>{email}</div>
                             : <div>No email provided</div>}
                     </div>
@@ -68,8 +68,19 @@ export default function Profile() {
 
                     {admin === 'true' ? <div>Admin Enabled</div> : null}
                     {
-                        myOrders.map(order=> {
-                            console.log(order)
+                        myOrders.map(order => {
+
+                            return (
+                                <div id='orderContainer'>
+                                    {order.orderemail === email ?
+                                        <div key={order.orderid} className='orders'>Previous orders:
+                                            <div>OrderID: {order.orderid}</div>
+
+                                            <div>Shipped to: {order.ordershipaddress}, {order.ordercity}, {order.orderstate}, {order.orderzip}</div>
+                                        </div>
+                                    : null}
+                                </div>
+                            )
                         })
                     }
 

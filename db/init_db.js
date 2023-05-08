@@ -404,7 +404,7 @@ async function populateInitialData() {
 
       const ordersToCreate = [
         {
-          orderUserID: 1,
+          orderUserID: 3,
           orderShipName: 'Jimi Hendrix',
           orderShipAddress: '123 California Ave',
           orderCity: 'Seattle',
