@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-export default function AdminProducts({ isAdmin }) {
+export default function AdminProducts({ isAdmin, DB }) {
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
 
     useEffect(() => {
         async function getProducts() {
             try {
-                const response = await fetch(`http://localhost:4000/api/products`, {
+                const response = await fetch(`${DB}/api/products`, {
                     headers: {
                         'Content-type': 'application/json'
                     }

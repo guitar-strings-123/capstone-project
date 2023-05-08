@@ -23,6 +23,7 @@ import {
 } from './admin/index.js';
 import SingleProduct from './SingleProduct';
 
+let DB = process.env.DATABASE_URL
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -53,30 +54,30 @@ const App = () => {
   // render all components below
   return (
     <div className="app-container">
-      <Header token={token} isAdmin={isAdmin} />
+      <Header token={token} isAdmin={isAdmin} DB={DB}/>
       {/* will eventually need to add ternary here to check for token */}
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage DB={DB} />} />
         <Route
           path="/AdminHomePage"
-          element={<AdminHomePage isAdmin={isAdmin} />}
+          element={<AdminHomePage isAdmin={isAdmin} DB={DB} />}
         />
         <Route
           path="/AdminProducts"
-          element={<AdminProducts isAdmin={isAdmin} />}
+          element={<AdminProducts isAdmin={isAdmin} DB={DB} />}
         />
-        <Route path="/AdminUsers" element={<AdminUsers isAdmin={isAdmin} />} />
-        <Route path="/AddProduct" element={<AddProduct isAdmin={isAdmin} />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/products/:productId" element={<SingleProduct />} />
+        <Route path="/AdminUsers" element={<AdminUsers isAdmin={isAdmin} DB={DB} />} />
+        <Route path="/AddProduct" element={<AddProduct isAdmin={isAdmin} DB={DB} />} />
+        <Route path="/cart" element={<Cart DB={DB} />} />
+        <Route path="/products" element={<Products  DB={DB}/>} />
+        <Route path="/products/:productId" element={<SingleProduct DB={DB} />} />
         <Route
           path="/login"
-          element={<Login token={token} setToken={setToken} />}
+          element={<Login token={token} setToken={setToken} DB={DB} />}
         />
         <Route
           path="/register"
-          element={<Register token={token} setToken={setToken} />}
+          element={<Register token={token} setToken={setToken}  DB={DB}/>}
         />
         <Route path="/UnderConstruction" element={<UnderConstruction />} />
       </Routes>

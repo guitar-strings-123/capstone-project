@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 
-export default function Login({ token, setToken }) {
+export default function Login({ token, setToken, DB }) {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Login({ token, setToken }) {
     const loginUser = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch('http://localhost:4000/api/users/login/', {
+            const response = await fetch(`${DB}/users/login/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

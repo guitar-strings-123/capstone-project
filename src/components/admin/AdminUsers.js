@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-export default function AdminUsers({ isAdmin }) {
+export default function AdminUsers({ isAdmin, DB }) {
     const [users, setUsers] = useState([])
 
     useEffect(() => {
         async function getUsers() {
             try {
-                const response = await fetch(`http://localhost:4000/api/users`, {
+                const response = await fetch(`${DB}/api/users`, {
                     headers: {
                         'Content-type': 'application/json'
                     }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-export default function Products() {
+export default function Products({DB}) {
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState('');
 
@@ -16,7 +16,7 @@ export default function Products() {
   });
   const getProducts = async () => {
     try {
-      const response = await fetch('http://localhost:4000/api/products/', {
+      const response = await fetch(`${DB}/api/products/`, {
         headers: {
           'Content-Type': 'application/json',
         },

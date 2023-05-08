@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import React from 'react';
 
-export default function SingleProduct() {
+export default function SingleProduct({DB}) {
     const [product, setProduct] = useState('')
     const navigate = useNavigate()
     const { productId } = useParams()
@@ -10,7 +10,7 @@ export default function SingleProduct() {
     useEffect(() => {
         const getProduct = async () => {
             try {
-                const response = await fetch(`http://localhost:4000/api/products/${productId}`, {
+                const response = await fetch(`${DB}/products/${productId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
