@@ -1,13 +1,13 @@
-const express = require("express");
+const express = require('express');
 const cartRouter = express.Router();
-const { } = require("../db");
+const {} = require('../db');
 const {
   getAllItemsInCart,
   getActiveCart,
   createActiveCart,
   addItemToCart,
   removeItemFromCart,
-} = require("../db/models/activecart");
+} = require('../db/models/activecart');
 
 // GET
 cartRouter.get(`/:userId/items`, async (req, res, next) => {
@@ -22,42 +22,43 @@ cartRouter.get(`/:userId/items`, async (req, res, next) => {
   }
 });
 
-cartRouter.get("/:cartId", async (req, res, next) => {
-  const cartId = req.params;
-  try {
-    const cart = await getAllItemsInCart(cartId);
-    res.status(200).json({ message: cart });
-  } catch (error) {
-    console.error(error);
-    next()
-  }
-});
+// cartRouter.get('/:userId', async (req, res, next) => {
+//   const cartId = req.params;
+//   try {
+//     const cart = await getAllItemsInCart(cartId);
+//     res.send(cart);
+//   } catch (error) {
+//     console.error(error);
+//     next();
+//   }
+// });
 
-cartRouter.get("/:userId", async (req, res, next) => {
+cartRouter.get('/:userId', async (req, res, next) => {
   const { userId } = req.params;
   try {
     const cart = await getActiveCart(userId);
-    res.status(200).json({ message: cart });
+    // const cartItems = await getAllItemsInCart(cart.id);
+    res.send({ cart });
   } catch (error) {
     console.error(error);
-    next()
+    next();
   }
 });
 
 //POST
 
-cartRouter.post("/:userId", async (req, res, next) => {
+cartRouter.post('/:userId', async (req, res, next) => {
   const { userId } = req.params;
   try {
     const newCart = await createActiveCart(userId);
     res.status(201).json({ message: newCart });
   } catch (error) {
     console.error(error);
-    next()
+    next();
   }
 });
 
-cartRouter.post("/:cartId", async (req, res, next) => {
+cartRouter.post('/:cartId', async (req, res, next) => {
   const { cartId } = req.params;
   const { productId, quantity } = req.body;
   try {
@@ -65,20 +66,20 @@ cartRouter.post("/:cartId", async (req, res, next) => {
     res.status(201).json({ message: item });
   } catch (error) {
     console.error(error);
-    next()
+    next();
   }
 });
 
 //DELETE
 
-cartRouter.delete("/:itemId", async (req, res, next) => {
+cartRouter.delete('/:itemId', async (req, res, next) => {
   const { itemId } = req.params;
   try {
     const item = await removeItemFromCart(itemId);
-    res.status(200).json({ message: "item removed" });
+    res.status(200).json({ message: 'item removed' });
   } catch (error) {
     console.error(error);
-    next()
+    next();
   }
 });
 
