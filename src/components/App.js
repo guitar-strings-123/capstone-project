@@ -20,6 +20,7 @@ import {
   AddProduct,
   AdminHomePage,
   AdminUsers,
+  AdminOrders
 } from './admin/index.js';
 import SingleProduct from './SingleProduct';
 
@@ -27,8 +28,9 @@ import SingleProduct from './SingleProduct';
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
-  
-  let DB = `https://strumonin.onrender.com`
+ 
+  // let DB = `https://strumonin.onrender.com`
+  let DB = `http://localhost:4000`
   // reload token on page refresh
   useEffect(() => {
     let storedToken = localStorage.getItem('token');
@@ -68,6 +70,7 @@ const App = () => {
         />
         <Route path="/AdminUsers" element={<AdminUsers isAdmin={isAdmin} DB={DB} />} />
         <Route path="/AddProduct" element={<AddProduct isAdmin={isAdmin} DB={DB} />} />
+        <Route path="/AdminOrders" element={<AdminOrders isAdmin={isAdmin} DB={DB} />} />
         <Route path="/cart" element={<Cart DB={DB} />} />
         <Route path="/products" element={<Products  DB={DB}/>} />
         <Route path="/products/:productId" element={<SingleProduct DB={DB} />} />

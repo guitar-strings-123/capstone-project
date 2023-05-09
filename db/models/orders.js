@@ -1,13 +1,12 @@
 const client = require('../client');
 module.exports = {};
 
-const getAllOrders = async () => {
+async function getAllOrders() {
   try {
     const { rows } = await client.query(`
       SELECT *
       FROM orders;
     `);
-
     return rows;
   } catch (err) {
     console.log(err);

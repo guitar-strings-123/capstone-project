@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function AdminUsers({ isAdmin, DB }) {
     const [users, setUsers] = useState([])
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function getUsers() {
@@ -24,12 +25,11 @@ export default function AdminUsers({ isAdmin, DB }) {
     return (
         <>
             {isAdmin ?
-                <div>
-                    <h1>All Users</h1>
-                    <div className="adminUsers">
+                <div className="title">
+                    <div className="products-container">
                         {users.map((user) => {
                             return (
-                                <div key={user.id}>
+                                <div className="productCard" key={user.id}>
                                     <div>Username: {user.username}</div>
                                     <div>Email: {user.useremail}</div>
                                     <div>First Name: {user.userfirstname}</div>
@@ -42,8 +42,9 @@ export default function AdminUsers({ isAdmin, DB }) {
                             )
                         })}
                     </div>
+                    <button className='back-button' onClick={() => navigate(-1)}>Go Back</button>
                 </div>
-                : 'You are not authorized to be on this page'
+                : <p>You are not authorized to be on this page</p>
             }
         </>
     )

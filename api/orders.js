@@ -1,32 +1,24 @@
 const express = require('express');
-const { createOrder } = require('../db/models/orders');
-const { requireUser } = require('./utils');
+const { createOrder, getAllOrders } = require('../db/models/orders');
 const router = express.Router();
 
 
-
 // if user.isAdmin == true, then they can use this function
-router.get('/', requireUser, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
-        const orders = Orders.getAllOrders()
-        if (!orders) {
-            next({
-                name: "NoOrders",
-                message: "You haven't sold anything yet!"
-            })
-        } else (
-            res.send(orders)
-        )
+        const orders = await getAllOrders()
+        res.send(orders)
     } catch (err) {
-        next(err)
+        console.log(err, "error receiving orders")
+        next()
     }
 })
 
 // getting orders by orderid instead of user id
-router.get('/:orderID/orders', requireUser, async (req, res, next) => {
+router.get('/:orderID/orders', async (req, res, next) => {
     try {
         const { orderID } = req.params
-        const order = Orders.getAllOrdersByOrderID(orderID)
+        const order = await Orders.getAllOrdersByOrderID(orderID)
         if (!order) {
             next({
                 name: 'Order',
@@ -40,7 +32,7 @@ router.get('/:orderID/orders', requireUser, async (req, res, next) => {
     }
 })
 
-router.post('/', requireUser, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     const {
         orderUserID,
         orderShipName,
