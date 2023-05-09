@@ -13,6 +13,8 @@ apiRouter.get('/health', (req, res, next) => {
   });
 });
 
+//KEEP THE BELOW CODE FOR FUTURE requireUser DEBUGGING
+
 // router.use(async (req,res,next) => {
 //   const prefix = 'Bearer ';
 //   const auth = req.header('Authorization');
