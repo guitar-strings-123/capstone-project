@@ -3,14 +3,14 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../style/Profile.css'
 
-export default function Profile() {
+export default function Profile({DB}) {
 
     const [myOrders, setMyOrders] = useState([]);
 
     useEffect(() => {
         const getOrders = async () => {
             try {
-                const response = await fetch('http://localhost:4000/api/orders', {
+                const response = await fetch(`${DB}/api/orders/`, {
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -18,7 +18,7 @@ export default function Profile() {
                 let result = await response.json();
                 console.log(result);
                 setMyOrders(result)
-            } catch (err) {OrderID
+            } catch (err) {
                 console.error(err)
             }
             console.log('this worked')

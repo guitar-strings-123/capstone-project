@@ -72,6 +72,7 @@ const App = () => {
         <Route path="/cart" element={<Cart DB={DB} />} />
         <Route path="/products" element={<Products  DB={DB}/>} />
         <Route path="/products/:productId" element={<SingleProduct DB={DB} />} />
+        <Route path="/profile" element={<Profile DB={DB} />} />
         <Route
           path="/login"
           element={<Login token={token} setToken={setToken} DB={DB} />}
