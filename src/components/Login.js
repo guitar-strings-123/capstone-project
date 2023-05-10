@@ -32,18 +32,23 @@ export default function Login({ token, setToken, DB }) {
                 }),
             });
 
-            const result = await response.json();
-            console.log(result);
-            setToken(result.token);
-            localStorage.setItem('token', result.token);
-            localStorage.setItem('username', result.user.username);
-            if (result.user.isadmin == true) {
-                localStorage.setItem('isAdmin', result.user.isadmin);
-            }
-        } catch (err) {
-            console.error(err);
-        }
-    };
+      const result = await response.json();
+      console.log(result);
+      setToken(result.token);
+      localStorage.setItem('token', result.token)
+      localStorage.setItem('userlastname', result.user.userlastname)
+      localStorage.setItem('userfirstname', result.user.userfirstname)
+      localStorage.setItem('userlocation', result.user.userlocation)
+      localStorage.setItem('useremail', result.user.useremail)
+      localStorage.setItem('username', result.user.username)
+      localStorage.setItem('userID', result.user.id)
+      if (result.user.isadmin == true) {
+        localStorage.setItem('isAdmin', result.user.isadmin);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
     return (
         <div id="loginContent">

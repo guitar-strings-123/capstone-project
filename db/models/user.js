@@ -10,6 +10,7 @@ module.exports = {
   createUser,
   getUserByUsername,
   getUser,
+  getUserByID
 };
 
 async function createUser({
@@ -91,5 +92,21 @@ async function getUserByUsername(username) {
     return user;
   } catch (error) {
     console.error(error);
+  }
+}
+
+async function getUserByID(id) {
+  try {
+    const { rows } = await client.query(
+      `
+      SELECT *
+      FROM users
+      WHERE id = $1;
+      `,
+      [id]
+    );
+    return rows;
+  }catch(error) {
+    console.error(error)
   }
 }

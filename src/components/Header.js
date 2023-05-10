@@ -5,12 +5,16 @@ import { default as NavBar } from './NavBar';
 import '../style/Header.css';
 
 export default function Header({ token, isAdmin }) {
-    const logout = () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('token');
-        localStorage.removeItem('isAdmin');
-        window.location.reload();
-    };
+  const logout = () => {
+    localStorage.removeItem('username');
+    localStorage.removeItem('token');
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('userlocation');
+    localStorage.removeItem('userfirstname');
+    localStorage.removeItem('userlastname');
+    localStorage.removeItem('useremail');
+    window.location.reload();
+  };
 
     return (
         <div id="header">
