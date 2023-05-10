@@ -49,7 +49,7 @@ export default function Footer() {
           </li>
           <li className="menu__item">
             <a className="menu__link" href="/UnderConstruction">
-              Team
+              Test
             </a>
           </li>
           <li className="menu__item">
