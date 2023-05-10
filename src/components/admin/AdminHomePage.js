@@ -15,8 +15,11 @@ export default function AdminHomePage({ isAdmin }) {
                         <Link to='/AdminUsers'>
                             <button>All Users</button>
                         </Link>
+                        <Link to='/AdminOrders'>
+                            <button>All Orders</button>
+                        </Link>
                     </div> :
-                    'You are not authorized to be on this page'
+                    <p>You are not authorized to be on this page</p>
             }
         </>
     )

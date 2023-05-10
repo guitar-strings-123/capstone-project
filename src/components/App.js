@@ -21,6 +21,7 @@ import {
   AddProduct,
   AdminHomePage,
   AdminUsers,
+  AdminOrders
 } from './admin/index.js';
 import SingleProduct from './SingleProduct';
 
@@ -71,6 +72,10 @@ const App = () => {
         <Route
           path="/AdminUsers"
           element={<AdminUsers isAdmin={isAdmin} DB={DB} />}
+        />
+        <Route 
+          path="/AdminOrders" 
+          element={<AdminOrders isAdmin={isAdmin} DB={DB} />} 
         />
         <Route
           path="/AddProduct"

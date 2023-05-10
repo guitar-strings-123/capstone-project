@@ -26,27 +26,31 @@ export default function AdminProducts({ isAdmin, DB }) {
         <>
             {
                 isAdmin ?
-                    <div id='test'>
-                        <h1>Product Page</h1>
-                        <div className="adminProduct">
-                            {products.map((product) => {
-                                return (
-                                    <div key={product.id}>
-                                        <div>Name: {product.name}</div>
-                                        <div>Description: {product.description}</div>
-                                        <img src={"https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg"} width="100" />
-                                        <div>$ {product.price}</div>
-                                        <br />
-                                    </div>
-                                )
-                            })}
+                    <>
+                        <div className="title">
+                            <div className='products-container'>
+                                {products.map((product) => {
+                                    return (
+                                        <div className="productCard" key={product.id}>
+                                            <div className="cardTitle">
+                                                <p style={{ marginBottom: 0, padding: 0 }}>
+                                                    {product.name} : {product.price}
+                                                    <br />
+                                                    {product.description}
+                                                </p>
+                                            </div>
+                                            {product.imgurl ? <img className="imgSmall" src={product.imgurl} /> : <img className="imgSmall" src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg" />}
+                                        </div>
+                                    );
+                                })}
+                                <Link to='/AddProduct'>
+                                    <button className='back-button'>Add Product</button>
+                                </Link>
+                                <button className='back-button' onClick={() => navigate(-1)}>Go Back</button>
+                            </div>
                         </div>
-                        <Link to='/AddProduct'>
-                            <button>Add Product</button>
-                        </Link>
-                        <button onClick={() => navigate(-1)}>Go Back</button>
-                    </div>
-                    : 'You are not authorized to be on this page'
+                    </>
+                    : <p>You are not authorized to be on this page</p>
             }
         </>
     )

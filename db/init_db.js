@@ -54,13 +54,13 @@ async function buildTables() {
       create table orders (
         orderID serial primary key,
         "orderUserID" integer references users(id),
-        orderShipName text,
-        orderShipAddress text,
-        orderShipAddress2 text,
-        orderCity text,
-        orderState text,
+        orderShipName varchar(255) not null,
+        orderShipAddress varchar(255) not null,
+        orderShipAddress2 varchar(255),
+        orderCity varchar(255) not null,
+        orderState varchar(255) not null,
         orderZip integer,
-        orderEmail text,
+        orderEmail varchar(255) not null,
         orderShipped BOOLEAN default false,
         orderTrackingNumber integer
       );
