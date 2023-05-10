@@ -2,12 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
-export default function FeaturedProducts({DB}) {
+export default function FeaturedProducts({ DB }) {
   const [products, setProducts] = useState([]);
-  // const chunk = (arr, size) =>
-  //   Array.from({ length: Math.ceil(arr.length / size) }, (v, i) =>
-  //     arr.slice(i * size, i * size + size)
-  //   );
   let featuredProducts = [
     products[0],
     products[1],
@@ -26,11 +22,13 @@ export default function FeaturedProducts({DB}) {
         },
       });
       let result = await response.json();
+
       return result;
     } catch (err) {
       console.error(err);
     }
   };
+
   const init = async () => {
     try {
       const result = await getProducts();
@@ -62,12 +60,6 @@ export default function FeaturedProducts({DB}) {
               <Link to={`/Products/${product.id}`}>
                 <img className="imgSmall" src={product.imgurl} />
               </Link>
-              {/* <img
-                src={`/assets/${product.name
-                  .split(' ')
-                  .join('')
-                  .toLowerCase()}-${product.id}`}
-              /> */}
             </div>
           );
         })

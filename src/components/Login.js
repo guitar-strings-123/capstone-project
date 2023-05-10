@@ -10,7 +10,6 @@ export default function Login({ token, setToken, DB, setCart }) {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      // wait 3 seconds and then redirect to home if token
       if (token) {
         navigate('/');
       }
@@ -20,6 +19,7 @@ export default function Login({ token, setToken, DB, setCart }) {
 
   const loginUser = async (event) => {
     event.preventDefault();
+    
     try {
       const response = await fetch(`${DB}/api/users/login/`, {
         method: 'POST',
@@ -33,22 +33,23 @@ export default function Login({ token, setToken, DB, setCart }) {
       });
 
       const result = await response.json();
-      console.log(result);
       setToken(result.token);
       localStorage.setItem('token', result.token);
       localStorage.setItem('username', result.user.username);
       if (result.user.isadmin == true) {
         localStorage.setItem('isAdmin', result.user.isadmin);
       }
-      console.log(result);
+
       const cartResponse = await fetch(`${DB}/api/cart/${result.user.id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
-      const cartResult = await cartResponse.json();
-      console.log(cartResult);
+
+      const {cart: [cartResult]} = await cartResponse.json();
+      localStorage.setItem('cartId', cartResult.id);
+      
       setCart(cartResult);
     } catch (err) {
       console.error(err);

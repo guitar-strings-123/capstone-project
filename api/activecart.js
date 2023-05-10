@@ -22,16 +22,16 @@ cartRouter.get(`/:userId/items`, async (req, res, next) => {
   }
 });
 
-// cartRouter.get('/:userId', async (req, res, next) => {
-//   const cartId = req.params;
-//   try {
-//     const cart = await getAllItemsInCart(cartId);
-//     res.send(cart);
-//   } catch (error) {
-//     console.error(error);
-//     next();
-//   }
-// });
+cartRouter.get('/items/:cartId', async (req, res, next) => {
+  const { cartId } = req.params;
+  try {
+    const cart = await getAllItemsInCart(cartId);
+    res.send(cart);
+  } catch (error) {
+    console.error(error);
+    next();
+  }
+});
 
 cartRouter.get('/:userId', async (req, res, next) => {
   const { userId } = req.params;

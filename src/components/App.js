@@ -30,6 +30,7 @@ const App = () => {
 
   // let DB = `https://strumonin.onrender.com`;
   let DB = `http://localhost:4000`;
+
   // reload token on page refresh
   useEffect(() => {
     let storedToken = localStorage.getItem('token');
@@ -56,7 +57,6 @@ const App = () => {
   return (
     <div className="app-container">
       <Header token={token} isAdmin={isAdmin} DB={DB} />
-      {/* will eventually need to add ternary here to check for token */}
       <Routes>
         <Route path="/" element={<HomePage DB={DB} />} />
         <Route
