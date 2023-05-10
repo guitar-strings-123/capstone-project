@@ -15,6 +15,7 @@ import { default as Products } from './Products';
 import { default as Login } from './Login';
 import { default as Footer } from './Footer';
 import { default as UnderConstruction } from './UnderConstruction';
+import { default as Profile } from './Profile';
 import {
   AdminProducts,
   AddProduct,
@@ -84,6 +85,7 @@ const App = () => {
           path="/products/:productId"
           element={<SingleProduct DB={DB} />}
         />
+        <Route path="/profile" element={<Profile DB={DB} />} />
         <Route
           path="/login"
           element={
@@ -99,7 +101,6 @@ const App = () => {
           path="/register"
           element={<Register token={token} setToken={setToken} DB={DB} />}
         />
-        <Route path="/UnderConstruction" element={<UnderConstruction />} />
       </Routes>
       <Footer />
     </div>

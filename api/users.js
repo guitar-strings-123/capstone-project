@@ -5,6 +5,7 @@ const { User, Orders } = require("../db/models");
 const { getAllUsers } = require("../db/models/user");
 const { JWT_SECRET = "so safe and so secure" } = process.env;
 const { requireUser } = require("./utils");
+const { getUserByID } = require('../db/models/user');
 
 // GET
 router.post("/login", async (req, res, next) => {

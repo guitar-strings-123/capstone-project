@@ -10,6 +10,7 @@ module.exports = {
   createUser,
   getUserByUsername,
   getUser,
+  getUserByID
 };
 
 async function createUser({
