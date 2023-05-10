@@ -55,7 +55,7 @@ export default function Profile({ DB }) {
 
                         <div className="infoStyle">
                             UserID:
-                            {userID ? <div id="testing">{userID}</div> : <div>no ID</div>}
+                            {userID ? <div>{userID}</div> : <div>no ID</div>}
                         </div>
 
                         <div className="infoStyle">

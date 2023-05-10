@@ -1,6 +1,10 @@
 .infoStyle {
     display: flex;
     flex-direction: row;
+    font-size: 2.5vw;
+    color:#3586FF;
+}
+#infoDesc {
     font-size: 2vw;
 }
 
@@ -42,21 +46,19 @@
 
 #orderContainer {
     border: 1vw solid #3586FF;
+    margin: 2vw 2vw 0 2vw;
 }
 
 #eachOrderContainer {
-    /* display: flex;
-    flex-direction: column; */
     align-items: left;
-    width: 100%;
     background-color: #3586FF;
     color: white;
-    border: .5vw solid white;
+    margin: 0 3vw 2vw 3vw;
 }
 
 #userInfo-container {
     margin: 0 auto;
-    border: thin solid #3586FF;
+    border: .5vw solid #3586FF;
     padding: 1vw;
     width: 100%;
     font-size: 2vw;
@@ -67,12 +69,14 @@
 }
 
 #prevOrderText {
-    font-size: 4vw;
+    font-size: 6vw;
+    font-style:oblique;
     height: 7vh;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    color:#3586FF;
 }
 
 #profileHeader {
