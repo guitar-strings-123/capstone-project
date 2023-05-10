@@ -9,8 +9,7 @@ module.exports = {
   getAllUsers,
   createUser,
   getUserByUsername,
-  getUser,
-  getUserByID
+  getUser
 };
 
 async function createUser({
