@@ -1,14 +1,17 @@
-const client = require("../client");
+const client = require('../client');
 
 const createActiveCart = async ({ userId }) => {
   try {
     const {
       rows: [activeCart],
-    } = await client.query(`
+    } = await client.query(
+      `
       INSERT INTO active_cart("user_id")
       VALUES ($1)
       RETURNING *;
-    `, [userId]);
+    `,
+      [userId]
+    );
 
     return activeCart;
   } catch (err) {
@@ -33,12 +36,14 @@ const getActiveCart = async (userId) => {
 
 const addItemToCart = async ({ productId, cartId, quantity }) => {
   try {
-    const { rows } = await client.query(`
-        INSERT INTO active_cart_items(product_id, active_cart_id, quantity)
+    const { rows } = await client.query(
+      `
+        INSERT INTO active_cart_items(active_cart_id, product_id, quantity)
         VALUES($1, $2, $3)
         RETURNING *;
-      `,[productId, cartId, quantity]);
-
+      `,
+      [cartId, productId, quantity]
+    );
     return rows;
   } catch (err) {
     console.log(err);
@@ -48,7 +53,7 @@ const addItemToCart = async ({ productId, cartId, quantity }) => {
 
 const updateQuanity = async (activeCartItemId, quantity) => {
   try {
-    const { rows } = await client.query( `
+    const { rows } = await client.query(`
         UPDATE active_cart_items
         SET quantity=${quantity}
         WHERE id=${activeCartItemId}
@@ -62,9 +67,9 @@ const updateQuanity = async (activeCartItemId, quantity) => {
 
 const removeItemFromCart = async (activeCartItemId) => {
   try {
-    const { rows } = await client.query( `
+    const { rows } = await client.query(`
       DELETE FROM active_cart_items
-        WHERE id=${activeCartItemId}
+        WHERE product_id=${activeCartItemId}
     `);
     return rows;
   } catch (err) {

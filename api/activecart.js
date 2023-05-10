@@ -47,7 +47,7 @@ cartRouter.get('/:userId', async (req, res, next) => {
 
 //POST
 
-cartRouter.post('/:userId', async (req, res, next) => {
+cartRouter.post('/active/:userId', async (req, res, next) => {
   const { userId } = req.params;
   try {
     const newCart = await createActiveCart(userId);
@@ -58,12 +58,11 @@ cartRouter.post('/:userId', async (req, res, next) => {
   }
 });
 
-cartRouter.post('/:cartId', async (req, res, next) => {
-  const { cartId } = req.params;
-  const { productId, quantity } = req.body;
+cartRouter.post('/:userId', async (req, res, next) => {
+  const { productId, cartId, quantity } = req.body;
   try {
-    const item = await addItemToCart(productId, cartId, quantity);
-    res.status(201).json({ message: item });
+    const item = await addItemToCart({ productId, cartId, quantity });
+    res.send({ item });
   } catch (error) {
     console.error(error);
     next();
@@ -72,7 +71,7 @@ cartRouter.post('/:cartId', async (req, res, next) => {
 
 //DELETE
 
-cartRouter.delete('/:itemId', async (req, res, next) => {
+cartRouter.delete('/remove/:itemId', async (req, res, next) => {
   const { itemId } = req.params;
   try {
     const item = await removeItemFromCart(itemId);
