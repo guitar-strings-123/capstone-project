@@ -33,7 +33,8 @@ async function buildTables() {
         userLastName varchar(255) UNIQUE NOT NULL,
         userLocation varchar(255) NOT NULL,
         active BOOLEAN DEFAULT true,
-        isAdmin BOOLEAN DEFAULT false
+        isAdmin BOOLEAN DEFAULT false,
+        
       );
       
       CREATE TABLE categories (
@@ -403,7 +404,7 @@ async function populateInitialData() {
 
       const ordersToCreate = [
         {
-          orderUserID: 1,
+          orderUserID: 3,
           orderShipName: 'Jimi Hendrix',
           orderShipAddress: '123 California Ave',
           orderCity: 'Seattle',
