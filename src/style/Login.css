@@ -5,6 +5,7 @@
 
 #loginContent {
     background-image: url("https://i.imgur.com/FqHABPk.jpg");
+    background-size: cover;
     height: 100vh;
     display: flex;
     flex-direction: row;

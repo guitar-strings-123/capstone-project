@@ -36,6 +36,21 @@ export default function Cart({ DB, cart }) {
       console.log(err);
     }
   }
+  const deleteItemFromCart = async (itemId) => {
+    try {
+      const response = await fetch(`${DB}/api/cart/remove/${itemId}`, {
+        method: 'Delete',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+      let result = await response.json();
+      console.log(result);
+      return result;
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   const init = async () => {
     try {
@@ -57,28 +72,37 @@ export default function Cart({ DB, cart }) {
     init();
   }, []);
 
+  useEffect(() => {
+    init();
+  }, [cartItems]);
+
   return (
     <div className="cart_page">
-      {
-        cartItems.map((productBundle) => {
-          const [item] = products.filter((object) => {
-            return (object.id == productBundle.product_id)
-          })
-          item ?
-            cartTotal += item.price
-            : 0;
+      {cartItems.map((productBundle) => {
+        const [item] = products.filter((object) => {
+          return object.id == productBundle.product_id;
+        });
+        item ? (cartTotal += item.price) : 0;
 
-          return (
+        return (
+          <div>
+            <div>{item?.name}</div>
             <div>
-              <div>{item?.name}</div>
-              <div><img className='imgSmall' src={item?.imgurl} /></div>
-              <div>{item?.description}</div>
-              <div>{item?.price}</div>
-              <div>{productBundle.quantity}</div>
+              <img className="imgSmall" src={item?.imgurl} />
             </div>
-          )
-        })
-      }
+            <div>{item?.description}</div>
+            <div>{item?.price}</div>
+            <div>{productBundle.quantity}</div>
+            <button
+              onClick={() => {
+                deleteItemFromCart(item.id);
+              }}
+            >
+              Remove Item
+            </button>
+          </div>
+        );
+      })}
       <div>Total:${cartTotal}</div>
     </div>
   );
