@@ -23,6 +23,7 @@ async function createUser({
   isAdmin,
 }) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
+
   try {
     const {
       rows: [user],
@@ -50,7 +51,6 @@ async function createUser({
 }
 
 async function getAllUsers() {
-  /* this adapter should fetch a list of users from your db */
   try {
     const { rows } = await client.query(`
       SELECT *
@@ -62,6 +62,7 @@ async function getAllUsers() {
     throw error;
   }
 }
+
 async function getUser({ username, password }) {
   if (!username || !password) {
     return;
@@ -70,10 +71,12 @@ async function getUser({ username, password }) {
   try {
     const user = await getUserByUsername(username);
     if (!user) return;
+
     const hashedPassword = user.password;
     const passwordsMatch = await bcrypt.compare(password, hashedPassword);
     if (!passwordsMatch) return;
     delete user.password;
+
     return user;
   } catch (error) {
     throw error;
@@ -82,31 +85,17 @@ async function getUser({ username, password }) {
 
 async function getUserByUsername(username) {
   try {
-    const { rows } = await client.query( `
+    const { rows } = await client.query(`
       SELECT *
       FROM users
       WHERE username = $1;
     `, [username]);
+
     if (!rows || !rows.length) return null;
     const [user] = rows;
+    
     return user;
   } catch (error) {
     console.error(error);
-  }
-}
-
-async function getUserByID(id) {
-  try {
-    const { rows } = await client.query(
-      `
-      SELECT *
-      FROM users
-      WHERE id = $1;
-      `,
-      [id]
-    );
-    return rows;
-  }catch(error) {
-    console.error(error)
   }
 }

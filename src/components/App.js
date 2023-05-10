@@ -24,13 +24,13 @@ import {
 } from './admin/index.js';
 import SingleProduct from './SingleProduct';
 
-
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
-  
-  let DB = `http://localhost:4000`
-  // let DB = `https://strumonin.onrender.com`
+  const [cart, setCart] = useState({});
+
+  // let DB = `https://strumonin.onrender.com`;
+  let DB = `http://localhost:4000`;
 
   // reload token on page refresh
   useEffect(() => {
@@ -57,8 +57,7 @@ const App = () => {
   // render all components below
   return (
     <div className="app-container">
-      <Header token={token} isAdmin={isAdmin} DB={DB}/>
-      {/* will eventually need to add ternary here to check for token */}
+      <Header token={token} isAdmin={isAdmin} DB={DB} />
       <Routes>
         <Route path="/" element={<HomePage DB={DB} />} />
         <Route
@@ -69,19 +68,38 @@ const App = () => {
           path="/AdminProducts"
           element={<AdminProducts isAdmin={isAdmin} DB={DB} />}
         />
-        <Route path="/AdminUsers" element={<AdminUsers isAdmin={isAdmin} DB={DB} />} />
-        <Route path="/AddProduct" element={<AddProduct isAdmin={isAdmin} DB={DB} />} />
-        <Route path="/cart" element={<Cart DB={DB} />} />
-        <Route path="/products" element={<Products  DB={DB}/>} />
-        <Route path="/products/:productId" element={<SingleProduct DB={DB} />} />
+        <Route
+          path="/AdminUsers"
+          element={<AdminUsers isAdmin={isAdmin} DB={DB} />}
+        />
+        <Route
+          path="/AddProduct"
+          element={<AddProduct isAdmin={isAdmin} DB={DB} />}
+        />
+        <Route
+          path="/cart"
+          element={<Cart DB={DB} cart={cart} setCart={setCart} />}
+        />
+        <Route path="/products" element={<Products DB={DB} />} />
+        <Route
+          path="/products/:productId"
+          element={<SingleProduct DB={DB} />}
+        />
         <Route path="/profile" element={<Profile DB={DB} />} />
         <Route
           path="/login"
-          element={<Login token={token} setToken={setToken} DB={DB} />}
+          element={
+            <Login
+              token={token}
+              setToken={setToken}
+              setCart={setCart}
+              DB={DB}
+            />
+          }
         />
         <Route
           path="/register"
-          element={<Register token={token} setToken={setToken}  DB={DB}/>}
+          element={<Register token={token} setToken={setToken} DB={DB} />}
         />
       </Routes>
       <Footer />
