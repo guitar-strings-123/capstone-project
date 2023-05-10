@@ -1,6 +1,7 @@
 .infoStyle {
     display: flex;
     flex-direction: row;
+    font-size: 2vw;
 }
 
 .notLoggedIn {
@@ -11,7 +12,6 @@
 }
 
 .orderInfo {
-    margin-left: 3vw;
     font-size: 3vw;
 }
 
@@ -19,9 +19,10 @@
     margin-top: 1vw;
     border: thin solid #3586ff;
     padding: 1vw;
-    text-align: center;
     width: 85%;
-    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 #welcome {
@@ -36,24 +37,50 @@
     display: flex;
     flex-direction: column;
     align-content: space-between;
+    margin-top: 7vw;
 }
 
 #orderContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    border: 1vw solid #3586FF;
+}
+
+#eachOrderContainer {
+    /* display: flex;
+    flex-direction: column; */
+    align-items: left;
+    width: 100%;
+    background-color: #3586FF;
+    color: white;
+    border: .5vw solid white;
 }
 
 #userInfo-container {
     margin: 0 auto;
     border: thin solid #3586FF;
     padding: 1vw;
-    width: 50%;
+    width: 100%;
     font-size: 2vw;
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 #prevOrderText {
     font-size: 4vw;
-    text-align: center;
-    margin-top: 3vw;
+    height: 7vh;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#profileHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0vw;
+    color: white;
+    background-color: #3586FF;
+    height: 25vh
 }

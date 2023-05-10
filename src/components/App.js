@@ -29,7 +29,9 @@ const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
   
-  let DB = `https://strumonin.onrender.com`
+  let DB = `http://localhost:4000`
+  // let DB = `https://strumonin.onrender.com`
+
   // reload token on page refresh
   useEffect(() => {
     let storedToken = localStorage.getItem('token');
