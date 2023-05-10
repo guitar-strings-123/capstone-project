@@ -104,7 +104,7 @@ export default function Profile({ DB }) {
           </div>
         </div>
       ) : (
-        <div className="notLoggedIn">please log in</div>
+        <div className="notLoggedIn">Please log in</div>
       )}
     </div>
   );
