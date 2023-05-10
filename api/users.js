@@ -7,8 +7,10 @@ const { JWT_SECRET = "so safe and so secure" } = process.env;
 const { requireUser } = require("./utils");
 const { getUserByID } = require('../db/models/user');
 
+// GET
 router.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
+
   if (!username || !password) {
     next({
       name: "MissingCredentialsError",
@@ -36,6 +38,42 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+router.get("/me", requireUser, async (req, res, next) => {
+  try {
+    res.send(req.user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/:username/orders", async (req, res, next) => {
+  try {
+    const { username } = req.params;
+    const user = await User.getUserByUsername(username);
+    if (!user) {
+      next({
+        name: "NoUser",
+        message: `Could not find user: ${username}`,
+      });
+    } else if (req.user && user.id === req.user.id) {
+      const orders = await Orders.getAllOrdersByUserID(user.id);
+      res.send(orders);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/', async (req, res, next) => {
+  try {
+    const allUsers = await getAllUsers()
+    res.send(allUsers)
+  } catch (err) {
+    next(err)
+  }
+})
+
+// PUT
 router.post("/register", async (req, res, next) => {
   try {
     const { username, password, userEmail, userFirstName, userLastName, userLocation } = req.body;
@@ -79,40 +117,5 @@ router.post("/register", async (req, res, next) => {
     next(error);
   }
 });
-
-router.get("/me", requireUser, async (req, res, next) => {
-  try {
-    res.send(req.user);
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get("/:username/orders", async (req, res, next) => {
-  try {
-    const { username } = req.params;
-    const user = await User.getUserByUsername(username);
-    if (!user) {
-      next({
-        name: "NoUser",
-        message: `Could not find user: ${username}`,
-      });
-    } else if (req.user && user.id === req.user.id) {
-      const orders = await Orders.getAllOrdersByUserID(user.id);
-      res.send(orders);
-    }
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get('/', async (req, res, next) => {
-  try {
-    const allUsers = await getAllUsers()
-    res.send(allUsers)
-  } catch (err) {
-    next(err)
-  }
-})
 
 module.exports = router;
