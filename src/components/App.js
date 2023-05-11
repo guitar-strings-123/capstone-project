@@ -30,8 +30,8 @@ const App = () => {
   const [token, setToken] = useState('');
   const [cart, setCart] = useState({});
 
-  // let DB = `https://strumonin.onrender.com`;
-  let DB = `http://localhost:4000`;
+  let DB = `https://strumonin.onrender.com`;
+  // let DB = `http://localhost:4000`;
 
   // reload token on page refresh
   useEffect(() => {
