@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 export default function Cart({ DB, cart }) {
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
+  const [cItems, setCItems] = useState(0);
   let cartId = localStorage.getItem('cartId');
   let cartTotal = 0;
 
@@ -68,42 +69,61 @@ export default function Cart({ DB, cart }) {
     }
   };
 
+  const init2 = async () => {
+    try {
+      const result = await getCartItems();
+      if (result) {
+        setCartItems(result);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     init();
   }, []);
 
   useEffect(() => {
-    init();
-  }, [cartItems]);
+    init2();
+  }, [cItems]);
 
   return (
     <div className="cart_page">
-      {cartItems.map((productBundle) => {
-        const [item] = products.filter((object) => {
-          return object.id == productBundle.product_id;
-        });
-        item ? (cartTotal += item.price) : 0;
-
-        return (
-          <div>
-            <div>{item?.name}</div>
-            <div>
-              <img className="imgSmall" src={item?.imgurl} />
-            </div>
-            <div>{item?.description}</div>
-            <div>{item?.price}</div>
-            <div>{productBundle.quantity}</div>
-            <button
-              onClick={() => {
-                deleteItemFromCart(item.id);
-              }}
-            >
-              Remove Item
-            </button>
-          </div>
-        );
-      })}
-      <div>Total:${cartTotal}</div>
+      {
+        cartItems.length ?
+          (
+            <>
+              {cartItems.map((productBundle) => {
+                const [item] = products.filter((object) => {
+                  return object.id == productBundle.product_id;
+                });
+                item ? (cartTotal += (item.price * productBundle.quantity)) : 0;
+                return (
+                  <div>
+                    <div>{item?.name}</div>
+                    <div>
+                      <img className="imgSmall" src={item?.imgurl} />
+                    </div>
+                    <div>{item?.description}</div>
+                    <div>{item?.price}</div>
+                    <div>{productBundle.quantity}</div>
+                    <button
+                      onClick={() => {
+                        deleteItemFromCart(item.id);
+                        setCItems(cItems + 1);
+                      }}
+                    >
+                      Remove Item
+                    </button>
+                  </div>
+                );
+              })}
+              <div>Total:${cartTotal}</div>
+            </>
+          )
+          : (<div>{`Your cart is empty... :(`}</div>)
+      }
     </div>
   );
 }

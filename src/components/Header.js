@@ -1,21 +1,24 @@
 import React from 'react';
 import CartIcon from '@mui/icons-material/ShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { default as NavBar } from './NavBar';
 import '../style/Header.css';
 
+
 export default function Header({ token, isAdmin }) {
-  const logout = () => {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
-    localStorage.removeItem('isAdmin');
-    localStorage.removeItem('userlocation');
-    localStorage.removeItem('userfirstname');
-    localStorage.removeItem('userlastname');
-    localStorage.removeItem('useremail');
-    localStorage.removeItem('cartId');
-    window.location.reload();
-  };
+    const navigate = useNavigate();
+    const logout = () => {
+        localStorage.removeItem('username');
+        localStorage.removeItem('token');
+        localStorage.removeItem('isAdmin');
+        localStorage.removeItem('userlocation');
+        localStorage.removeItem('userfirstname');
+        localStorage.removeItem('userlastname');
+        localStorage.removeItem('useremail');
+        localStorage.removeItem('cartId');
+        navigate('/');
+        window.location.reload();
+    };
 
     return (
         <div id="header">
@@ -39,6 +42,7 @@ export default function Header({ token, isAdmin }) {
                                 onClick={(event) => {
                                     event.preventDefault();
                                     logout();
+                                    
                                 }}
                             >
                                 Logout
