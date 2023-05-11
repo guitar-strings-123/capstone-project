@@ -30,16 +30,18 @@ export default function AdminOrders({ isAdmin, DB }) {
                         {orders.map((order) => {
                             return (
                                 <div className="productCard" key={order.id}>
-                                    <div>Name: {order.ordershipname}</div>
-                                    <div>Address: {order.ordershipaddress}</div>
-                                    {order.ordershipaddress2 ? <div>Address: {order.ordershipaddress2}</div> : null}
-                                    <div>City: {order.ordercity}</div>
-                                    <div>State: {order.orderstate}</div>
-                                    <div>Zip: {order.orderzip}</div>
-                                    <div>Email: {order.orderemail}</div>
-                                    {order.ordershipped ? <div>Shipped: Yes</div> : <div>Shipped: No</div>}
-                                    <div>Tracking Number: {order.ordertrackingnumber}</div>
-                                    <br />
+                                    <div>
+                                        <div>Name: {order.ordershipname}</div>
+                                        <div>Address: {order.ordershipaddress}</div>
+                                        {order.ordershipaddress2 ? <div>Address: {order.ordershipaddress2}</div> : null}
+                                        <div>City: {order.ordercity}</div>
+                                        <div>State: {order.orderstate}</div>
+                                        <div>Zip: {order.orderzip}</div>
+                                        <div>Email: {order.orderemail}</div>
+                                        {order.ordershipped ? <div>Shipped: Yes</div> : <div>Shipped: No</div>}
+                                        <div>Tracking Number: {order.ordertrackingnumber}</div>
+                                        <br />
+                                    </div>
                                 </div>
                             )
                         })}
