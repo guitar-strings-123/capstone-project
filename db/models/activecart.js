@@ -1,6 +1,6 @@
 const client = require('../client');
 
-const createActiveCart = async ({ userId }) => {
+const createActiveCart = async (userId ) => {
   try {
     const {
       rows: [activeCart],
@@ -20,13 +20,14 @@ const createActiveCart = async ({ userId }) => {
   }
 };
 
-const getActiveCart = async (userId) => {
+const getActiveCart = async ({userId}) => {
   try {
     const { rows } = await client.query(`
       SELECT * 
       FROM active_cart
-      WHERE user_id=${userId}
-    `);
+      WHERE user_id=$1;
+    `,[userId]);
+
     return rows;
   } catch (err) {
     console.log(err);
