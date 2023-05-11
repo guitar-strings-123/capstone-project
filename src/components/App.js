@@ -106,6 +106,7 @@ const App = () => {
           path="/register"
           element={<Register token={token} setToken={setToken} DB={DB} />}
         />
+        <Route path='/UnderConstruction' element={<UnderConstruction />} />
       </Routes>
       <Footer />
     </div>
