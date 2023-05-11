@@ -53,6 +53,15 @@ body {
   margin-bottom: 230px;
 }
 
+.cartProducts {
+  border: groove 1px #3586ff;
+  display: flex;
+  flex-direction: row;
+  margin: 30px;
+  margin-top: 150px;
+  margin-bottom: 230px;
+}
+
 .products-container {
   border: groove 1px #3586ff;
   display: grid;
@@ -64,6 +73,10 @@ body {
 
 }
 
+.total{
+  margin: 30px;
+  margin-top: -200px;
+}
 .productCard {
   text-align: center;
   min-width: 100px;

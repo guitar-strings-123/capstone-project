@@ -15,7 +15,6 @@ export default function SingleProduct({ DB, cart, token }) {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
-          //   Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           productId: productId,
@@ -37,7 +36,6 @@ export default function SingleProduct({ DB, cart, token }) {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
-          Authorization: `Bearer ${token}`,
         },
       });
       let result = await response.json();
