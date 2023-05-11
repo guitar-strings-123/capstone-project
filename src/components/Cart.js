@@ -108,8 +108,8 @@ export default function Cart({ DB, cart }) {
                   <div>Price: {item?.price}</div>
                   <div>Quantity: {productBundle.quantity}</div>
                   <button
-                    onClick={() => {
-                      deleteItemFromCart(item.id);
+                    onClick={async () => {
+                      await deleteItemFromCart(item.id);
                       setCItems(cItems + 1);
                     }}
                   >
