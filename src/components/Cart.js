@@ -90,40 +90,40 @@ export default function Cart({ DB, cart }) {
 
   return (
     <div className="cart_page">
-      {
-        cartItems.length ?
-          (
-            <>
-              {cartItems.map((productBundle) => {
-                const [item] = products.filter((object) => {
-                  return object.id == productBundle.product_id;
-                });
-                item ? (cartTotal += (item.price * productBundle.quantity)) : 0;
-                return (
+      {cartItems.length ? (
+        <div>
+          <div className="cartProducts">
+            {cartItems.map((productBundle) => {
+              const [item] = products.filter((object) => {
+                return object.id == productBundle.product_id;
+              });
+              item ? (cartTotal += item.price * productBundle.quantity) : 0;
+              return (
+                <div className="productCard">
+                  <div>{item?.name}</div>
                   <div>
-                    <div>{item?.name}</div>
-                    <div>
-                      <img className="imgSmall" src={item?.imgurl} />
-                    </div>
-                    <div>{item?.description}</div>
-                    <div>{item?.price}</div>
-                    <div>{productBundle.quantity}</div>
-                    <button
-                      onClick={() => {
-                        deleteItemFromCart(item.id);
-                        setCItems(cItems + 1);
-                      }}
-                    >
-                      Remove Item
-                    </button>
+                    <img className="imgSmall" src={item?.imgurl} />
                   </div>
-                );
-              })}
-              <div>Total:${cartTotal}</div>
-            </>
-          )
-          : (<div>{`Your cart is empty... :(`}</div>)
-      }
+                  <div>{item?.description}</div>
+                  <div>Price: {item?.price}</div>
+                  <div>Quantity: {productBundle.quantity}</div>
+                  <button
+                    onClick={() => {
+                      deleteItemFromCart(item.id);
+                      setCItems(cItems + 1);
+                    }}
+                  >
+                    Remove Item
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="total">Cart Total:${cartTotal}</div>
+        </div>
+      ) : (
+        <div>{`Your cart is empty... :(`}</div>
+      )}
     </div>
   );
 }
