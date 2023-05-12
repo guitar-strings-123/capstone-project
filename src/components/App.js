@@ -45,6 +45,7 @@ const App = () => {
     // invoke the adapter, await the response, and set the data
     const getAPIStatus = async () => {
       const { healthy } = await getAPIHealth();
+      healthy ? console.log('api is up! :D') : console.log('api is down :/');
       setAPIHealth(healthy ? 'api is up! :D' : 'api is down :/');
     };
 
@@ -88,7 +89,7 @@ const App = () => {
         <Route path="/products" element={<Products DB={DB} />} />
         <Route
           path="/products/:productId"
-          element={<SingleProduct DB={DB} cart={cart} token={token} />}
+          element={<SingleProduct DB={DB} cart={cart} setCart={setCart} token={token} />}
         />
         <Route path="/profile" element={<Profile DB={DB} />} />
         <Route

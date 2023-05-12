@@ -8,8 +8,47 @@ export default function SingleProduct({ DB, cart, token }) {
   const { productId } = useParams();
   const userID = localStorage.getItem('userID');
 
+  const getCart = async () => {
+    try {
+      const response = await fetch(`${DB}/api/cart/${userID}`, {
+        headers: {
+          'Content-type': 'application/json'
+        }
+      });
+      const {cart} = await response.json();
+
+      if (cart && cart.length) {
+        // if user has a cart in the array, return true
+        localStorage.setItem('cartId', cart[0].user_id);
+        return true;
+      } else {
+        // if no cart, return false
+        return false;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+
+  }
+
+  const addActiveCart = async () => {
+    try {
+      const response = await fetch(`${DB}/api/cart/active/${userID}`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+      const result = await response.json();
+      
+      return result;
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const addItemToCart = async (productId) => {
-    console.log(productId, userID);
     try {
       const response = await fetch(`${DB}/api/cart/${userID}`, {
         method: 'POST',
@@ -22,33 +61,24 @@ export default function SingleProduct({ DB, cart, token }) {
           quantity: 1,
         }),
       });
-      let result = await response.json();
-      console.log(result);
+      const result = await response.json();
+      console.log('product bundle added:', result);
+   
       return;
     } catch (err) {
       console.error(err);
     }
   };
 
-  const addActiveCart = async () => {
-    try {
-      const response = await fetch(`${DB}/api/cart/active/${userID}`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
-      let result = await response.json();
-      console.log(result);
-      return result;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const handleClick = async () => {
-    addActiveCart;
-    addItemToCart(productId);
+    const hasCart = await getCart();
+    // if the user does not have a cart...
+    if (!hasCart) {
+      // add a cart
+      await addActiveCart();
+    }
+    // add item to cart
+    await addItemToCart(productId);
   };
 
   useEffect(() => {
@@ -59,8 +89,7 @@ export default function SingleProduct({ DB, cart, token }) {
             'Content-Type': 'application/json',
           },
         });
-        let result = await response.json();
-        console.log(result);
+        const result = await response.json();
         setProduct(result);
       } catch (err) {
         console.error(err);

@@ -36,9 +36,10 @@ cartRouter.get('/items/:cartId', async (req, res, next) => {
 cartRouter.get('/:userId', async (req, res, next) => {
   const { userId } = req.params;
   try {
-    const cart = await getActiveCart(userId);
+    const cart = await getActiveCart({userId});
     // const cartItems = await getAllItemsInCart(cart.id);
     res.send({ cart });
+   
   } catch (error) {
     console.error(error);
     next();
@@ -51,7 +52,8 @@ cartRouter.post('/active/:userId', async (req, res, next) => {
   const { userId } = req.params;
   try {
     const newCart = await createActiveCart(userId);
-    res.status(201).json({ message: newCart });
+    // res.status(201).json({ message: newCart });
+    res.send(newCart)
   } catch (error) {
     console.error(error);
     next();
