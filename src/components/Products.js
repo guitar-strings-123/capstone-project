@@ -21,8 +21,8 @@ export default function Products({DB}) {
           'Content-Type': 'application/json',
         },
       });
-      let result = await response.json();
-      console.log(result);
+      const result = await response.json();
+
       return result;
     } catch (err) {
       console.error(err);

@@ -43,7 +43,7 @@ export default function Register({ token, setToken, DB }) {
 
 
             const result = await response.json();
-            console.log(result)
+
             setToken(result.token)
             localStorage.setItem('token', result.token)
             localStorage.setItem('username', result.user.username)

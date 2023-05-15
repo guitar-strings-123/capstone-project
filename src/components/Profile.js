@@ -15,12 +15,11 @@ export default function Profile({ DB }) {
           },
         });
         let result = await response.json();
-        console.log(result);
+
         setMyOrders(result);
       } catch (err) {
         console.error(err);
       }
-      console.log("this worked");
     };
     console.log(`MY ORDERS: ${myOrders}`);
     getOrders();
