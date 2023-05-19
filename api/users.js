@@ -8,35 +8,26 @@ const { requireUser } = require("./utils");
 const { getUserByID } = require('../db/models/user');
 
 // GET
-router.post("/login", async (req, res, next) => {
-  const { username, password } = req.body;
-
-  if (!username || !password) {
-    next({
-      name: "MissingCredentialsError",
-      message: "You need both a username and password to login",
-    });
-  }
-
+router.get('/holder/:token', async (req, res, next) => {
+  const { token } = req.params;
   try {
-    const user = await User.getUser({ username, password });
-    if (!user) {
-      next({
-        name: "IncorrectCredentialsError",
-        message: "Username or password is incorrect",
-      });
-    } else {
-      const token = jwt.sign(
-        { id: user.id, username: user.username },
-        JWT_SECRET,
-        { expiresIn: "1w" }
-      );
-      res.send({ user, message: "logged in!", token });
-    }
+    const user = jwt.verify(token, JWT_SECRET);
+    res.send(user)
   } catch (error) {
-    next(error);
+    console.error(error)
   }
-});
+})
+
+router.get('/fetch/:userName', async (req, res, next) => {
+  const { userName } = req.params;
+  try {
+    const userObj = await User.getUserByUsername(userName);
+
+    res.send(userObj);
+  } catch (error) {
+    console.error(error)
+  }
+})
 
 router.get("/me", requireUser, async (req, res, next) => {
   try {
@@ -74,6 +65,36 @@ router.get('/', async (req, res, next) => {
 })
 
 // PUT
+router.post("/login", async (req, res, next) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    next({
+      name: "MissingCredentialsError",
+      message: "You need both a username and password to login",
+    });
+  }
+
+  try {
+    const user = await User.getUser({ username, password });
+    if (!user) {
+      next({
+        name: "IncorrectCredentialsError",
+        message: "Username or password is incorrect",
+      });
+    } else {
+      const token = jwt.sign(
+        { id: user.id, username: user.username },
+        JWT_SECRET,
+        { expiresIn: "1w" }
+      );
+      res.send({ user, message: "logged in!", token });
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/register", async (req, res, next) => {
   try {
     const { username, password, userEmail, userFirstName, userLastName, userLocation } = req.body;
