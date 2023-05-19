@@ -7,6 +7,7 @@ const {
   createActiveCart,
   addItemToCart,
   removeItemFromCart,
+  updateQuantity,
 } = require('../db/models/activecart');
 
 // GET
@@ -71,6 +72,21 @@ cartRouter.post('/:userId', async (req, res, next) => {
   }
 });
 
+//PUT
+
+cartRouter.put('/:activeCartId', async (req, res, next) => {
+  const { activeCartId } = req.params;
+  const { quantity, productId } = req.body;
+  
+  try {
+    const updatedQuantity = await updateQuantity({activeCartId, quantity, productId})
+    res.send({updatedQuantity});
+  } catch (error) {
+    console.error(error);
+    next();
+  }
+})
+
 //DELETE
 
 cartRouter.delete('/remove/:itemId', async (req, res, next) => {
@@ -86,7 +102,7 @@ cartRouter.delete('/remove/:itemId', async (req, res, next) => {
 
 //More Cart Goals ----
 //Find a way to get all products based on active cart itmes
-//Update the quanity (Router.patch or.put)
+//Update the quantity (Router.patch or.put)
 //seed the database
 
 module.exports = cartRouter;

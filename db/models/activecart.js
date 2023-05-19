@@ -52,13 +52,15 @@ const addItemToCart = async ({ productId, cartId, quantity }) => {
   }
 };
 
-const updateQuanity = async (activeCartItemId, quantity) => {
+const updateQuantity = async ({activeCartId, quantity, productId}) => {
   try {
     const { rows } = await client.query(`
         UPDATE active_cart_items
         SET quantity=${quantity}
-        WHERE id=${activeCartItemId}
+        WHERE active_cart_id=${activeCartId} AND product_id=${productId}
+        RETURNING *;
       `);
+
     return rows;
   } catch (err) {
     console.log(err);
@@ -99,5 +101,5 @@ module.exports = {
   addItemToCart,
   removeItemFromCart,
   getAllItemsInCart,
-  updateQuanity,
+  updateQuantity,
 };

@@ -15,7 +15,7 @@ export default function SingleProduct({ DB, cart, token }) {
           'Content-type': 'application/json'
         }
       });
-      const {cart} = await response.json();
+      const { cart } = await response.json();
 
       if (cart && cart.length) {
         // if user has a cart in the array, return true
@@ -28,8 +28,24 @@ export default function SingleProduct({ DB, cart, token }) {
     } catch (err) {
       console.error(err);
     }
+  }
 
+  async function getCartItems() {
+    // since there's only 1 cart per user, use userID to get the cart
+    const cartId = userID
 
+    try {
+      const response = await fetch(`${DB}/api/cart/items/${cartId}`, {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+      const result = await response.json();
+
+      return result;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   const addActiveCart = async () => {
@@ -41,32 +57,62 @@ export default function SingleProduct({ DB, cart, token }) {
         },
       });
       const result = await response.json();
-      
+
       return result;
     } catch (err) {
       console.error(err);
     }
   };
 
-  const addItemToCart = async (productId) => {
-    try {
-      const response = await fetch(`${DB}/api/cart/${userID}`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json',
-        },
-        body: JSON.stringify({
-          productId: productId,
-          cartId: userID,
-          quantity: 1,
-        }),
-      });
-      const result = await response.json();
-      console.log('product bundle added:', result);
-   
-      return;
-    } catch (err) {
-      console.error(err);
+  const addItemToCart = async () => {
+    const activeCartId = localStorage.getItem('cartId')
+    const cartItems = await getCartItems();
+    const [productBundle] = cartItems.filter((bundle) => {
+      return (bundle.product_id == productId)
+    })
+
+    if (productBundle && productBundle.quantity > 0) {
+      // just update the quantity in the bundle by 1
+      const quantity = productBundle.quantity + 1;
+
+      try {
+        const response = await fetch(`${DB}/api/cart/${activeCartId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            quantity: quantity,
+            productId: productId,
+          }),
+        });
+        const result = await response.json();
+
+        return result;
+      } catch (error) {
+        console.error(error)
+      }
+
+    } else {
+      // add a new product bundle with quantity 1
+      try {
+        const response = await fetch(`${DB}/api/cart/${userID}`, {
+          method: 'POST',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            productId: productId,
+            cartId: userID,
+            quantity: 1,
+          }),
+        });
+        const result = await response.json();
+
+        return;
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 

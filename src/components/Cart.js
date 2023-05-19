@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { Routes, Route, useParams } from 'react-router-dom';
 
 export default function Cart({ DB, cart }) {
   const [cartItems, setCartItems] = useState([]);
@@ -37,19 +36,47 @@ export default function Cart({ DB, cart }) {
       console.log(err);
     }
   }
-  const deleteItemFromCart = async (itemId) => {
-    try {
-      const response = await fetch(`${DB}/api/cart/remove/${itemId}`, {
-        method: 'Delete',
-        headers: {
-          'Content-type': 'application/json',
-        },
-      });
-      let result = await response.json();
-      console.log(result);
-      return result;
-    } catch (err) {
-      console.error(err);
+
+  const deleteItemFromCart = async (activeCartId, quantity, itemId) => {
+    const productId = itemId
+
+    if (quantity > 1) {
+      // remove 1 from the product bundle quantity
+      quantity -= 1;
+
+      try {
+        const response = await fetch(`${DB}/api/cart/${activeCartId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify({
+            quantity: quantity,
+            productId: productId,
+          }),
+        });
+        const result = await response.json();
+
+        return result;
+      } catch (error) {
+        console.error(error)
+      }
+
+    } else {
+      // delete the whole product bundle
+      try {
+        const response = await fetch(`${DB}/api/cart/remove/${itemId}`, {
+          method: 'Delete',
+          headers: {
+            'Content-type': 'application/json',
+          },
+        });
+        const result = await response.json();
+
+        return result;
+      } catch (err) {
+        console.error(err);
+      }
     }
   };
 
@@ -109,7 +136,7 @@ export default function Cart({ DB, cart }) {
                   <div>Quantity: {productBundle.quantity}</div>
                   <button
                     onClick={async () => {
-                      await deleteItemFromCart(item.id);
+                      await deleteItemFromCart(productBundle.active_cart_id, productBundle.quantity, item.id);
                       setCItems(cItems + 1);
                     }}
                   >
