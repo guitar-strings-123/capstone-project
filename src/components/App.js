@@ -29,28 +29,61 @@ const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
   const [cart, setCart] = useState({});
+  const [user, setUser] = useState({});
 
   let DB = `https://strumonin.onrender.com`;
   // let DB = `http://localhost:4000`;
 
-  // reload token on page refresh
-  useEffect(() => {
-    let storedToken = localStorage.getItem('token');
-    setToken(storedToken);
-  }, []);
+  const fetchUser = async (storedToken) => {
+    let userName;
+
+    try {
+      const userResponse = await fetch(`${DB}/api/users/holder/${storedToken}`, {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+      const userResult = await userResponse.json();
+      if (userResult) {
+        userName = userResult.username;
+      }
+    } catch (error) {
+      console.error(error)
+    }
+
+    try {
+      const userObj = await fetch(`${DB}/api/users/fetch/${userName}`, {
+        headers: {
+          'Content-type': 'application/json',
+        },
+      });
+      const returnedUser = await userObj.json();
+
+      return returnedUser;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+    // reload token on page refresh
+    useEffect(() => {
+      let storedToken = localStorage.getItem('token');
+      setToken(storedToken);
+  
+      const initUser = async () => {
+        const fetchedUser = await fetchUser(storedToken);
+        setUser(fetchedUser);
+      }
+      initUser();
+    }, []);
 
   useEffect(() => {
-    // follow this pattern inside your useEffect calls:
-    // first, create an async function that will wrap your axios service adapter
-    // invoke the adapter, await the response, and set the data
     const getAPIStatus = async () => {
       const { healthy } = await getAPIHealth();
       healthy ? console.log('api is up! :D') : console.log('api is down :/');
       setAPIHealth(healthy ? 'api is up! :D' : 'api is down :/');
     };
 
-    // second, after you've defined your getter above
-    // invoke it immediately after its declaration, inside the useEffect callback
     getAPIStatus();
   }, []);
 
