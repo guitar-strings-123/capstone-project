@@ -2,15 +2,14 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import React from 'react';
 
-export default function SingleProduct({ DB, cart, token }) {
+export default function SingleProduct({ DB, cart, user }) {
   const [product, setProduct] = useState('');
   const navigate = useNavigate();
   const { productId } = useParams();
-  const userID = localStorage.getItem('userID');
 
   const getCart = async () => {
     try {
-      const response = await fetch(`${DB}/api/cart/${userID}`, {
+      const response = await fetch(`${DB}/api/cart/${user.id}`, {
         headers: {
           'Content-type': 'application/json'
         }
@@ -19,7 +18,6 @@ export default function SingleProduct({ DB, cart, token }) {
 
       if (cart && cart.length) {
         // if user has a cart in the array, return true
-        localStorage.setItem('cartId', cart[0].user_id);
         return true;
       } else {
         // if no cart, return false
@@ -31,11 +29,10 @@ export default function SingleProduct({ DB, cart, token }) {
   }
 
   async function getCartItems() {
-    // since there's only 1 cart per user, use userID to get the cart
-    const cartId = userID
+    // since there's only 1 cart per user, use user.id to get the cart
 
     try {
-      const response = await fetch(`${DB}/api/cart/items/${cartId}`, {
+      const response = await fetch(`${DB}/api/cart/items/${user.id}`, {
         headers: {
           'Content-type': 'application/json',
         },
@@ -50,7 +47,7 @@ export default function SingleProduct({ DB, cart, token }) {
 
   const addActiveCart = async () => {
     try {
-      const response = await fetch(`${DB}/api/cart/active/${userID}`, {
+      const response = await fetch(`${DB}/api/cart/active/${user.id}`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -65,7 +62,6 @@ export default function SingleProduct({ DB, cart, token }) {
   };
 
   const addItemToCart = async () => {
-    const activeCartId = localStorage.getItem('cartId')
     const cartItems = await getCartItems();
     const [productBundle] = cartItems.filter((bundle) => {
       return (bundle.product_id == productId)
@@ -76,7 +72,7 @@ export default function SingleProduct({ DB, cart, token }) {
       const quantity = productBundle.quantity + 1;
 
       try {
-        const response = await fetch(`${DB}/api/cart/${activeCartId}`, {
+        const response = await fetch(`${DB}/api/cart/${user.id}`, {
           method: 'PUT',
           headers: {
             'Content-type': 'application/json',
@@ -96,14 +92,14 @@ export default function SingleProduct({ DB, cart, token }) {
     } else {
       // add a new product bundle with quantity 1
       try {
-        const response = await fetch(`${DB}/api/cart/${userID}`, {
+        const response = await fetch(`${DB}/api/cart/${user.id}`, {
           method: 'POST',
           headers: {
             'Content-type': 'application/json',
           },
           body: JSON.stringify({
             productId: productId,
-            cartId: userID,
+            cartId: user.id,
             quantity: 1,
           }),
         });

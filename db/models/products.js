@@ -140,7 +140,7 @@ async function updateProduct({ id, ...fields }) {
       update products
       set ${setString}
       where id=${id}
-      returning *
+      returning *;
     `, Object.values(fields));
 
     return rows;

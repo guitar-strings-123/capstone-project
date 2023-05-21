@@ -117,12 +117,12 @@ const App = () => {
         />
         <Route
           path="/cart"
-          element={<Cart DB={DB} cart={cart} setCart={setCart} />}
+          element={<Cart DB={DB} user={user} />}
         />
         <Route path="/products" element={<Products DB={DB} />} />
         <Route
           path="/products/:productId"
-          element={<SingleProduct DB={DB} cart={cart} setCart={setCart} token={token} />}
+          element={<SingleProduct DB={DB} cart={cart} user={user} />}
         />
         <Route path="/profile" element={<Profile DB={DB} />} />
         <Route
