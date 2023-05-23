@@ -5,16 +5,19 @@ const { User, Orders } = require("../db/models");
 const { getAllUsers } = require("../db/models/user");
 const { JWT_SECRET = "so safe and so secure" } = process.env;
 const { requireUser } = require("./utils");
-const { getUserByID } = require('../db/models/user');
+// const { getUserByID } = require('../db/models/user');
 
 // GET
 router.get('/holder/:token', async (req, res, next) => {
   const { token } = req.params;
+
   try {
     const user = jwt.verify(token, JWT_SECRET);
+
     res.send(user)
   } catch (error) {
     console.error(error)
+    next();
   }
 })
 

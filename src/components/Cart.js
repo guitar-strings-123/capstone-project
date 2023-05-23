@@ -1,10 +1,10 @@
+// import { response } from 'express';
 import React, { useState, useEffect } from 'react';
 
-export default function Cart({ DB, cart }) {
+export default function Cart({ DB, user }) {
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
   const [cItems, setCItems] = useState(0);
-  let cartId = localStorage.getItem('cartId');
   let cartTotal = 0;
 
   async function getAllProducts() {
@@ -23,6 +23,8 @@ export default function Cart({ DB, cart }) {
   }
 
   async function getCartItems() {
+    const cartId = user.id;
+
     try {
       const response = await fetch(`${DB}/api/cart/items/${cartId}`, {
         headers: {
@@ -80,6 +82,37 @@ export default function Cart({ DB, cart }) {
     }
   };
 
+  // const order = async () => {
+
+  //   try {
+  //     const response = await fetch(`${DB}/api/orders/`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         orderUserID: userID,
+  //         orderShipName: userName,
+  //         orderShipAddress: '',
+  //         orderShipAddress2: '',
+  //         orderCity: x,
+  //         orderState: x,
+  //         orderZip: x,
+  //         orderEmail: x,
+  //         orderShipped: x,
+  //         orderTrackingNumber: x
+  //       })
+  //     })
+  //     const result = await response.json();
+
+  //     return result;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+
+  //   console.log('ordered!')
+  // }
+
   const init = async () => {
     try {
       const result = await getCartItems();
@@ -96,24 +129,11 @@ export default function Cart({ DB, cart }) {
     }
   };
 
-  const init2 = async () => {
-    try {
-      const result = await getCartItems();
-      if (result) {
-        setCartItems(result);
-      }
-    } catch (err) {
-      console.log(err);
+  useEffect(() => {
+    if (user.id) {
+      init();
     }
-  };
-
-  useEffect(() => {
-    init();
-  }, []);
-
-  useEffect(() => {
-    init2();
-  }, [cItems]);
+  }, [user, cItems]);
 
   return (
     <div className="cart_page">
@@ -138,15 +158,20 @@ export default function Cart({ DB, cart }) {
                     onClick={async () => {
                       await deleteItemFromCart(productBundle.active_cart_id, productBundle.quantity, item.id);
                       setCItems(cItems + 1);
-                    }}
-                  >
-                    Remove Item
+                    }}>Remove Item
                   </button>
                 </div>
               );
             })}
           </div>
-          <div className="total">Cart Total:${cartTotal}</div>
+          <div className="total">
+            <span>Cart Total:${cartTotal}</span>
+            <span>
+              <button>
+                Order
+              </button>
+            </span>
+          </div>
         </div>
       ) : (
         <div>{`Your cart is empty... :(`}</div>

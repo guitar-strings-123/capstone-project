@@ -72,7 +72,7 @@ const removeItemFromCart = async (activeCartItemId) => {
   try {
     const { rows } = await client.query(`
       DELETE FROM active_cart_items
-        WHERE product_id=${activeCartItemId}
+        WHERE product_id=${activeCartItemId};
     `);
     return rows;
   } catch (err) {
@@ -83,11 +83,12 @@ const removeItemFromCart = async (activeCartItemId) => {
 
 const getAllItemsInCart = async (cartId) => {
   try {
+
     const { rows } = await client.query(`
       SELECT *
       FROM active_cart_items
-      WHERE active_cart_id=${cartId}
-    `);
+      WHERE active_cart_id=$1;
+    `, [cartId]);
     return rows;
   } catch (err) {
     console.log(err);
