@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 
-export default function Login({ token, setToken, DB, setCart }) {
+export default function Login({ token, setToken, DB, setCart, setUser }) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -34,17 +34,9 @@ export default function Login({ token, setToken, DB, setCart }) {
 
       const result = await response.json();
 
+      setUser(result.user);
       setToken(result.token);
       localStorage.setItem('token', result.token)
-      localStorage.setItem('userlastname', result.user.userlastname)
-      localStorage.setItem('userfirstname', result.user.userfirstname)
-      localStorage.setItem('userlocation', result.user.userlocation)
-      localStorage.setItem('useremail', result.user.useremail)
-      localStorage.setItem('username', result.user.username)
-      localStorage.setItem('userID', result.user.id)
-      if (result.user.isadmin == true) {
-        localStorage.setItem('isAdmin', result.user.isadmin);
-      }
 
       const cartResponse = await fetch(`${DB}/api/cart/${result.user.id}`, {
         method: 'GET',
@@ -54,7 +46,6 @@ export default function Login({ token, setToken, DB, setCart }) {
       });
 
       const {cart: [cartResult]} = await cartResponse.json();
-      localStorage.setItem('cartId', cartResult.id);
       
       setCart(cartResult);
     } catch (err) {
