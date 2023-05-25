@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../style/Profile.css";
 
-export default function Profile({ DB }) {
+export default function Profile({ DB, user }) {
   const [myOrders, setMyOrders] = useState([]);
 
   useEffect(() => {
@@ -25,22 +25,14 @@ export default function Profile({ DB }) {
     getOrders();
   }, []);
 
-  const username = localStorage.getItem("username");
-  const userID = localStorage.getItem("userID");
-  const admin = localStorage.getItem("isAdmin");
-  const email = localStorage.getItem("useremail");
-  const location = localStorage.getItem("userlocation");
-  const firstname = localStorage.getItem("userfirstname");
-  const lastname = localStorage.getItem("userlastname");
-
   return (
     // username?<div>${username}</div>:null
     <div>
-      {username ? (
+      {user.username ? (
         <div id="profile-container">
           <div id="profileHeader">
-            {firstname ? (
-              <div id="welcome">Welcome back, {firstname}!</div>
+            {user.userfirstname ? (
+              <div id="welcome">Welcome back, {user.userfirstname}!</div>
             ) : (
               <div id="welcome">Welcome back!</div>
             )}
@@ -49,31 +41,31 @@ export default function Profile({ DB }) {
           <div id="userInfo-container">
             <div className="infoStyle">
               Username:
-              {username ? <div>{username}</div> : null}
+              {user.username ? <div>{user.username}</div> : null}
             </div>
 
             <div className="infoStyle">
               UserID:
-              {userID ? <div>{userID}</div> : <div>no ID</div>}
+              {user.id ? <div>{user.id}</div> : <div>no ID</div>}
             </div>
 
             <div className="infoStyle">
               Email:
-              {email ? <div>{email}</div> : <div>No email provided</div>}
+              {user.useremail ? <div>{user.useremail}</div> : <div>No email provided</div>}
             </div>
 
             <div className="infoStyle">
               Location:
-              {location ? <div>{location}</div> : null}
+              {user.userlocation ? <div>{user.userlocation}</div> : null}
             </div>
-            {admin === "true" ? <div>Admin Enabled</div> : null}
+            {user.isadmin === "true" ? <div>Admin Enabled</div> : null}
           </div>
           <div id="orderContainer">
             <div id="prevOrderText">Previous Orders:</div>
             {myOrders.map((order) => {
               return (
                 <div id="eachOrderContainer">
-                  {order.orderemail === email ? (
+                  {order.orderemail === user.useremail ? (
                     <div key={order.orderid} className="orders">
                       <div className="orderInfo">OrderID: {order.orderid}</div>
 

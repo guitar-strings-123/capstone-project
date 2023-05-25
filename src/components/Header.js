@@ -8,14 +8,7 @@ import '../style/Header.css';
 export default function Header({ token, isAdmin }) {
     const navigate = useNavigate();
     const logout = () => {
-        localStorage.removeItem('username');
         localStorage.removeItem('token');
-        localStorage.removeItem('isAdmin');
-        localStorage.removeItem('userlocation');
-        localStorage.removeItem('userfirstname');
-        localStorage.removeItem('userlastname');
-        localStorage.removeItem('useremail');
-        localStorage.removeItem('cartId');
         navigate('/');
         window.location.reload();
     };

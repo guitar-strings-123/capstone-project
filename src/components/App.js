@@ -74,7 +74,9 @@ const App = () => {
         const fetchedUser = await fetchUser(storedToken);
         setUser(fetchedUser);
       }
-      initUser();
+      if (storedToken) {
+        initUser();
+      }
     }, []);
 
   useEffect(() => {
@@ -87,7 +89,8 @@ const App = () => {
     getAPIStatus();
   }, []);
 
-  const isAdmin = localStorage.getItem('isAdmin');
+  // const isAdmin = localStorage.getItem('isAdmin');
+  const isAdmin = user.isadmin;
 
   // render all components below
   return (
@@ -124,7 +127,7 @@ const App = () => {
           path="/products/:productId"
           element={<SingleProduct DB={DB} cart={cart} user={user} />}
         />
-        <Route path="/profile" element={<Profile DB={DB} />} />
+        <Route path="/profile" element={<Profile DB={DB} user={user} />} />
         <Route
           path="/login"
           element={
@@ -133,6 +136,7 @@ const App = () => {
               setToken={setToken}
               setCart={setCart}
               DB={DB}
+              setUser={setUser}
             />
           }
         />
