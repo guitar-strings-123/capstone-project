@@ -82,8 +82,8 @@ export default function AddProduct({ isAdmin, DB }) {
                     </select>
                 </div >
                 <button className="submit-btn" type="submit">Add Product</button>
-                <button onClick={() => navigate(-1)}>Go Back</button>
             </form >
+                <button onClick={() => navigate(-1)}>Go Back</button>
         </div >
     );
 }
