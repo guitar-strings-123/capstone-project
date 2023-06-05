@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function AddProduct({ isAdmin, DB }) {
+export default function AddProduct({ user, DB }) {
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
-    const [price, setPrice] = useState('')
+    const [price, setPrice] = useState(0)
     const [categoryID, setCategoryID] = useState(0)
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
@@ -29,7 +29,7 @@ export default function AddProduct({ isAdmin, DB }) {
         } catch (err) {
             console.log(err)
         } finally {
-            if (isAdmin) {
+            if (user.isadmin) {
                 console.log('Product successfully added!')
                 navigate('/AdminProducts')
             } else {

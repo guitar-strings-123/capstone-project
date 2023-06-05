@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function AdminUsers({ isAdmin, DB }) {
+export default function AdminUsers({ user, DB }) {
     const [users, setUsers] = useState([])
     const navigate = useNavigate()
 
@@ -24,19 +24,19 @@ export default function AdminUsers({ isAdmin, DB }) {
 
     return (
         <>
-            {isAdmin ?
+            {user.isadmin ?
                 <div className="title">
                     <div className="products-container">
-                        {users.map((user) => {
+                        {users.map((usr) => {
                             return (
-                                <div className="productCard" key={user.id}>
-                                    <div>Username: {user.username}</div>
-                                    <div>Email: {user.useremail}</div>
-                                    <div>First Name: {user.userfirstname}</div>
-                                    <div>Last Name: {user.userlastname}</div>
-                                    <div>Location: {user.userlocation}</div>
-                                    {user.active ? <div>Active: Yes</div> : <div>Active: No</div>}
-                                    {user.isadmin ? <div>Admin: Yes</div> : <div>Admin: No</div>}
+                                <div className="productCard" key={usr.id}>
+                                    <div>Username: {usr.username}</div>
+                                    <div>Email: {usr.useremail}</div>
+                                    <div>First Name: {usr.userfirstname}</div>
+                                    <div>Last Name: {usr.userlastname}</div>
+                                    <div>Location: {usr.userlocation}</div>
+                                    {usr.active ? <div>Active: Yes</div> : <div>Active: No</div>}
+                                    {usr.isadmin ? <div>Admin: Yes</div> : <div>Admin: No</div>}
                                     <br />
                                 </div>
                             )

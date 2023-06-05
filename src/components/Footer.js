@@ -1,4 +1,4 @@
-import { useNavigate, useParams, Link } from "react-router-dom";
+// import { useNavigate, useParams, Link } from "react-router-dom";
 export default function Footer() {
   return (
     <footer className="footer-container">

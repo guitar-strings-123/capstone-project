@@ -5,8 +5,9 @@ import { default as NavBar } from './NavBar';
 import '../style/Header.css';
 
 
-export default function Header({ token, isAdmin }) {
+export default function Header({ token, user }) {
     const navigate = useNavigate();
+    const isAdmin = user.isadmin;
     const logout = () => {
         localStorage.removeItem('token');
         navigate('/');
@@ -53,11 +54,9 @@ export default function Header({ token, isAdmin }) {
                     <div id="cartBlock">
                         <Link to="Cart">{<CartIcon sx={{ color: 'white' }} />}</Link>
                     </div>
-                    {/* {!isAdmin ?  */}
                     <div id="admin">
                         <Link to="AdminHomePage" />
                     </div>
-                    {/* : null} */}
                 </div>
             </div>
         </div>

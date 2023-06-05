@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function AdminHomePage({ isAdmin }) {
+export default function AdminHomePage({ user }) {
 
 
     return (
         <>
             {
-                isAdmin ?
+                user.isadmin ?
                     <div id='test'>
                         <Link to='/AdminProducts'>
                             <button>All Products</button>

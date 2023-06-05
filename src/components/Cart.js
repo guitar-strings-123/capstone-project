@@ -1,10 +1,10 @@
 // import { response } from 'express';
 import React, { useState, useEffect } from 'react';
 
-export default function Cart({ DB, user }) {
+export default function Cart({ user, DB }) {
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
-  const [cItems, setCItems] = useState(0);
+  const [toggleCart, setToggleCart] = useState(false);
   let cartTotal = 0;
 
   async function getAllProducts() {
@@ -133,7 +133,7 @@ export default function Cart({ DB, user }) {
     if (user.id) {
       init();
     }
-  }, [user, cItems]);
+  }, [user, toggleCart]);
 
   return (
     <div className="cart_page">
@@ -145,8 +145,9 @@ export default function Cart({ DB, user }) {
                 return object.id == productBundle.product_id;
               });
               item ? (cartTotal += item.price * productBundle.quantity) : 0;
+
               return (
-                <div className="productCard">
+                <div className="productCard" key={item?.id}>
                   <div>{item?.name}</div>
                   <div>
                     <img className="imgSmall" src={item?.imgurl} />
@@ -157,7 +158,7 @@ export default function Cart({ DB, user }) {
                   <button
                     onClick={async () => {
                       await deleteItemFromCart(productBundle.active_cart_id, productBundle.quantity, item.id);
-                      setCItems(cItems + 1);
+                      setToggleCart((toggleCart) => !toggleCart);
                     }}>Remove Item
                   </button>
                 </div>
