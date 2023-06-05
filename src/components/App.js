@@ -28,7 +28,6 @@ import SingleProduct from './SingleProduct';
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [token, setToken] = useState('');
-  const [cart, setCart] = useState({});
   const [user, setUser] = useState({});
 
   let DB = `https://strumonin.onrender.com`;
@@ -89,43 +88,40 @@ const App = () => {
     getAPIStatus();
   }, []);
 
-  // const isAdmin = localStorage.getItem('isAdmin');
-  const isAdmin = user.isadmin;
-
   // render all components below
   return (
     <div className="app-container">
-      <Header token={token} isAdmin={isAdmin} DB={DB} />
+      <Header token={token} user={user} />
       <Routes>
         <Route path="/" element={<HomePage DB={DB} />} />
         <Route
           path="/AdminHomePage"
-          element={<AdminHomePage isAdmin={isAdmin} DB={DB} />}
+          element={<AdminHomePage user={user} />}
         />
         <Route
           path="/AdminProducts"
-          element={<AdminProducts isAdmin={isAdmin} DB={DB} />}
+          element={<AdminProducts user={user} DB={DB} />}
         />
         <Route
           path="/AdminUsers"
-          element={<AdminUsers isAdmin={isAdmin} DB={DB} />}
+          element={<AdminUsers user={user} DB={DB} />}
         />
         <Route 
           path="/AdminOrders" 
-          element={<AdminOrders isAdmin={isAdmin} DB={DB} />} 
+          element={<AdminOrders user={user} DB={DB} />} 
         />
         <Route
           path="/AddProduct"
-          element={<AddProduct isAdmin={isAdmin} DB={DB} />}
+          element={<AddProduct user={user} DB={DB} />}
         />
         <Route
           path="/cart"
-          element={<Cart DB={DB} user={user} />}
+          element={<Cart user={user} DB={DB} />}
         />
         <Route path="/products" element={<Products DB={DB} />} />
         <Route
           path="/products/:productId"
-          element={<SingleProduct DB={DB} cart={cart} user={user} />}
+          element={<SingleProduct DB={DB} user={user} />}
         />
         <Route path="/profile" element={<Profile DB={DB} user={user} />} />
         <Route
@@ -134,7 +130,6 @@ const App = () => {
             <Login
               token={token}
               setToken={setToken}
-              setCart={setCart}
               DB={DB}
               setUser={setUser}
             />

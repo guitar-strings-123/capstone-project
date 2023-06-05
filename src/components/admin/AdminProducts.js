@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-export default function AdminProducts({ isAdmin, DB }) {
+export default function AdminProducts({ user, DB }) {
     const [products, setProducts] = useState([])
     const navigate = useNavigate()
 
@@ -25,7 +25,7 @@ export default function AdminProducts({ isAdmin, DB }) {
     return (
         <>
             {
-                isAdmin ?
+                user.isadmin ?
                     <>
                         <div className="title">
                             <div className='products-container'>

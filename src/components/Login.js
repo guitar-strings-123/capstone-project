@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../style/Login.css';
 
-export default function Login({ token, setToken, DB, setCart, setUser }) {
+export default function Login({ token, setToken, DB, setUser }) {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -37,17 +37,6 @@ export default function Login({ token, setToken, DB, setCart, setUser }) {
       setUser(result.user);
       setToken(result.token);
       localStorage.setItem('token', result.token)
-
-      const cartResponse = await fetch(`${DB}/api/cart/${result.user.id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      const {cart: [cartResult]} = await cartResponse.json();
-      
-      setCart(cartResult);
     } catch (err) {
       console.error(err);
     }

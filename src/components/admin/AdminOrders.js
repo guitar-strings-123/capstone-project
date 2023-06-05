@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function AdminOrders({ isAdmin, DB }) {
+export default function AdminOrders({ user, DB }) {
     const [orders, setOrders] = useState([])
     const navigate = useNavigate()
 
@@ -24,13 +24,13 @@ export default function AdminOrders({ isAdmin, DB }) {
 
     return (
         <>
-            {isAdmin ?
+            {user.isadmin ?
                 <div className="title">
                     <div className="products-container">
                         {orders.map((order) => {
                             return (
                                 <div className="productCard" key={order.id}>
-                                    <div>
+                                    {/* <div> */}
                                         <div>Name: {order.ordershipname}</div>
                                         <div>Address: {order.ordershipaddress}</div>
                                         {order.ordershipaddress2 ? <div>Address: {order.ordershipaddress2}</div> : null}
@@ -41,7 +41,7 @@ export default function AdminOrders({ isAdmin, DB }) {
                                         {order.ordershipped ? <div>Shipped: Yes</div> : <div>Shipped: No</div>}
                                         <div>Tracking Number: {order.ordertrackingnumber}</div>
                                         <br />
-                                    </div>
+                                    {/* </div> */}
                                 </div>
                             )
                         })}

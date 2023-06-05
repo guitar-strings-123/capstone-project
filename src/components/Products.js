@@ -7,7 +7,7 @@ export default function Products({DB}) {
   const [query, setQuery] = useState('');
 
   const filteredProducts = products.filter((product) => {
-    const { name, description, imgURL, price } = product;
+    const { name, description } = product;
     if (name.toLowerCase().includes(query.toLowerCase())) {
       return name.toLowerCase().includes(query.toLowerCase());
     } else if (description.toLowerCase().includes(query.toLowerCase())) {

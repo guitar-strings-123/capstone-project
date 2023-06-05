@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import React from 'react';
 
-export default function SingleProduct({ DB, cart, user }) {
+export default function SingleProduct({ DB, user }) {
   const [product, setProduct] = useState('');
   const navigate = useNavigate();
   const { productId } = useParams();
@@ -153,7 +153,7 @@ export default function SingleProduct({ DB, cart, user }) {
               <img src={product.imgurl} width="150" />
             </p>
             <button
-              onClick={cart.length ? addItemToCart : handleClick}
+              onClick={handleClick}
               className="add-to-cart"
             >
               Add To Cart
