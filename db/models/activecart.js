@@ -6,8 +6,8 @@ const createActiveCart = async (userId ) => {
       rows: [activeCart],
     } = await client.query(
       `
-      INSERT INTO active_cart("user_id")
-      VALUES ($1)
+      INSERT INTO active_cart(id, "user_id")
+      VALUES ($1, $1)
       RETURNING *;
     `,
       [userId]

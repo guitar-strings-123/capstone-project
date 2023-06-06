@@ -63,9 +63,15 @@ export default function SingleProduct({ DB, user }) {
 
   const addItemToCart = async () => {
     const cartItems = await getCartItems();
-    const [productBundle] = cartItems.filter((bundle) => {
-      return (bundle.product_id == productId)
-    })
+    // initialize productBundle to undefined
+    let productBundle;
+
+    // only filter the product bundles if cartItems has at least 1 product bundle
+    if (cartItems) {
+      [productBundle] = cartItems.filter((bundle) => {
+        return (bundle.product_id == productId)
+      })
+    }
 
     if (productBundle && productBundle.quantity > 0) {
       // just update the quantity in the bundle by 1
@@ -91,6 +97,7 @@ export default function SingleProduct({ DB, user }) {
 
     } else {
       // add a new product bundle with quantity 1
+
       try {
         const response = await fetch(`${DB}/api/cart/${user.id}`, {
           method: 'POST',
@@ -120,7 +127,7 @@ export default function SingleProduct({ DB, user }) {
       await addActiveCart();
     }
     // add item to cart
-    await addItemToCart(productId);
+    await addItemToCart();
   };
 
   useEffect(() => {

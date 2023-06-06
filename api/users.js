@@ -100,7 +100,7 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/register", async (req, res, next) => {
   try {
-    const { username, password, userEmail, userFirstName, userLastName, userLocation } = req.body;
+    const { username, password, userEmail, userFirstName, userLastName, userAddress, userCity, userState, userZip } = req.body;
     const queriedUser = await User.getUserByUsername(username);
     if (queriedUser) {
       res.status(401);
@@ -121,7 +121,10 @@ router.post("/register", async (req, res, next) => {
         userEmail,
         userFirstName,
         userLastName,
-        userLocation
+        userAddress,
+        userCity,
+        userState,
+        userZip
       });
       if (!user) {
         next({

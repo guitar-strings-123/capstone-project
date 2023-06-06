@@ -18,7 +18,10 @@ async function createUser({
   userEmail,
   userFirstName,
   userLastName,
-  userLocation,
+  userAddress,
+  userCity,
+  userState,
+  userZip,
   isAdmin,
 }) {
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
@@ -28,8 +31,8 @@ async function createUser({
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password, userEmail, userFirstName, userLastName, userLocation, isAdmin) 
-      VALUES($1, $2, $3, $4, $5, $6, $7) 
+      INSERT INTO users(username, password, userEmail, userFirstName, userLastName, userAddress, userCity, userState, userZip, isAdmin) 
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
       ON CONFLICT (username) DO NOTHING 
       RETURNING *;
     `,
@@ -39,7 +42,10 @@ async function createUser({
         userEmail,
         userFirstName,
         userLastName,
-        userLocation,
+        userAddress,
+        userCity,
+        userState,
+        userZip,
         isAdmin,
       ]
     );

@@ -34,7 +34,10 @@ export default function AdminUsers({ user, DB }) {
                                     <div>Email: {usr.useremail}</div>
                                     <div>First Name: {usr.userfirstname}</div>
                                     <div>Last Name: {usr.userlastname}</div>
-                                    <div>Location: {usr.userlocation}</div>
+                                    <div>Street: {usr.useraddress}</div>
+                                    <div>City: {usr.usercity}</div>
+                                    <div>State: {usr.userstate}</div>
+                                    <div>Zip/Postal: {usr.userzip}</div>
                                     {usr.active ? <div>Active: Yes</div> : <div>Active: No</div>}
                                     {usr.isadmin ? <div>Admin: Yes</div> : <div>Admin: No</div>}
                                     <br />
