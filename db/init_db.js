@@ -31,7 +31,10 @@ async function buildTables() {
         userEmail varchar(255) UNIQUE NOT NULL,
         userFirstName varchar(255) UNIQUE NOT NULL,
         userLastName varchar(255) UNIQUE NOT NULL,
-        userLocation varchar(255) NOT NULL,
+        userAddress varchar(255) NOT NULL,
+        userCity varchar(255) NOT NULL,
+        userState varchar(255) NOT NULL,
+        userZip varchar(255) NOT NULL,
         active BOOLEAN DEFAULT true,
         isAdmin BOOLEAN DEFAULT false
        
@@ -66,7 +69,7 @@ async function buildTables() {
       );
    
       CREATE TABLE active_cart (
-        id SERIAL PRIMARY KEY,
+        id INTEGER PRIMARY KEY,
         "user_id" INTEGER REFERENCES users(id)
       );
 
@@ -366,7 +369,10 @@ async function populateInitialData() {
           userEmail: 'jimi@hendrix.com',
           userFirstName: 'Jimi',
           userLastName: 'Hendrix',
-          userLocation: 'Seattle, Washington',
+          userAddress: '1524A Haight St.',
+          userCity: 'Seattle',
+          userState: 'Washington',
+          userZip: '98101'
         },
         {
           username: 'spaceman',
@@ -374,7 +380,10 @@ async function populateInitialData() {
           userEmail: 'brian@queen.com',
           userFirstName: 'Brian',
           userLastName: 'May',
-          userLocation: 'London, England',
+          userAddress: 'Oxford St.',
+          userCity: 'London',
+          userState: 'England',
+          userZip: 'E1 7AY'
         },
         {
           username: 'santana',
@@ -382,7 +391,10 @@ async function populateInitialData() {
           userEmail: 'carlos@santana.com',
           userFirstName: 'Carlos',
           userLastName: 'Santana',
-          userLocation: 'Jalisco, Mexico',
+          userAddress: '2115 Jalisco St.',
+          userCity: 'Jalisco',
+          userState: 'Mexico',
+          userZip: '78954'
         },
         {
           username: 'bob',
@@ -390,7 +402,10 @@ async function populateInitialData() {
           userEmail: 'bob@bob.com',
           userFirstName: 'bob',
           userLastName: 'bob',
-          userLocation: 'bob, bob',
+          userAddress: 'bob St.',
+          userCity: 'bob city',
+          userState: 'bob',
+          userZip: '13013',
           isAdmin: true,
         },
       ];
@@ -433,13 +448,12 @@ async function populateInitialData() {
 
     async function createInitialCarts() {
       console.log('starting to create carts');
-      const [hendrix123] = await getAllUsers();
+      const users = await getAllUsers();
 
-      const cartsToCreate = [
-        {
-          userId: hendrix123.id,
-        },
-      ];
+      let cartsToCreate = [];
+      for (let i = 0; i < users.length; i++) {
+        cartsToCreate[i] = users[i].id
+      }
 
       const itemsInCarts = [
         {

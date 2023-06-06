@@ -14,9 +14,8 @@
 .registerCard {
     position: relative;
     width: 300px;
-    height: 300px;
-    margin: 40px;
-    margin-top: 200px;
+    max-height: 450px;
+    margin: 50px 200px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -39,14 +38,14 @@ form {
     justify-content: center;
 }
 
-#username, #password, #firstName, #lastName, #email, #location {
+#username, #password, #firstName, #lastName, #email, #address, #city, #state, #zip {
     margin-bottom: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-#usernameLabel, #passwordLabel, #firstNameLabel, #lastNameLabel, #emailLabel, #locationLabel {
+#usernameLabel, #passwordLabel, #firstNameLabel, #lastNameLabel, #emailLabel, #addressLabel, #cityLabel, #stateLabel, #zipLabel {
     margin-right: 1rem;
     color: white;
 }

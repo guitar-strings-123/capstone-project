@@ -55,7 +55,7 @@ export default function Profile({ DB, user }) {
 
             <div className="infoStyle">
               Location:
-              {user.userlocation ? <div>{user.userlocation}</div> : null}
+              {user.state ? <div>{user.usercity}, {user.userstate}</div> : null}
             </div>
             {user.isadmin === "true" ? <div>Admin Enabled</div> : null}
           </div>

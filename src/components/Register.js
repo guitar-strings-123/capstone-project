@@ -9,7 +9,10 @@ export default function Register({ token, setToken, DB }) {
     const [newEmail, setNewEmail] = useState("");
     const [newFirstName, setNewFirstName] = useState("");
     const [newLastName, setNewLastName] = useState("");
-    const [newLocation, setNewLocation] = useState("");
+    const [newAddress, setNewAddress] = useState("");
+    const [newCity, setNewCity] = useState("");
+    const [newState, setNewState] = useState("");
+    const [newZip, setNewZip] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,13 +39,24 @@ export default function Register({ token, setToken, DB }) {
                     userEmail: newEmail,
                     userFirstName: newFirstName,
                     userLastName: newLastName,
-                    userLocation: newLocation,
+                    userAddress: newAddress,
+                    userCity: newCity,
+                    userState: newState,
+                    userZip: newZip
                 }),
             }
             );
 
-
+            
             const result = await response.json();
+            
+            const cartResponse = await fetch(`${DB}/api/cart/active/${result.user.id}`, {
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json',
+                }
+            });
+            const cartResult = await cartResponse.json()
 
             setToken(result.token)
             localStorage.setItem('token', result.token)
@@ -106,12 +120,36 @@ export default function Register({ token, setToken, DB }) {
                                             onChange={(event) => setNewEmail(event.target.value)}
                                         ></input>
                                     </div>
-                                    <div id="location">
-                                        <label id="locationLabel">Address</label>
+                                    <div id="address">
+                                        <label id="addressLabel">Street</label>
                                         <input
                                             type="text"
-                                            value={newLocation}
-                                            onChange={(event) => setNewLocation(event.target.value)}
+                                            value={newAddress}
+                                            onChange={(event) => setNewAddress(event.target.value)}
+                                        ></input>
+                                    </div>
+                                    <div id="city">
+                                        <label id="cityLabel">City</label>
+                                            <input
+                                                type="text"
+                                                value={newCity}
+                                                onChange={(event) => setNewCity(event.target.value)}
+                                            ></input>
+                                    </div>
+                                    <div id="state">
+                                        <label id="stateLabel">State</label>
+                                        <input
+                                            type="text"
+                                            value={newState}
+                                            onChange={(event) => setNewState(event.target.value)}
+                                        ></input>
+                                    </div>
+                                    <div id="zip">
+                                        <label id="zipLabel">Zip/Postal</label>
+                                        <input
+                                            type="text"
+                                            value={newZip}
+                                            onChange={(event) => setNewZip(event.target.value)}
                                         ></input>
                                     </div>
                                     <button type="submit">Register</button>

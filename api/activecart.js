@@ -63,8 +63,12 @@ cartRouter.post('/active/:userId', async (req, res, next) => {
 
 cartRouter.post('/:userId', async (req, res, next) => {
   const { productId, cartId, quantity } = req.body;
+  console.log('api cartRouter productId', productId)
+  console.log('api cartRouter cartId', cartId)
+  console.log('api cartRouter quantity', productId)
   try {
     const item = await addItemToCart({ productId, cartId, quantity });
+    console.log('api cartRouter item', item)
     res.send({ item });
   } catch (error) {
     console.error(error);
