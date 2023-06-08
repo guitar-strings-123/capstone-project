@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:orderID/orders', async (req, res, next) => {
     try {
         const { orderID } = req.params
-        const order = await Orders.getAllOrdersByOrderID(orderID)
+        const order = await getAllOrdersByOrderID(orderID)
         if (!order) {
             next({
                 name: 'Order',
@@ -44,7 +44,8 @@ router.post('/', async (req, res, next) => {
         orderZip,
         orderEmail,
         orderShipped,
-        orderTrackingNumber
+        orderTrackingNumber,
+        orderProducts
     } = req.body
     const productData = {}
     try {
@@ -58,6 +59,7 @@ router.post('/', async (req, res, next) => {
         productData.orderEmail = orderEmail
         productData.orderShipped = orderShipped
         productData.orderTrackingNumber = orderTrackingNumber
+        productData.orderProducts = orderProducts
 
         const order = await createOrder(productData)
         if (order) {

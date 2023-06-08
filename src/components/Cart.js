@@ -1,7 +1,9 @@
 // import { response } from 'express';
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Cart({ user, DB }) {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
   const [toggleCart, setToggleCart] = useState(false);
@@ -82,37 +84,6 @@ export default function Cart({ user, DB }) {
     }
   };
 
-  // const order = async () => {
-
-  //   try {
-  //     const response = await fetch(`${DB}/api/orders/`, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         orderUserID: userID,
-  //         orderShipName: userName,
-  //         orderShipAddress: '',
-  //         orderShipAddress2: '',
-  //         orderCity: x,
-  //         orderState: x,
-  //         orderZip: x,
-  //         orderEmail: x,
-  //         orderShipped: x,
-  //         orderTrackingNumber: x
-  //       })
-  //     })
-  //     const result = await response.json();
-
-  //     return result;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-
-  //   console.log('ordered!')
-  // }
-
   const init = async () => {
     try {
       const result = await getCartItems();
@@ -134,6 +105,12 @@ export default function Cart({ user, DB }) {
       init();
     }
   }, [user, toggleCart]);
+
+  const navigateToOrders = async (event) => {
+    event.preventDefault();
+
+    navigate('/Order')
+  }
 
   return (
     <div className="cart_page">
@@ -168,7 +145,7 @@ export default function Cart({ user, DB }) {
           <div className="total">
             <span>Cart Total:${cartTotal}</span>
             <span>
-              <button>
+              <button onClick={(event) => {navigateToOrders(event)}}>
                 Order
               </button>
             </span>

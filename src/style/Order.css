@@ -1,0 +1,76 @@
+#contentContainer {
+    background-color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#orderCard {
+    position: relative;
+    width: 400px;
+    height: 450px;
+    margin-top: 100px;;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #3586ff, #b3d2ff);
+    box-shadow: 2px 2px 2px gray;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#orderLabel {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color:white;
+}
+
+span {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fieldLabel {
+    margin-right: 1rem;
+    color: white;
+}
+
+#checkbox {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#controls {
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* #button {
+
+} */
+
+#checkboxText {
+    font-size: .8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+button {
+    align-self: center;
+    min-width: fit-content;
+    min-height: fit-content;
+    margin-bottom: 0;
+}
