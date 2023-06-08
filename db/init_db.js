@@ -65,7 +65,8 @@ async function buildTables() {
         orderZip integer,
         orderEmail varchar(255) not null,
         orderShipped BOOLEAN default false,
-        orderTrackingNumber integer
+        orderTrackingNumber integer,
+        orderProducts integer[][]
       );
    
       CREATE TABLE active_cart (
@@ -420,25 +421,27 @@ async function populateInitialData() {
       const ordersToCreate = [
         {
           orderUserID: 3,
-          orderShipName: 'Jimi Hendrix',
-          orderShipAddress: '123 California Ave',
-          orderCity: 'Seattle',
-          orderState: 'Washington',
+          orderShipName: 'Test Order',
+          orderShipAddress: 'test',
+          orderCity: 'test',
+          orderState: 'test',
           orderZip: 12345,
-          orderEmail: 'jimi@hendrix.com',
+          orderEmail: 'test@test.com',
           orderShipped: true,
           orderTrackingNumber: 4325,
+          orderProducts: [[1,2],[2,1]]
         },
         {
           orderUserID: 2,
-          orderShipName: 'Brian May',
-          orderShipAddress: '56 London Rd',
-          orderCity: 'London',
-          orderState: 'England',
+          orderShipName: 'Test Order',
+          orderShipAddress: 'test',
+          orderCity: 'test',
+          orderState: 'test',
           orderZip: 32134,
-          orderEmail: 'brian@queen.com',
+          orderEmail: 'test',
           orderShipped: false,
           orderTrackingNumber: 4326,
+          orderProducts: [[2,1],[3,1]]
         },
       ];
       const orders = await Promise.all(ordersToCreate.map(Orders.createOrder));

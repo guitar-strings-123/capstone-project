@@ -24,14 +24,15 @@ async function createOrder({
   orderZip,
   orderEmail,
   orderShipped,
-  orderTrackingNumber
+  orderTrackingNumber,
+  orderProducts
 }) {
   try {
     const {
       rows: [order],
     } = await client.query(`
-      INSERT INTO orders("orderUserID", orderShipName, orderShipAddress, orderShipAddress2, orderCity, orderState, orderZip, orderEmail, orderShipped, orderTrackingNumber)
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+      INSERT INTO orders("orderUserID", orderShipName, orderShipAddress, orderShipAddress2, orderCity, orderState, orderZip, orderEmail, orderShipped, orderTrackingNumber, orderProducts)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
       RETURNING *;
     `,
       [
@@ -45,6 +46,7 @@ async function createOrder({
         orderEmail,
         orderShipped,
         orderTrackingNumber,
+        orderProducts
       ]
     );
 

@@ -20,7 +20,7 @@ export default function Profile({ DB, user }) {
         console.error(err);
       }
     };
-    console.log(`MY ORDERS: ${myOrders}`);
+
     getOrders();
   }, []);
 
@@ -70,7 +70,7 @@ export default function Profile({ DB, user }) {
 
                       <div className="orderInfo">
                         Shipped to: {order.ordershipaddress}, {order.ordercity},{" "}
-                        {order.orderstate}, {order.orderzip}
+                        {order.orderstate} {order.orderzip}
                       </div>
 
                       <div className="orderInfo">
@@ -79,12 +79,13 @@ export default function Profile({ DB, user }) {
                       <div className="orderInfo">
                         Order email: {order.orderemail}
                       </div>
-                      {order.ordershipped === false ? (
+                      {order.ordershipped ? (
                         <>
-                          <div className="orderInfo">Order not shipped</div>
+                          <div className="orderInfo">Order is on the way!</div>
+                          
                         </>
                       ) : (
-                        <div className="orderInfo">Order is on the way!</div>
+                          <div className="orderInfo">Order not shipped</div>
                       )}
                     </div>
                   ) : null}

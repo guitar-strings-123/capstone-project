@@ -16,6 +16,7 @@ import { default as Login } from './Login';
 import { default as Footer } from './Footer';
 import { default as UnderConstruction } from './UnderConstruction';
 import { default as Profile } from './Profile';
+import { default as Order } from './Order'
 import {
   AdminProducts,
   AddProduct,
@@ -30,8 +31,8 @@ const App = () => {
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
 
-  let DB = `https://strumonin.onrender.com`;
-  // let DB = `http://localhost:4000`;
+  // let DB = `https://strumonin.onrender.com`;
+  let DB = `http://localhost:4000`;
 
   const fetchUser = async (storedToken) => {
     let userName;
@@ -138,6 +139,8 @@ const App = () => {
         <Route
           path="/register"
           element={<Register token={token} setToken={setToken} DB={DB} />}
+        />
+        <Route path="/order" element={<Order DB={DB} user={user} />}
         />
         <Route path='/UnderConstruction' element={<UnderConstruction />} />
       </Routes>

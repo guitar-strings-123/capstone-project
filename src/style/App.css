@@ -60,6 +60,7 @@ body {
   margin: 30px;
   margin-top: 150px;
   margin-bottom: 230px;
+  white-space: nowrap;
 }
 
 .products-container {
@@ -70,7 +71,6 @@ body {
   white-space: nowrap;
   margin: 30px;
   margin-bottom: 230px;
-
 }
 
 .total{
@@ -179,7 +179,7 @@ body {
   font-weight: 300;
 }
 
-.wave {
+/* .wave {
   position: absolute;
   top: -100px;
   left: 0;
@@ -236,7 +236,7 @@ body {
   100% {
     background-positon-x: 0px;
   }
-}
+} */
 
 #search {
   margin-top: 100px;
