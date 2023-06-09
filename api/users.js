@@ -25,7 +25,8 @@ router.get('/fetch/:userName', async (req, res, next) => {
   const { userName } = req.params;
   try {
     const userObj = await User.getUserByUsername(userName);
-
+    delete userObj.password
+    
     res.send(userObj);
   } catch (error) {
     console.error(error)

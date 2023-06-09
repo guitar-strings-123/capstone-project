@@ -31,8 +31,8 @@ const App = () => {
   const [token, setToken] = useState('');
   const [user, setUser] = useState({});
 
-  let DB = `https://strumonin.onrender.com`;
-  // let DB = `http://localhost:4000`;
+  // let DB = `https://strumonin.onrender.com`;
+  let DB = `http://localhost:4000`;
 
   const fetchUser = async (storedToken) => {
     let userName;
