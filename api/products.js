@@ -41,8 +41,8 @@ productRouter.post('/', async (req, res, next) => {
 
     // the content of req.body will be created in the fetch command of the frontend
     // destructure variables from the request
-    const { name, description, imgURL, price, categoryID } = req.body;
-    const result = await Products.createProduct({ name, description, imgURL, price, categoryID });
+    const { name, description, imgURL, price, categoryID, isadmin } = req.body;
+    const result = await Products.createProduct({ name, description, imgURL, price, categoryID, isadmin });
 
     if (result.message) {
         // handle the error message if the user is not an admin or if there was another error

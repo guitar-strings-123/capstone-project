@@ -5,8 +5,8 @@ const { User } = require('./user');
 module.exports = {
   // add your database adapter fns here
   createProduct,
+  // addProduct,
   getAllProducts,
-  addProduct,
   removeProduct,
   getProductById,
   updateProduct,
@@ -16,20 +16,28 @@ module.exports = {
   pass in an object, so later you can pass in an array of objects and .map() through them
   to easily create multiple products with one function call
 */
-async function createProduct({ name, description, imgURL, price, categoryID }) {
-  try {
-    const {
-      rows: [product],
-    } = await client.query(`
-        INSERT INTO products(name, description, imgURL, price, "categoryId") 
-        VALUES($1, $2, $3, $4, $5) 
-        ON CONFLICT (name) DO NOTHING 
-        RETURNING *;
-    `, [name, description, imgURL, price, categoryID]);
-
-    return product;
-  } catch (error) {
-    throw error;
+async function createProduct({ name, description, imgURL, price, categoryID, isadmin  }) {
+  if (isadmin) {
+    try {
+      const {
+        rows: [product],
+      } = await client.query(`
+          INSERT INTO products(name, description, imgURL, price, "categoryId") 
+          VALUES($1, $2, $3, $4, $5) 
+          ON CONFLICT (name) DO NOTHING 
+          RETURNING *;
+      `, [name, description, imgURL, price, categoryID]);
+  
+      return product;
+    } catch (error) {
+      throw error;
+    }
+  } else {
+    // return an error object to use in the front end to display the error message
+    return {
+      name: `InvalidAuthorizationError`,
+      message: 'This account lacks administrative privilege',
+    };
   }
 }
 
@@ -46,34 +54,34 @@ async function getAllProducts() {
   }
 }
 
-// function for administrator to add product to database
-async function addProduct({ name, description, imgURL, price, categoryID }) {
-  const users = await User.getAllUsers();
-  // under construction: have to add curUser variable that stores user info upon login
-  const user = users.filter((entry) => entry.username == curUser.username);
+// // function for administrator to add product to database
+// async function addProduct({ name, description, imgURL, price, categoryID }) {
+//   const users = await User.getAllUsers();
+//   // under construction: have to add curUser variable that stores user info upon login
+//   const user = users.filter((entry) => entry.username == curUser.username);
+//   console.log('filtered user:', user)
+//   if (user.isAdmin) {
+//     try {
+//       const result = await createProduct({
+//         name,
+//         description,
+//         imgURL,
+//         price,
+//         categoryID,
+//       });
 
-  if (user.isAdmin) {
-    try {
-      const result = await createProduct({
-        name,
-        description,
-        imgURL,
-        price,
-        categoryID,
-      });
-
-      return result;
-    } catch (error) {
-      throw error;
-    }
-  } else {
-    // return an error object to use in the front end to display the error message
-    return {
-      name: `InvalidAuthorizationError`,
-      message: 'This account lacks administrative privilege',
-    };
-  }
-}
+//       return result;
+//     } catch (error) {
+//       throw error;
+//     }
+//   } else {
+//     // return an error object to use in the front end to display the error message
+//     return {
+//       name: `InvalidAuthorizationError`,
+//       message: 'This account lacks administrative privilege',
+//     };
+//   }
+// }
 
 async function removeProduct(id) {
   const users = await User.getAllUsers();

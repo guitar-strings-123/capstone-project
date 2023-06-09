@@ -22,7 +22,9 @@ export default function AddProduct({ user, DB }) {
                 body: JSON.stringify({
                     name: name,
                     description: description,
-                    price: price
+                    price: price,
+                    categoryID: categoryID,
+                    isadmin: user.isadmin
                 })
             })
             const result = await response.json()
