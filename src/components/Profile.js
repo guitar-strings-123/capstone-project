@@ -55,7 +55,7 @@ export default function Profile({ DB, user }) {
 
             <div className="infoStyle">
               Location:
-              {user.state ? <div>{user.usercity}, {user.userstate}</div> : null}
+              {user.userstate ? <div>{user.usercity}, {user.userstate}</div> : null}
             </div>
             {user.isadmin === "true" ? <div>Admin Enabled</div> : null}
           </div>
@@ -64,7 +64,7 @@ export default function Profile({ DB, user }) {
             {myOrders.map((order) => {
               return (
                 <div id="eachOrderContainer">
-                  {order.orderemail === user.useremail ? (
+                  {order.orderUserID === user.id ? (
                     <div key={order.orderid} className="orders">
                       <div className="orderInfo">OrderID: {order.orderid}</div>
 

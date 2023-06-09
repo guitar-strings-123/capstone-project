@@ -96,6 +96,22 @@ const getAllItemsInCart = async (cartId) => {
   }
 };
 
+// this function is used to empty the user's cart upon ordering
+const emptyCart = async (cartId) => {
+  
+  try {
+    const productBundles = await client.query(`
+      DELETE FROM active_cart_items
+      WHERE active_cart_id=$1
+      RETURNING *;
+    `, [cartId])
+
+    return productBundles;
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 module.exports = {
   createActiveCart,
   getActiveCart,
@@ -103,4 +119,5 @@ module.exports = {
   removeItemFromCart,
   getAllItemsInCart,
   updateQuantity,
+  emptyCart,
 };
