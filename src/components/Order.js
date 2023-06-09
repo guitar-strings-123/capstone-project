@@ -13,35 +13,43 @@ export default function Order({DB, user}) {
     const [orderZip, setOrderZip] = useState('')
     const [orderEmail, setOrderEmail] = useState('')
     const [orderProductsList, setOrderProductsList] = useState([])
-    // const [isChecked, setIsChecked] = useState(false)
 
   const order = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch(`${DB}/api/orders/`, {
-        method: 'POST',
-        headers: {
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify({
-          orderUserID: user.id,
-          orderShipName: orderName,
-          orderShipAddress: orderShipAddress,
-          orderShipAddress2: orderShipAddress2,
-          orderCity: orderCity,
-          orderState: orderState,
-          orderZip: orderZip,
-          orderEmail: orderEmail,
-          orderShipped: false,
-          orderTrackingNumber: 0,
-          orderProducts: orderProductsList
-        })
-      })
-      const result = await response.json();
 
-      console.log('order here i am:', result)
-      return result;
+        const ordersResponse = await fetch(`${DB}/api/orders/`, {
+            method: 'POST',
+            headers: {
+            'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+            orderUserID: user.id,
+            orderShipName: orderName,
+            orderShipAddress: orderShipAddress,
+            orderShipAddress2: orderShipAddress2,
+            orderCity: orderCity,
+            orderState: orderState,
+            orderZip: orderZip,
+            orderEmail: orderEmail,
+            orderShipped: false,
+            orderTrackingNumber: 0,
+            orderProducts: orderProductsList
+            })
+        })
+        const ordersResult = await ordersResponse.json();
+        
+        const cartResponse = await fetch(`${DB}/api/cart/${user.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-type': 'application/json'
+            }
+        })
+        // no need to json parse the response, since nothing is returned
+        // const cartResult = await cartResponse.json();
+        
+        return ordersResult;
     } catch (error) {
       console.error(error);
     }

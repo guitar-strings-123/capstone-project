@@ -8,11 +8,13 @@ const {
   addItemToCart,
   removeItemFromCart,
   updateQuantity,
+  emptyCart,
 } = require('../db/models/activecart');
 
 // GET
 cartRouter.get(`/:userId/items`, async (req, res, next) => {
   const userId = req.params.userId;
+  
   try {
     const cartId = await getActiveCart(userId);
     const items = await getAllItemsInCart(cartId);
@@ -25,6 +27,7 @@ cartRouter.get(`/:userId/items`, async (req, res, next) => {
 
 cartRouter.get('/items/:cartId', async (req, res, next) => {
   const { cartId } = req.params;
+
   try {
     const cart = await getAllItemsInCart(cartId);
 
@@ -37,6 +40,7 @@ cartRouter.get('/items/:cartId', async (req, res, next) => {
 
 cartRouter.get('/:userId', async (req, res, next) => {
   const { userId } = req.params;
+
   try {
     const cart = await getActiveCart({userId});
 
@@ -51,6 +55,7 @@ cartRouter.get('/:userId', async (req, res, next) => {
 
 cartRouter.post('/active/:userId', async (req, res, next) => {
   const { userId } = req.params;
+
   try {
     const newCart = await createActiveCart(userId);
 
@@ -63,9 +68,7 @@ cartRouter.post('/active/:userId', async (req, res, next) => {
 
 cartRouter.post('/:userId', async (req, res, next) => {
   const { productId, cartId, quantity } = req.body;
-  console.log('api cartRouter productId', productId)
-  console.log('api cartRouter cartId', cartId)
-  console.log('api cartRouter quantity', productId)
+
   try {
     const item = await addItemToCart({ productId, cartId, quantity });
     console.log('api cartRouter item', item)
@@ -95,6 +98,7 @@ cartRouter.put('/:activeCartId', async (req, res, next) => {
 
 cartRouter.delete('/remove/:itemId', async (req, res, next) => {
   const { itemId } = req.params;
+
   try {
     const item = await removeItemFromCart(itemId);
     res.status(200).json({ message: 'item removed' });
@@ -103,5 +107,16 @@ cartRouter.delete('/remove/:itemId', async (req, res, next) => {
     next();
   }
 });
+
+cartRouter.delete('/:activeCartId', async (req, res, next) => {
+  const { activeCartId } = req.params;
+
+  try {
+    const productBundles = await emptyCart(activeCartId)
+  } catch (error) {
+    console.error(error);
+    next();
+  }
+})
 
 module.exports = cartRouter;

@@ -77,7 +77,7 @@ async function getAllOrdersByOrderID(orderID) {
     const { rows } = await client.query(`
       SELECT * 
       FROM orders
-      WHERE id = $1
+      WHERE id = $1;
     `, [orderID])
     if (!rows || !rows.length) return null
     const [order] = rows
