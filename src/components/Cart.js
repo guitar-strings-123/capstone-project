@@ -152,7 +152,7 @@ export default function Cart({ user, DB }) {
           </div>
         </div>
       ) : (
-        <div>{`Your cart is empty... :(`}</div>
+          <div className="cartEmpty">{`Your cart is empty... :(`}</div>
       )}
     </div>
   );

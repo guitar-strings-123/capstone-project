@@ -53,16 +53,6 @@ body {
   margin-bottom: 230px;
 }
 
-.cartProducts {
-  border: groove 1px #3586ff;
-  display: flex;
-  flex-direction: row;
-  margin: 30px;
-  margin-top: 150px;
-  margin-bottom: 230px;
-  white-space: nowrap;
-}
-
 .products-container {
   border: groove 1px #3586ff;
   display: grid;
@@ -77,10 +67,29 @@ body {
   margin: 30px;
   margin-top: -200px;
 }
+
+.cartProducts {
+  border: groove 1px #3586ff;
+  display: flex;
+  flex-direction: row;
+  margin: 30px;
+  margin-top: 150px;
+  margin-bottom: 230px;
+  white-space: nowrap;
+}
+
 .productCard {
   text-align: center;
   min-width: 100px;
   max-width: 300px;
+}
+
+.cartEmpty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
 }
 
 .single-product-page {
