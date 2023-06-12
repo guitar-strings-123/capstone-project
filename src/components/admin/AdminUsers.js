@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../../style/Admin.css'
 
 export default function AdminUsers({ user, DB }) {
     const [users, setUsers] = useState([])
@@ -25,11 +26,14 @@ export default function AdminUsers({ user, DB }) {
     return (
         <>
             {user.isadmin ?
-                <div className="title">
+                <div className="container">
+                    <div>
+                        <button className='back-button' onClick={() => navigate(-1)}>Go Back</button>
+                    </div>
                     <div className="products-container">
                         {users.map((usr) => {
                             return (
-                                <div className="productCard" key={usr.id}>
+                                <div className="detailsCard" key={usr.id}>
                                     <div>Username: {usr.username}</div>
                                     <div>Email: {usr.useremail}</div>
                                     <div>First Name: {usr.userfirstname}</div>
@@ -45,9 +49,8 @@ export default function AdminUsers({ user, DB }) {
                             )
                         })}
                     </div>
-                    <button className='back-button' onClick={() => navigate(-1)}>Go Back</button>
                 </div>
-                : <p>You are not authorized to be on this page</p>
+                : <p className="noAuthorization">You are not authorized to be on this page</p>
             }
         </>
     )

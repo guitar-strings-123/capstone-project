@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import '../../style/Admin.css'
 
 export default function AddProduct({ user, DB }) {
     const [name, setName] = useState('')
@@ -42,50 +43,60 @@ export default function AddProduct({ user, DB }) {
     }
 
     return (
-        <div className="add-product-container" >
-            <form onSubmit={addProduct}>
-                <h1>Add a Product</h1>
+        <div id="contentContainer" >
+            <form id="addProductCard" onSubmit={addProduct}>
+                <h1 id="addProductHeader">Add a Product</h1>
                 <div>
-                    <label htmlFor="name"></label>
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Product Name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
+                    <span>
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Product Name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </span>
                 </div>
                 <div>
-                    <label htmlFor="description"></label>
-                    <input
-                        type="text"
-                        id="description"
-                        placeholder="Product Description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
+                    <span>
+                        <label htmlFor="description">Desc.</label>
+                        <input
+                            type="text"
+                            id="description"
+                            placeholder="Product Description"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </span>
                 </div>
                 <div>
-                    <label htmlFor="price"></label>
-                    <input
-                        type="text"
-                        id="price"
-                        placeholder="Product Price"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
-                    />
+                    <span>
+                        <label htmlFor="price">Price</label>
+                        <input
+                            type="text"
+                            id="price"
+                            placeholder="Product Price"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                        />
+                    </span>
                 </div>
                 <div>
-                    <label htmlFor="categoryId">Category</label>
-                    <select name="categoryId" id="categoryId" value={categoryID} onChange={(e) => setCategoryID(e.target.value)}>
-                        <option value="1">Classical</option>
-                        <option value="2">Acoustic</option>
-                        <option value="3">Electronic</option>
-                    </select>
+                    <span>
+                        <label htmlFor="categoryId">Category</label>
+                        <select name="categoryId" id="categoryId" value={categoryID} onChange={(e) => setCategoryID(e.target.value)}>
+                            <option value="1">Classical</option>
+                            <option value="2">Acoustic</option>
+                            <option value="3">Electronic</option>
+                        </select>
+                    </span>
                 </div >
-                <button className="submit-btn" type="submit">Add Product</button>
+                <span>
+                    <button className="submit-btn" type="submit">Add Product</button>
+                    <button type="button" onClick={() => navigate(-1)}>Go Back</button>
+                </span>
             </form >
-                <button onClick={() => navigate(-1)}>Go Back</button>
         </div >
     );
 }
