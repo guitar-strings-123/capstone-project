@@ -65,8 +65,8 @@ export default function Products({DB}) {
                   <div className="cardTitle">
                     <p style={{ marginBottom: 0, padding: 0 }}>
                       {product.name} : {product.price}
-                      {/* <br /> */}
-                      <div className="productDescription">{product.description}</div>
+                      <br />
+                      {product.description}
                     </p>
                   </div>
                   <Link to={`/Products/${product.id}`}>

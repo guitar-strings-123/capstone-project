@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import React from 'react';
+import { toast } from 'react-toastify';
 
 export default function SingleProduct({ DB, user }) {
   const [product, setProduct] = useState('');
@@ -119,6 +120,8 @@ export default function SingleProduct({ DB, user }) {
     }
   };
 
+
+
   const handleClick = async () => {
     const hasCart = await getCart();
     // if the user does not have a cart...
@@ -128,6 +131,15 @@ export default function SingleProduct({ DB, user }) {
     }
     // add item to cart
     await addItemToCart();
+    toast.success(`${product.name} added to cart!`, {
+      position: "bottom-left",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    });
   };
 
   useEffect(() => {
@@ -157,7 +169,7 @@ export default function SingleProduct({ DB, user }) {
               <br />
               {product.description}
               <br />
-              <img src={product.imgurl} width="150" />
+              {product.imgurl ? <img src={product.imgurl} width="150" /> : <img src="https://media.guitarcenter.com/is/image/MMGS7/L93981000002000-00-720x720.jpg" width="150"/>}
             </p>
             <button
               onClick={handleClick}
